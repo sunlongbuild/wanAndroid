@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/collect"
+        android:title="@string/collect"
+        android:icon="@mipmap/follw"/>
+    <item
+        android:id="@+id/todo"
+        android:title="@string/todo"
+        android:icon="@mipmap/solution"/>
+    <item
+        android:id="@+id/night"
+        android:title="@string/night"
+        android:icon="@mipmap/night"/>
+    <item
+        android:id="@+id/setting"
+        android:title="@string/setting"
+        android:icon="@mipmap/setting"/>
+    <item
+        android:id="@+id/about"
+        android:title="@string/about"
+        android:icon="@mipmap/jg"/>
+    <item
+        android:id="@+id/log_out"
+        android:title="@string/log_out"
+        android:icon="@mipmap/bulb"/>
+</menu>
