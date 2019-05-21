@@ -42,9 +42,9 @@ public class SettingActivity extends BaseActivity<EmptyView, EmptyPresenter> imp
 
     @Override
     protected void initView() {
+        toolSetting.setTitle("");
         setSupportActionBar(toolSetting);//支持toolbar
         toolSetting.setNavigationIcon(R.mipmap.icon_left);//设置返回键
-        toolSetting.setTitle(getResources().getString(R.string.setting));
         toolSetting.setNavigationOnClickListener(this);
     }
 
