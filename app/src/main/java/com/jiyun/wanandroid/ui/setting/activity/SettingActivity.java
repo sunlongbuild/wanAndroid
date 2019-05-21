@@ -1,7 +1,11 @@
 package com.jiyun.wanandroid.ui.setting.activity;
 
+import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 
@@ -11,7 +15,10 @@ import com.jiyun.wanandroid.base.Constants;
 import com.jiyun.wanandroid.presenter.EmptyPresenter;
 import com.jiyun.wanandroid.utils.Logger;
 import com.jiyun.wanandroid.utils.SpUtil;
+import com.jiyun.wanandroid.utils.SystemShareUtils;
 import com.jiyun.wanandroid.view.EmptyView;
+
+import java.io.File;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -48,7 +55,7 @@ public class SettingActivity extends BaseActivity<EmptyView, EmptyPresenter> imp
 
     private void detectionOptions() {
         boolean checked = chNoImage.isChecked();
-        SpUtil.setParam(Constants.SETTING_NO_IMAGE,checked);
+        SpUtil.setParam(Constants.SETTING_NO_IMAGE, checked);
         finish();
     }
 
@@ -58,5 +65,12 @@ public class SettingActivity extends BaseActivity<EmptyView, EmptyPresenter> imp
         //当界面显示的时候  获取保存的状态
         boolean image = (boolean) SpUtil.getParam(Constants.SETTING_NO_IMAGE, false);
         chNoImage.setChecked(image);
+        //getCache();//获取app的缓存
     }
+
+    private void getCache() {
+
+    }
+
 }
+
