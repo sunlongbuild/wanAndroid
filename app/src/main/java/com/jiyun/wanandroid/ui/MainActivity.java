@@ -30,6 +30,8 @@ import com.jiyun.wanandroid.ui.project.fragment.ProjectFragment;
 import com.jiyun.wanandroid.ui.setting.activity.SettingActivity;
 import com.jiyun.wanandroid.ui.todo.activity.ToDoActivity;
 import com.jiyun.wanandroid.ui.wechat.fragment.The_publicFragment;
+import com.jiyun.wanandroid.utils.Logger;
+import com.jiyun.wanandroid.utils.SpUtil;
 import com.jiyun.wanandroid.utils.ToastUtil;
 import com.jiyun.wanandroid.utils.UIModeUtil;
 import com.jiyun.wanandroid.view.EmptyView;
@@ -198,5 +200,5 @@ public class MainActivity extends BaseActivity<EmptyView, EmptyPresenter> implem
             }
         });
     }
-    
+
 }
