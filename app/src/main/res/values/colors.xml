@@ -6,4 +6,9 @@
 
     <color name="white">#ffffff</color>
     <color name="dedede">#dedede</color>
+    <color name="c_e91d65">#E91D65</color>
+    <color name="c_ffffff">#ffffff</color>
+    <color name="c_e6f5f6">#E6F5F6</color>
+    <color name="c_49454a">#49454A</color>
+    <color name="c_5f9c54">#5F9C94</color>
 </resources>
