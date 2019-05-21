@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import com.jiyun.wanandroid.utils.ToastUtil;
+import com.jiyun.wanandroid.widget.LoadingDialog;
 
 import butterknife.ButterKnife;
 
@@ -13,6 +14,8 @@ import butterknife.ButterKnife;
  */
 public abstract class BaseActivity<V extends BaseView,P extends BasePresenter> extends AppCompatActivity implements BaseView {
     protected P mPresenter;
+    private LoadingDialog mLoadingDialog;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +51,21 @@ public abstract class BaseActivity<V extends BaseView,P extends BasePresenter> e
         super.onDestroy();
         mPresenter.onDestory();
         mPresenter = null;
+    }
+
+    @Override
+    public void showLoading() {
+        if (mLoadingDialog == null) {
+            mLoadingDialog = new LoadingDialog(this);
+        }
+        mLoadingDialog.show();
+    }
+
+    @Override
+    public void hideLoading() {
+        if (mLoadingDialog != null && mLoadingDialog.isShowing()){
+            mLoadingDialog.dismiss();
+        }
     }
 
 }
