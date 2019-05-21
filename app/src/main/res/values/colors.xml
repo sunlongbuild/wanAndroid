@@ -4,6 +4,8 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
+    <!--夜间模式下   将白色设置为黑色   黑色设置为白色 -->
     <color name="white">#ffffff</color>
     <color name="dedede">#dedede</color>
+    <color name="black">#000000</color>
 </resources>
