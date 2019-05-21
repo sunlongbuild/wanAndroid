@@ -35,4 +35,6 @@ public interface Constants {
     String DAY_NIGHT_FRAGMENT_POS = "day_night_fragment_pos";
 
 
+    //设置界面的图片是否保存key值
+    String SETTING_NO_IMAGE = "setting_no_image";
 }
