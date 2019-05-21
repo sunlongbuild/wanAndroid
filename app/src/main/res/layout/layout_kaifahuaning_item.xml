@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/author"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_12"
+        android:layout_marginTop="@dimen/dp_13"
+        android:text="author"
+        android:textColor="@color/c_999999"
+        android:textSize="@dimen/sp_12" />
+
+    <TextView
+        android:id="@+id/niceDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/dp_12"
+        android:layout_marginTop="@dimen/dp_13"
+        android:text="2019-04-06"
+        android:textColor="@color/c_999999"
+        android:textSize="@dimen/sp_12" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="零报错基于Virtualbox虚拟机搭建Linux(Ubuntu)的Android开发环境"
+        android:layout_below="@id/author"
+        android:layout_marginLeft="@dimen/dp_12"
+        android:layout_marginRight="@dimen/dp_12"
+        android:layout_marginTop="@dimen/dp_13"
+        android:lineSpacingExtra="@dimen/dp_6"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/superChapterName"
+        android:text="开发环境"
+        android:layout_below="@id/title"
+        android:layout_marginTop="@dimen/dp_13"
+        android:layout_marginLeft="@dimen/dp_12"
+        android:textColor="@color/c_999999"
+        android:textSize="@dimen/sp_12"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/superChapterName"
+        android:text="chapterName"
+        android:textColor="@color/c_999999"
+        android:textSize="@dimen/sp_12"
+        android:layout_toRightOf="@id/superChapterName"
+        android:id="@+id/chapterName"
+        />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/follow_unselected"
+        android:src="@mipmap/follow_unselected"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/title"
+        android:layout_marginTop="@dimen/dp_13"
+        android:layout_marginRight="@dimen/dp_12"
+        />
+    <View
+        android:id="@+id/view_vv"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        android:layout_below="@id/superChapterName"
+        android:layout_marginTop="@dimen/dp_11"
+        android:background="@color/c_dcdcdc" />
+</RelativeLayout>
