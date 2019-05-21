@@ -6,6 +6,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 
+import android.support.v7.app.AppCompatDelegate;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.view.Display;
@@ -19,6 +20,19 @@ import com.jiyun.wanandroid.utils.ToastUtil;
  */
 public class BaseApp extends Application {
     private static BaseApp sBaseApp;
+
+
+    /*
+    * *  author gme
+    *    time
+    */
+    //默认不是夜间模式
+    public static int mMode = AppCompatDelegate.MODE_NIGHT_NO;
+
+
+
+
+
     public static int mWidthPixels;
     public static int mHeightPixels;
 

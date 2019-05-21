@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.jiyun.wanandroid.widget.LoadingDialog;
+
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
@@ -17,6 +19,7 @@ import butterknife.Unbinder;
 public abstract class BaseFragment<V extends BaseView, P extends BasePresenter> extends Fragment implements BaseView {
     protected P mPresenter;
     private Unbinder mUnbinder;
+    private LoadingDialog mLoadingDialog;
 
     @Nullable
     @Override
@@ -57,4 +60,18 @@ public abstract class BaseFragment<V extends BaseView, P extends BasePresenter> 
         mPresenter = null;
     }
 
+    @Override
+    public void showLoading() {
+        if (mLoadingDialog == null) {
+            mLoadingDialog = new LoadingDialog(getContext());
+        }
+        mLoadingDialog.show();
+    }
+
+    @Override
+    public void hideLoading() {
+        if (mLoadingDialog != null && mLoadingDialog.isShowing()){
+            mLoadingDialog.dismiss();
+        }
+    }
 }

@@ -5,7 +5,7 @@
     android:id="@+id/dl"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".ui.MainActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -55,26 +55,25 @@
                 android:id="@+id/rb"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:layout_weight="1"
                 android:button="@null"
                 android:drawableTop="@mipmap/home_unselected"
                 android:gravity="center"
                 android:padding="4dp"
-                android:text="@string/home"
-                android:layout_marginTop="5dp"
-                />
+                android:text="@string/home" />
 
             <RadioButton
                 android:id="@+id/rb2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:layout_weight="1"
                 android:button="@null"
                 android:drawableTop="@mipmap/icon_knowledge_hierarchy_not_selected"
                 android:gravity="center"
-                android:text="@string/knowledge"
                 android:padding="4dp"
-                android:layout_marginTop="5dp"
+                android:text="@string/knowledge"
 
                 />
 
@@ -82,24 +81,24 @@
                 android:id="@+id/rb3"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:layout_weight="1"
                 android:button="@null"
-                android:padding="4dp"
-                android:layout_marginTop="5dp"
                 android:drawableTop="@mipmap/wechat"
                 android:gravity="center"
+                android:padding="4dp"
                 android:text="@string/the_public" />
 
             <RadioButton
                 android:id="@+id/rb4"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:layout_weight="1"
                 android:button="@null"
                 android:drawableTop="@mipmap/icon_navigation_not_selected"
                 android:gravity="center"
                 android:padding="4dp"
-                android:layout_marginTop="5dp"
 
                 android:text="@string/navigation" />
 
@@ -107,12 +106,12 @@
                 android:id="@+id/rb5"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:layout_weight="1"
                 android:button="@null"
                 android:drawableTop="@mipmap/icon_project_not_selected"
                 android:gravity="center"
                 android:padding="4dp"
-                android:layout_marginTop="5dp"
                 android:text="@string/project" />
 
 
@@ -125,8 +124,5 @@
         android:layout_height="match_parent"
         android:layout_gravity="left"
         app:headerLayout="@layout/header_layout"
-        app:menu="@menu/layout_menu"
-        />
-
-
+        app:menu="@menu/layout_menu" />
 </android.support.v4.widget.DrawerLayout>

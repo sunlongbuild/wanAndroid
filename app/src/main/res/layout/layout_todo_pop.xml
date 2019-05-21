@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/c_ffffff"
+    android:orientation="vertical">
+
+
+    <Button
+        android:id="@+id/tv_one"
+        android:layout_width="@dimen/dp_100"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@null"
+        android:text="@string/one"
+        android:textColor="@drawable/bg_todo_e6f5f6" />
+
+    <Button
+        android:id="@+id/tv_work"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@null"
+        android:text="@string/work"
+        android:textColor="@drawable/bg_todo_e6f5f6" />
+
+    <Button
+        android:id="@+id/tv_study"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@null"
+        android:text="@string/study"
+        android:textColor="@drawable/bg_todo_e6f5f6" />
+
+    <Button
+        android:id="@+id/tv_life"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@null"
+        android:text="@string/life"
+        android:textColor="@drawable/bg_todo_e6f5f6" />
+
+</LinearLayout>
