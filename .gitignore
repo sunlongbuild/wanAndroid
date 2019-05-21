@@ -10,4 +10,4 @@
 /build.gradle
 /captures
 .externalNativeBuild
-/gradle/wrapper
+/gradle
