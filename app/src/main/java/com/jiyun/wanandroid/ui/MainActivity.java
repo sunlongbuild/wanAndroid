@@ -1,13 +1,24 @@
 package com.jiyun.wanandroid.ui;
 
+<<<<<<< HEAD
 import android.os.Bundle;
+=======
+import android.content.Intent;
+import android.support.annotation.NonNull;
+>>>>>>> fa80885235e2ac3d1e90bad3d514de646e65eb4a
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+<<<<<<< HEAD
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+=======
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
+>>>>>>> fa80885235e2ac3d1e90bad3d514de646e65eb4a
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.RadioButton;
@@ -15,17 +26,36 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.jiyun.wanandroid.R;
+import com.jiyun.wanandroid.base.BaseActivity;
+import com.jiyun.wanandroid.presenter.EmptyPresenter;
+import com.jiyun.wanandroid.ui.about.activity.AboutActivity;
+import com.jiyun.wanandroid.ui.collect.activity.CollectActivity;
 import com.jiyun.wanandroid.ui.home.fragment.HomeFragment;
 import com.jiyun.wanandroid.ui.knowledge.fragment.KnowledgeFragment;
+import com.jiyun.wanandroid.ui.logout.activity.LogoutActivity;
 import com.jiyun.wanandroid.ui.navigation.fragment.NavigationFragment;
+import com.jiyun.wanandroid.ui.night.activity.NightActivity;
 import com.jiyun.wanandroid.ui.project.fragment.ProjectFragment;
+import com.jiyun.wanandroid.ui.setting.activity.SettingActivity;
+import com.jiyun.wanandroid.ui.todo.activity.ToDoActivity;
 import com.jiyun.wanandroid.ui.wechat.fragment.The_publicFragment;
+import com.jiyun.wanandroid.utils.Logger;
+import com.jiyun.wanandroid.utils.SpUtil;
+import com.jiyun.wanandroid.utils.ToastUtil;
+import com.jiyun.wanandroid.utils.UIModeUtil;
+import com.jiyun.wanandroid.view.EmptyView;
 
 import butterknife.BindView;
+<<<<<<< HEAD
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
+=======
+import butterknife.OnClick;
+
+public class MainActivity extends BaseActivity<EmptyView, EmptyPresenter> implements EmptyView {
+>>>>>>> fa80885235e2ac3d1e90bad3d514de646e65eb4a
 
 
     @BindView(R.id.toolbar_text)
@@ -55,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
     private NavigationFragment navigationFragment;
     private ProjectFragment projectFragment;
     private The_publicFragment the_publicFragment;
+<<<<<<< HEAD
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,16 +93,35 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+=======
+    @Override
+    protected EmptyPresenter initPresenter() {
+        return new EmptyPresenter();
+    }
+>>>>>>> fa80885235e2ac3d1e90bad3d514de646e65eb4a
 
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_main;
+    }
 
+    @Override
+    protected void initView() {
         mToolbar.setTitle("");
         mToolbarText.setText("首页");
         setSupportActionBar(mToolbar);
+<<<<<<< HEAD
+=======
+        initToolBar();
+    }
+    private void initToolBar() {
+>>>>>>> fa80885235e2ac3d1e90bad3d514de646e65eb4a
         ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, mDl, mToolbar, R.string.open, R.string.close);
         mDl.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
-
-
+    }
+    @Override
+    protected void initData() {
         homeFragment = new HomeFragment();
         knowledgeFragment = new KnowledgeFragment();
         navigationFragment = new NavigationFragment();
@@ -92,7 +142,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> fa80885235e2ac3d1e90bad3d514de646e65eb4a
     @OnClick({R.id.rb, R.id.rb2, R.id.rb3, R.id.rb4, R.id.rb5})
     public void onClick(View v) {
         switch (v.getId()) {
@@ -144,6 +197,41 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
         }
+    }
+
+    @Override
+    protected void initListener() {
+        mNav.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                switch (menuItem.getItemId()) {
+                    case R.id.collect:
+                        Intent intent = new Intent(MainActivity.this, CollectActivity.class);
+                        startActivity(intent);
+                        break;
+                    case R.id.todo:
+                        Intent intent2 = new Intent(MainActivity.this, ToDoActivity.class);
+                        startActivity(intent2);
+                        break;
+                    case R.id.night://切换夜间模式
+                        UIModeUtil.changeModeUI(MainActivity.this);
+                        break;
+                    case R.id.setting:
+                        Intent intent4 = new Intent(MainActivity.this, SettingActivity.class);
+                        startActivity(intent4);
+                        break;
+                    case R.id.about:
+                        Intent intent5 = new Intent(MainActivity.this, AboutActivity.class);
+                        startActivity(intent5);
+                        break;
+                    case R.id.log_out:
+                        Intent intent6 = new Intent(MainActivity.this, LogoutActivity.class);
+                        startActivity(intent6);
+                        break;
+                }
+                return false;
+            }
+        });
     }
 
 }
