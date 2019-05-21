@@ -1,8 +1,18 @@
 package com.jiyun.wanandroid.ui;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import com.jiyun.wanandroid.R;
 import com.jiyun.wanandroid.ui.home.fragment.HomeFragment;
@@ -11,48 +21,53 @@ import com.jiyun.wanandroid.ui.navigation.fragment.NavigationFragment;
 import com.jiyun.wanandroid.ui.project.fragment.ProjectFragment;
 import com.jiyun.wanandroid.ui.wechat.fragment.The_publicFragment;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 public class MainActivity extends AppCompatActivity {
 
-    @butterknife.BindView(R.id.toolbar_text)
-    android.widget.TextView mToolbarText;
-    @butterknife.BindView(R.id.toolbar)
-    Toolbar mToolbar;
-    @butterknife.BindView(R.id.rb)
-    android.widget.RadioButton mRb;
-    @butterknife.BindView(R.id.rb2)
-    android.widget.RadioButton mRb2;
-    @butterknife.BindView(R.id.rb3)
-    android.widget.RadioButton mRb3;
-    @butterknife.BindView(R.id.rb4)
-    android.widget.RadioButton mRb4;
-    @butterknife.BindView(R.id.rb5)
-    android.widget.RadioButton mRb5;
-    @butterknife.BindView(R.id.rg)
-    android.widget.RadioGroup mRg;
-    @butterknife.BindView(R.id.nav)
-    android.support.design.widget.NavigationView mNav;
-    @butterknife.BindView(R.id.dl)
-    android.support.v4.widget.DrawerLayout mDl;
 
+    @BindView(R.id.toolbar_text)
+    TextView mToolbarText;
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
+    @BindView(R.id.frame)
+    FrameLayout mFrame;
+    @BindView(R.id.rb)
+    RadioButton mRb;
+    @BindView(R.id.rb2)
+    RadioButton mRb2;
+    @BindView(R.id.rb3)
+    RadioButton mRb3;
+    @BindView(R.id.rb4)
+    RadioButton mRb4;
+    @BindView(R.id.rb5)
+    RadioButton mRb5;
+    @BindView(R.id.rg)
+    RadioGroup mRg;
+    @BindView(R.id.nav)
+    NavigationView mNav;
+    @BindView(R.id.dl)
+    DrawerLayout mDl;
     private HomeFragment homeFragment;
     private KnowledgeFragment knowledgeFragment;
     private NavigationFragment navigationFragment;
     private ProjectFragment projectFragment;
     private The_publicFragment the_publicFragment;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
-        butterknife.ButterKnife.bind(this);
+        ButterKnife.bind(this);
 
 
         mToolbar.setTitle("");
         mToolbarText.setText("首页");
         setSupportActionBar(mToolbar);
-        android.support.v7.app.ActionBarDrawerToggle actionBarDrawerToggle = new android.support.v7.app.ActionBarDrawerToggle(this, mDl, mToolbar, R.string.open, R.string.close);
+        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, mDl, mToolbar, R.string.open, R.string.close);
         mDl.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
 
@@ -64,8 +79,8 @@ public class MainActivity extends AppCompatActivity {
         the_publicFragment = new The_publicFragment();
 
 
-        android.support.v4.app.FragmentManager manager = getSupportFragmentManager();
-        android.support.v4.app.FragmentTransaction transaction = manager.beginTransaction();
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
         transaction.add(R.id.frame, homeFragment);
         transaction.add(R.id.frame, knowledgeFragment);
         transaction.add(R.id.frame, navigationFragment);
@@ -78,8 +93,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    @butterknife.OnClick({R.id.rb, R.id.rb2, R.id.rb3, R.id.rb4, R.id.rb5})
-    public void onClick(android.view.View v) {
+    @OnClick({R.id.rb, R.id.rb2, R.id.rb3, R.id.rb4, R.id.rb5})
+    public void onClick(View v) {
         switch (v.getId()) {
             default:
                 break;
@@ -102,18 +117,18 @@ public class MainActivity extends AppCompatActivity {
                 mToolbarText.setText("公众号");
 
                 getSupportFragmentManager().beginTransaction()
-                        .show(navigationFragment)
+                        .show(the_publicFragment)
                         .hide(homeFragment).hide(knowledgeFragment)
-                        .hide(projectFragment).hide(the_publicFragment).commit();
+                        .hide(projectFragment).hide(navigationFragment).commit();
 
                 break;
             case R.id.rb4:
                 mToolbarText.setText("导航");
 
                 getSupportFragmentManager().beginTransaction()
-                        .show(projectFragment)
+                        .show(navigationFragment)
                         .hide(homeFragment).hide(knowledgeFragment)
-                        .hide(navigationFragment).hide(the_publicFragment).commit();
+                        .hide(projectFragment).hide(the_publicFragment).commit();
 
                 break;
             case R.id.rb5:
@@ -121,11 +136,11 @@ public class MainActivity extends AppCompatActivity {
                 mToolbarText.setText("项目");
 
                 getSupportFragmentManager().beginTransaction()
-                        .show(the_publicFragment)
+                        .show(projectFragment)
                         .hide(homeFragment)
                         .hide(knowledgeFragment)
                         .hide(navigationFragment)
-                        .hide(projectFragment).commit();
+                        .hide(the_publicFragment).commit();
                 break;
 
         }

@@ -3,15 +3,15 @@
     <item
         android:id="@+id/collect"
         android:title="@string/collect"
-        android:icon="@mipmap/follw"/>
+        android:icon="@mipmap/icon_uxin"/>
     <item
         android:id="@+id/todo"
         android:title="@string/todo"
-        android:icon="@mipmap/solution"/>
+        android:icon="@mipmap/icon_todo"/>
     <item
         android:id="@+id/night"
         android:title="@string/night"
-        android:icon="@mipmap/night"/>
+        android:icon="@mipmap/icon_moon"/>
     <item
         android:id="@+id/setting"
         android:title="@string/setting"
@@ -19,9 +19,9 @@
     <item
         android:id="@+id/about"
         android:title="@string/about"
-        android:icon="@mipmap/jg"/>
+        android:icon="@mipmap/icon_about"/>
     <item
         android:id="@+id/log_out"
         android:title="@string/log_out"
-        android:icon="@mipmap/bulb"/>
+        android:icon="@mipmap/icon_logout"/>
 </menu>
