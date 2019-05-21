@@ -1,15 +1,24 @@
 package com.jiyun.wanandroid.ui;
 
+<<<<<<< HEAD
+import android.os.Bundle;
+=======
 import android.content.Intent;
 import android.support.annotation.NonNull;
+>>>>>>> fa80885235e2ac3d1e90bad3d514de646e65eb4a
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+<<<<<<< HEAD
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+=======
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+>>>>>>> fa80885235e2ac3d1e90bad3d514de646e65eb4a
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.RadioButton;
@@ -37,9 +46,16 @@ import com.jiyun.wanandroid.utils.UIModeUtil;
 import com.jiyun.wanandroid.view.EmptyView;
 
 import butterknife.BindView;
+<<<<<<< HEAD
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
+public class MainActivity extends AppCompatActivity {
+=======
 import butterknife.OnClick;
 
 public class MainActivity extends BaseActivity<EmptyView, EmptyPresenter> implements EmptyView {
+>>>>>>> fa80885235e2ac3d1e90bad3d514de646e65eb4a
 
 
     @BindView(R.id.toolbar_text)
@@ -69,10 +85,20 @@ public class MainActivity extends BaseActivity<EmptyView, EmptyPresenter> implem
     private NavigationFragment navigationFragment;
     private ProjectFragment projectFragment;
     private The_publicFragment the_publicFragment;
+<<<<<<< HEAD
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
+=======
     @Override
     protected EmptyPresenter initPresenter() {
         return new EmptyPresenter();
     }
+>>>>>>> fa80885235e2ac3d1e90bad3d514de646e65eb4a
 
     @Override
     protected int getLayoutId() {
@@ -84,9 +110,12 @@ public class MainActivity extends BaseActivity<EmptyView, EmptyPresenter> implem
         mToolbar.setTitle("");
         mToolbarText.setText("首页");
         setSupportActionBar(mToolbar);
+<<<<<<< HEAD
+=======
         initToolBar();
     }
     private void initToolBar() {
+>>>>>>> fa80885235e2ac3d1e90bad3d514de646e65eb4a
         ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, mDl, mToolbar, R.string.open, R.string.close);
         mDl.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
@@ -113,6 +142,10 @@ public class MainActivity extends BaseActivity<EmptyView, EmptyPresenter> implem
 
     }
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> fa80885235e2ac3d1e90bad3d514de646e65eb4a
     @OnClick({R.id.rb, R.id.rb2, R.id.rb3, R.id.rb4, R.id.rb5})
     public void onClick(View v) {
         switch (v.getId()) {
@@ -137,18 +170,18 @@ public class MainActivity extends BaseActivity<EmptyView, EmptyPresenter> implem
                 mToolbarText.setText("公众号");
 
                 getSupportFragmentManager().beginTransaction()
-                        .show(navigationFragment)
+                        .show(the_publicFragment)
                         .hide(homeFragment).hide(knowledgeFragment)
-                        .hide(projectFragment).hide(the_publicFragment).commit();
+                        .hide(projectFragment).hide(navigationFragment).commit();
 
                 break;
             case R.id.rb4:
                 mToolbarText.setText("导航");
 
                 getSupportFragmentManager().beginTransaction()
-                        .show(projectFragment)
+                        .show(navigationFragment)
                         .hide(homeFragment).hide(knowledgeFragment)
-                        .hide(navigationFragment).hide(the_publicFragment).commit();
+                        .hide(projectFragment).hide(the_publicFragment).commit();
 
                 break;
             case R.id.rb5:
@@ -156,11 +189,11 @@ public class MainActivity extends BaseActivity<EmptyView, EmptyPresenter> implem
                 mToolbarText.setText("项目");
 
                 getSupportFragmentManager().beginTransaction()
-                        .show(the_publicFragment)
+                        .show(projectFragment)
                         .hide(homeFragment)
                         .hide(knowledgeFragment)
                         .hide(navigationFragment)
-                        .hide(projectFragment).commit();
+                        .hide(the_publicFragment).commit();
                 break;
 
         }
