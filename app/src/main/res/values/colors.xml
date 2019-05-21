@@ -7,14 +7,12 @@
     <!--夜间模式下   将白色设置为黑色   黑色设置为白色 -->
     <color name="white">#ffffff</color>
     <color name="dedede">#dedede</color>
-<<<<<<< HEAD
     <color name="c_e91d65">#E91D65</color>
     <color name="c_ffffff">#ffffff</color>
     <color name="c_e6f5f6">#E6F5F6</color>
     <color name="c_49454a">#49454A</color>
     <color name="c_5f9c54">#5F9C94</color>
-=======
     <color name="black">#000000</color>
     <color name="c_84afe4">#84afe4</color>
->>>>>>> f8655816d0e90c9ff6f814d2a215d47859673c49
+
 </resources>

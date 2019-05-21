@@ -22,7 +22,6 @@
     <string name="night">夜间模式</string>
     <string name="about">关于我们</string>
     <string name="log_out">退出登录</string>
-<<<<<<< HEAD
     <string name="one">只用这一个</string>
     <string name="work">工作</string>
     <string name="study">学习</string>
@@ -33,7 +32,6 @@
     <string name="input_todo_name">输入待办名称，如：准备演示PPT</string>
     <string name="input_todo_des">输入待办详情，非必填，如：\n1、制作演示PPT\n2、预定会议室\n3、通知参加会议人员\n4、提前10分钟准备会议环境</string>
     <string name="save">保存</string>
-=======
     <string name="basic_setting">基本设置</string>
     <string name="no_image_model">无图模式</string>
     <string name="no_image_model_content">开启后在非wifi环境下不加载图片</string>
@@ -54,5 +52,4 @@
     <string name="source_code">源代码</string>
     <string name="copyright_statement">版权声明</string>
     <string name="Individuals_only">仅作个人及非商业用途</string>
->>>>>>> f8655816d0e90c9ff6f814d2a215d47859673c49
 </resources>
