@@ -22,7 +22,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.project.activity.WebActivity"
+
+        <activity
+            android:name=".ui.project.activity.WebActivity"
+            android:theme="@style/NoAppTheme"></activity>
+        <activity
+            android:name=".ui.home.BannerShowActivity"
+            android:theme="@style/NoAppTheme" />
+        <activity
+            android:name=".ui.home.activity.HomeShowActivity"
+            android:theme="@style/NoAppTheme" />
+        <activity
+            android:name=".ui.knowledge.fragment.KaiFaHuanJingActivity"
+            android:theme="@style/NoAppTheme" />
+        <activity
+            android:name=".ui.knowledge.fragment.activity.KaiFaHuanJingShowActivity"
             android:theme="@style/NoAppTheme"></activity>
         <activity
             android:name=".ui.todo.activity.ToDoActivity"
@@ -33,6 +47,7 @@
         <activity android:name=".ui.about.activity.AboutActivity" />
         <activity android:name=".ui.collect.activity.CollectActivity" />
         <activity android:name=".ui.todo.activity.AddToDoActivity"></activity>
+
     </application>
 
 </manifest>
