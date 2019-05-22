@@ -7,9 +7,9 @@
     <!--夜间模式下   将白色设置为黑色   黑色设置为白色 -->
     <color name="white">#ffffff</color>
     <color name="dedede">#dedede</color>
-<<<<<<< HEAD
+
     <color name="c_c0c0c0">#c0c0c0</color>
-=======
+
     <color name="c_e91d65">#E91D65</color>
     <color name="c_ffffff">#ffffff</color>
     <color name="c_e6f5f6">#E6F5F6</color>
@@ -17,6 +17,11 @@
     <color name="c_5f9c54">#5F9C94</color>
     <color name="black">#000000</color>
     <color name="c_84afe4">#84afe4</color>
+    <color name="c_333333">#333333</color>
+    <color name="c_fa6a13">#fa6a13</color>
+    <color name="c_ff9D53">#ff9d53</color>
+    <color name="c_33000000">#33000000</color>
+    <color name="c_fcebbc">#fcebbc</color>
+    <color name="c_f3f2ea">#f3f2ea</color>
 
->>>>>>> fa80885235e2ac3d1e90bad3d514de646e65eb4a
 </resources>

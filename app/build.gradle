@@ -26,17 +26,14 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-<<<<<<< HEAD
 
     //butterknife依赖
     implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 
-=======
     //ButterKnife依赖(添加Android ButterKnife Zelezny插件)
     implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
->>>>>>> fa80885235e2ac3d1e90bad3d514de646e65eb4a
     //ok
     implementation 'com.squareup.okhttp3:okhttp:3.12.0'
     //retrofit
@@ -52,12 +49,11 @@ dependencies {
     implementation 'jp.wasabeef:glide-transformations:3.3.0'
 
     implementation 'com.android.support:design:28.0.0'
-<<<<<<< HEAD
+
     implementation 'q.rorbin:VerticalTabLayout:1.2.5'
     //超牛逼的刷新加载
     implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-14'
     implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0-alpha-14'//没有使用特殊Header，可以不加这行
-=======
->>>>>>> fa80885235e2ac3d1e90bad3d514de646e65eb4a
+
 
 }
