@@ -1,4 +1,4 @@
-package com.jiyun.wanandroid.model;
+package com.jiyun.wanandroid.model.knowledge;
 
 import com.jiyun.wanandroid.api.home.knowledge.KnowledgeApi;
 import com.jiyun.wanandroid.base.BaseModel;

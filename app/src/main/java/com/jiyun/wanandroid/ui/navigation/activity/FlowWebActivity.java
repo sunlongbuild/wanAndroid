@@ -13,6 +13,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jiyun.wanandroid.R;
+import com.jiyun.wanandroid.utils.SystemShareUtils;
+import com.jiyun.wanandroid.utils.ToastUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -29,6 +31,7 @@ public class FlowWebActivity extends AppCompatActivity {
     @BindView(R.id.img)
     ImageView mImg;
     private String web;
+    private String shareTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,27 +54,30 @@ public class FlowWebActivity extends AppCompatActivity {
             @Override
             public void onReceivedTitle(WebView view, String title) {
                 mTvTitle.setText(title);
+                shareTitle = title;
             }
         });
     }
 
-    //选项菜单
+
+    /*
+     * *  author gme
+     *    time   2019年5月22日 11:31:52
+     *    分享内容
+     *
+     */
+
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        menu.add(1, 1, 1, "分享");
-        menu.add(1, 2, 1, "收藏");
-        menu.add(1, 3, 1, "用浏览器打开");
+    public boolean onCreateOptionsMenu(Menu menu) {//创建上下文菜单
+        getMenuInflater().inflate(R.menu.share_collection_browser,menu);
         return super.onCreateOptionsMenu(menu);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+
+    public boolean onOptionsItemSelected(MenuItem item) {//监听上下文选择
         switch (item.getItemId()) {
-            case 1:
-                break;
-            case 2:
-                break;
-            case 3:
+            case R.id.share:
+                getShareContent();//获取分享内容
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -87,4 +93,12 @@ public class FlowWebActivity extends AppCompatActivity {
                 break;
         }
     }
+    private void getShareContent() {
+        if (shareTitle != null && web != null){
+            SystemShareUtils.shareText(this,getResources().getString(R.string.wanandroid)+"【"+shareTitle+"】"+":"+web);
+        }else {
+            ToastUtil.showShort(getResources().getString(R.string.networrk_slow));
+        }
+    }
+
 }

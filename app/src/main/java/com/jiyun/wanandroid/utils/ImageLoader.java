@@ -1,6 +1,7 @@
 package com.jiyun.wanandroid.utils;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -29,7 +30,8 @@ public class ImageLoader {
                 .placeholder(placeImg);
         //获取设置页面选择的无图模式
         boolean mIsLoadingImage = (boolean) SpUtil.getParam(Constants.SETTING_NO_IMAGE, false);
-        if (!mIsLoadingImage){
+        Logger.logD("tag","无图模式"+mIsLoadingImage);
+        if (mIsLoadingImage== false){
             Glide.with(context).load(url).apply(options).into(iv);
         }
     }
@@ -45,7 +47,7 @@ public class ImageLoader {
         RequestOptions options = new RequestOptions()
                 .placeholder(placeImg);
         boolean mIsLoadingImage = (boolean) SpUtil.getParam(Constants.SETTING_NO_IMAGE, false);
-        if (!mIsLoadingImage) {
+        if (mIsLoadingImage == false) {
             Glide.with(context).load(resId).apply(options).into(iv);
         }
     }
@@ -62,7 +64,7 @@ public class ImageLoader {
                 .placeholder(placeImg)
                 .circleCrop();
         boolean mIsLoadingImage = (boolean) SpUtil.getParam(Constants.SETTING_NO_IMAGE, false);
-        if (!mIsLoadingImage) {
+        if (mIsLoadingImage== false) {
             Glide.with(context).load(resId).apply(options).into(iv);
         }
     }
@@ -79,7 +81,7 @@ public class ImageLoader {
                 .placeholder(placeImg)
                 .circleCrop();
         boolean mIsLoadingImage = (boolean) SpUtil.getParam(Constants.SETTING_NO_IMAGE, false);
-        if (!mIsLoadingImage) {
+        if (mIsLoadingImage== false) {
             Glide.with(context).load(url).apply(options).into(iv);
         }
     }
@@ -97,7 +99,7 @@ public class ImageLoader {
                 .placeholder(placeImg)
                 .transform(new RoundedCornersTransformation(SystemUtil.dp2px(radiusDp),0));
         boolean mIsLoadingImage = (boolean) SpUtil.getParam(Constants.SETTING_NO_IMAGE, false);
-        if (!mIsLoadingImage) {
+        if (mIsLoadingImage== false) {
             Glide.with(context).load(url).apply(options).into(iv);
         }
     }

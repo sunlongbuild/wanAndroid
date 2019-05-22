@@ -6,6 +6,9 @@
 
     <!--夜间模式下   将白色设置为黑色   黑色设置为白色 -->
     <color name="dedede">#dedede</color>
+    <color name="c_FF6AC5D8">#FF6AC5D8</color>
+    <color name="c_373737">#373737</color>
+
 
     <color name="c_c0c0c0">#c0c0c0</color>
     <color name="c_009688">#009688</color>
@@ -26,4 +29,5 @@
     <color name="c_f3f2ea">#f3f2ea</color>
 
     <color name="c_b5b3b5">#b5b3b5</color>
+    <color name="c_06bbd6">#06BBD6</color>
 </resources>

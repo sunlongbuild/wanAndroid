@@ -1,8 +1,8 @@
-package com.jiyun.wanandroid.presenter;
+package com.jiyun.wanandroid.presenter.knowledge;
 
 import com.jiyun.wanandroid.base.BasePresenter;
 import com.jiyun.wanandroid.entity.knowledge.KnowledgeBean;
-import com.jiyun.wanandroid.model.KaiFaHuanJingModel;
+import com.jiyun.wanandroid.model.knowledge.KaiFaHuanJingModel;
 import com.jiyun.wanandroid.net.ResultCallBack;
 import com.jiyun.wanandroid.utils.ToastUtil;
 import com.jiyun.wanandroid.view.knowledge.KaiFaHuanJingView;

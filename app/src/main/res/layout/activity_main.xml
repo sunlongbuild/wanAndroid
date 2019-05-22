@@ -10,7 +10,10 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:id="@+id/lv"
+    android:layout_height="wrap_content">
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:background="@color/c_e91d65"
@@ -18,7 +21,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_20"
             >
-
             <TextView
                 android:id="@+id/toolbar_text"
                 android:layout_width="wrap_content"
@@ -26,12 +28,23 @@
 
         </android.support.v7.widget.Toolbar>
 
+    <ImageView
+        android:id="@+id/img_sosu"
+        android:src="@drawable/sosuo"
+
+        android:layout_width="@dimen/dp_18"
+        android:layout_height="@dimen/dp_18"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/dp_10"
+        />
+</RelativeLayout>
         <FrameLayout
             android:id="@+id/frame"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_above="@id/rg"
-            android:layout_below="@id/toolbar" />
+            android:layout_below="@id/lv" />
 
 
         <View
