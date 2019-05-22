@@ -44,4 +44,5 @@ dependencies {
     implementation 'jp.wasabeef:glide-transformations:3.3.0'
     //google material design 几乎是所有这种风格的控件的依赖
     implementation 'com.android.support:design:28.0.0'
+    implementation 'org.greenrobot:eventbus:3.0.0'//Eventbus
 }
