@@ -1,13 +1,33 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="fragment.NavigationFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <q.rorbin.verticaltablayout.VerticalTabLayout
+        android:id="@+id/tab"
+        android:layout_width="@dimen/dp_100"
+        android:layout_height="match_parent"
+        android:background="#EDEDED"
+        app:indicator_color="@color/colorPrimary"
+        app:indicator_width="0dp"
+        app:indicator_gravity="left"
+        app:tab_height="50dp"
+        android:visibility="visible"
+        app:tab_mode="scrollable"/>
+    <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
-
-</FrameLayout>
+        android:id="@+id/lv"
+        android:layout_toRightOf="@id/tab"/>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/btn_main"
+        android:backgroundTint="@color/c_009688"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:src="@mipmap/icon_up_arrow"
+        app:elevation="@dimen/dp_15"
+        android:layout_margin="@dimen/dp_15"/>
+</RelativeLayout>

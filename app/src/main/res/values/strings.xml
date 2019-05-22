@@ -22,4 +22,72 @@
     <string name="night">夜间模式</string>
     <string name="about">关于我们</string>
     <string name="log_out">退出登录</string>
+    <string name="about_play_android">玩Android</string>
+    <string name="about_sites_title">网站内容</string>
+    <string name="about_sites_content_one">\t\t本网站每天新增20～30篇优质文章，并加
+        \n入到现有的知识分类中，力求整理出一份优质而又
+        \n详尽的知识体系，闲暇时间不放上来学习下
+        \n知识；除此以外，并为大家提供平时开发过
+        \n程中常用的工具以及常用的网址导航。\n\n
+        \t\t当然这只是我们目前的功能，未来我们将
+        \n提供更多更加便捷的功能···
+        \n\n如果您有任何好的建议：
+        \n\n\n
+        \t\t\t\t关于网站的排版\n
+        \t\t\t\t关于新增常用网址以及工具\n
+        \t\t\t\t未来你希望增加的工具等
+    </string>
+    <string name="about_sites_content_two">
+        \t\t可以在
+    </string>
+    <string name="about_sites_content_three">https://github.com/hongyangAndroid/wanandroid</string>
+    <string name="about_sites_content_four">项目中以issue形式提出,我将及时跟进。
+        \n\n\t\t如果您希望长期关注本站，可以加入我们的QQ\n群：591683946
+    </string>
+    <string name="about_sites_content_five">\n源码位置
+    </string>
+    <string name="about_sites_content_six">\t\t本软件开源，如果你发现任何错误，不要犹豫，
+        马上点击GitHub，在上面发起issue或者提交pullrequest</string>
+
+    <string name="one">只用这一个</string>
+    <string name="work">工作</string>
+    <string name="study">学习</string>
+    <string name="life">生活</string>
+    <string name="backlog">待办</string>
+    <string name="finish">完成</string>
+    <string name="details">详情：</string>
+    <string name="input_todo_name">输入待办名称，如：准备演示PPT</string>
+    <string name="input_todo_des">输入待办详情，非必填，如：\n1、制作演示PPT\n2、预定会议室\n3、通知参加会议人员\n4、提前10分钟准备会议环境</string>
+    <string name="save">保存</string>
+    <string name="basic_setting">基本设置</string>
+    <string name="no_image_model">无图模式</string>
+    <string name="no_image_model_content">开启后在非wifi环境下不加载图片</string>
+    <string name="no_yes_select_essay_top">是否显示首页置顶文章</string>
+    <string name="no_yes_select_essay_top_content">开启后将不会显示首页顶置文章</string>
+    <string name="auto_switch_day_and_night">自动切换日夜间模式</string>
+    <string name="set_switch_time">设置切换时间</string>
+    <string name="title_color">主题颜色</string>
+    <string name="custom_title_color">自定义主题颜色</string>
+    <string name="author_setting">其他设置</string>
+    <string name="navigation_color">导航栏颜色</string>
+    <string name="navigation_color_follow_title">导航栏颜色跟随主题颜色</string>
+    <string name="clear_cache">清除缓存</string>
+    <string name="only_about">关于</string>
+    <string name="version">版本</string>
+    <string name="current_version">当前版本</string>
+    <string name="update_log">更新日志</string>
+    <string name="source_code">源代码</string>
+    <string name="copyright_statement">版权声明</string>
+    <string name="Individuals_only">仅作个人及非商业用途</string>
+    <string name="todo_title">标题：</string>
+    <string name="todo_add">新增</string>
+    <string name="priority">优先级：</string>
+    <string name="common">一般</string>
+    <string name="important">重要</string>
+    <string name="todo_data">日期：</string>
+    <string name="time">2019-5-21</string>
+    <string name="share">分享</string>
+    <string name="wanandroid">玩Android分享</string>
+    <string name="browser">用浏览器打开</string>
+    <string name="networrk_slow">网络有点慢!</string>
 </resources>
