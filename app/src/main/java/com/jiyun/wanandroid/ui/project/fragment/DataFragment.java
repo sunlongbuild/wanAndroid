@@ -122,6 +122,8 @@ public class DataFragment extends BaseFragment<DataView, DataPresenter> implemen
                 Intent intent = new Intent(getActivity(), WebActivity.class);
                 intent.putExtra("url", datasBeans.get(position).getLink());
                 intent.putExtra("title", datasBeans.get(position).getTitle());
+                intent.putExtra("url",datasBeans.get(position).getLink());
+                //intent.putExtra("title",datasBeans.get(position).getTitle());
                 getActivity().startActivity(intent);
             }
         });
