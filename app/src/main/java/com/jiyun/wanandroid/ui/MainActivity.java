@@ -1,8 +1,5 @@
 package com.jiyun.wanandroid.ui;
 
-
-import android.graphics.drawable.Drawable;
-import android.os.Bundle;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -10,11 +7,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-
-
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
@@ -36,15 +28,19 @@ import com.jiyun.wanandroid.ui.project.fragment.ProjectFragment;
 import com.jiyun.wanandroid.ui.setting.activity.SettingActivity;
 import com.jiyun.wanandroid.ui.todo.activity.ToDoActivity;
 import com.jiyun.wanandroid.ui.wechat.fragment.The_publicFragment;
-import com.jiyun.wanandroid.utils.ToastUtil;
 import com.jiyun.wanandroid.utils.UIModeUtil;
 import com.jiyun.wanandroid.view.EmptyView;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+
+
+
+
+
 public class MainActivity extends BaseActivity<EmptyView, EmptyPresenter> implements EmptyView {
+
 
     @BindView(R.id.toolbar_text)
     TextView mToolbarText;
@@ -74,10 +70,16 @@ public class MainActivity extends BaseActivity<EmptyView, EmptyPresenter> implem
     private ProjectFragment projectFragment;
     private The_publicFragment the_publicFragment;
 
+
+
+
     @Override
     protected EmptyPresenter initPresenter() {
         return new EmptyPresenter();
     }
+
+
+
 
     @Override
     protected int getLayoutId() {

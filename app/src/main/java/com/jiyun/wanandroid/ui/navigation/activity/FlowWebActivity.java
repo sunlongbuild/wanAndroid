@@ -1,15 +1,13 @@
-package com.jiyun.wanandroid.ui.project.activity;
+package com.jiyun.wanandroid.ui.navigation.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jiyun.wanandroid.R;
@@ -18,59 +16,47 @@ import com.jiyun.wanandroid.utils.ToastUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
-public class WebActivity extends AppCompatActivity {
+public class FlowWebActivity extends AppCompatActivity {
 
-    @BindView(R.id.web)
-    WebView mWeb;
-    @BindView(R.id.title)
-    TextView mTitle;
+    @BindView(R.id.tv_title)
+    TextView mTvTitle;
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
-    @BindView(R.id.img)
-    ImageView mImg;
-    private String url;
-    private String title;
+    @BindView(R.id.web)
+    WebView mWeb;
+    private String web;
+    private String shareTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_web);
+        setContentView(R.layout.activity_flow_web);
         ButterKnife.bind(this);
-        initData();
+        initView();
     }
 
-    private void initData() {
-        url = getIntent().getStringExtra("url");
-      /*  title = getIntent().getStringExtra("title");
-        mTitle.setText(title);*/
+    private void initView() {
+
+
         mToolbar.setTitle("");
         setSupportActionBar(mToolbar);
+        web = getIntent().getStringExtra("web");
         mWeb.getSettings().setJavaScriptEnabled(true);
         mWeb.setWebViewClient(new WebViewClient());
-        mWeb.loadUrl(url);
+        mWeb.loadUrl(web);
         mWeb.setWebChromeClient(new WebChromeClient(){
             @Override
             public void onReceivedTitle(WebView view, String title) {
-                mTitle.setText(title);
+                mTvTitle.setText(title);
+                shareTitle = title;
             }
         });
     }
 
-    @OnClick(R.id.img)
-    public void onClick(View v) {
-        switch (v.getId()) {
-            default:
-                break;
-            case R.id.img:
-                finish();
-                break;
-        }
-    }
     /*
      * *  author gme
-     *    time    2019年5月22日 10:25:00
+     *    time   2019年5月22日 11:31:52
      *    分享内容
      *
      */
@@ -92,10 +78,11 @@ public class WebActivity extends AppCompatActivity {
     }
 
     private void getShareContent() {
-        if (title != null & url != null){
-            SystemShareUtils.shareText(this,getResources().getString(R.string.wanandroid)+"【"+title+"】"+":"+url);
+        if (shareTitle != null && web != null){
+            SystemShareUtils.shareText(this,getResources().getString(R.string.wanandroid)+"【"+shareTitle+"】"+":"+web);
         }else {
             ToastUtil.showShort(getResources().getString(R.string.networrk_slow));
         }
     }
+
 }

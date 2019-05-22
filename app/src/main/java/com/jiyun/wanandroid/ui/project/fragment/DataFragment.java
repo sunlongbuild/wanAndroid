@@ -103,7 +103,7 @@ public class DataFragment extends BaseFragment<DataView, DataPresenter> implemen
             public void OnClick(int position, ListDataBean.DataBean.DatasBean datasBean) {
                 Intent intent = new Intent(getActivity(), WebActivity.class);
                 intent.putExtra("url",datasBeans.get(position).getLink());
-                intent.putExtra("title",datasBeans.get(position).getTitle());
+                //intent.putExtra("title",datasBeans.get(position).getTitle());
                 getActivity().startActivity(intent);
             }
         });
