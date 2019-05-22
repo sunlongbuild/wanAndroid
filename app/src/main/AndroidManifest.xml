@@ -46,7 +46,9 @@
         <activity android:name=".ui.logout.activity.LogoutActivity" />
         <activity android:name=".ui.about.activity.AboutActivity" />
         <activity android:name=".ui.collect.activity.CollectActivity" />
-        <activity android:name=".ui.todo.activity.AddToDoActivity"></activity>
+        <activity
+            android:name=".ui.todo.activity.AddToDoActivity"
+            android:theme="@style/NoAppTheme" />
 
     </application>
 
