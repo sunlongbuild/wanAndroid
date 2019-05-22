@@ -60,12 +60,12 @@ public class AboutActivity extends BaseActivity<EmptyView, EmptyPresenter> imple
         mAboutTvVersionName.setText(versionName);
         SpannableString sp = new SpannableString(mAboutTvSitesContentSix.getText().toString());
         //设置超链接
-        sp.setSpan(new URLSpan("https://github.com/iceCola7/WanAndroid"), 27, 33,
+        sp.setSpan(new URLSpan("https://github.com/iceCola7/WanAndroid"), 28, 34,
         Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
           //设置高亮样式二
-        sp.setSpan(new ForegroundColorSpan(Color.BLUE),27,33,Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+        sp.setSpan(new ForegroundColorSpan(Color.BLUE),28,34,Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
         //设置斜体
-        sp.setSpan(new StyleSpan(android.graphics.Typeface.BOLD_ITALIC), 27, 33, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+        sp.setSpan(new StyleSpan(android.graphics.Typeface.BOLD_ITALIC), 28, 34, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
         //SpannableString对象设置给TextView
         mAboutTvSitesContentSix.setText(sp);
         //设置TextView可点击

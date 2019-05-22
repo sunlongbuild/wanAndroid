@@ -15,7 +15,6 @@ import android.widget.FrameLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-
 import com.jiyun.wanandroid.R;
 import com.jiyun.wanandroid.base.BaseActivity;
 import com.jiyun.wanandroid.presenter.EmptyPresenter;
@@ -71,8 +70,7 @@ public class MainActivity extends BaseActivity<EmptyView, EmptyPresenter> implem
     protected void initView() {
         mToolbar.setTitle("");
         mToolbarText.setText("首页");
-        getSupportFragmentManager().beginTransaction().show(homeFragment).hide(knowledgeFragment).hide(navigationFragment).hide(projectFragment)
-                .hide(the_publicFragment).commit();
+
         setSupportActionBar(mToolbar);
 
 
@@ -138,13 +136,8 @@ public class MainActivity extends BaseActivity<EmptyView, EmptyPresenter> implem
                         .hide(the_publicFragment).commit();
 
                 break;
-            case R.id.setting:
-                //设置
-                Intent intent4 = new Intent(MainActivity.this, SettingActivity.class);
-                startActivity(intent4);
             case R.id.rb3:
                 mToolbarText.setText("公众号");
-
                 getSupportFragmentManager().beginTransaction()
                         .show(the_publicFragment)
                         .hide(homeFragment).hide(knowledgeFragment)
@@ -160,10 +153,6 @@ public class MainActivity extends BaseActivity<EmptyView, EmptyPresenter> implem
                         .hide(projectFragment).hide(the_publicFragment).commit();
 
                 break;
-            case R.id.log_out:
-                //退出登录
-                Intent intent6 = new Intent(MainActivity.this, LogoutActivity.class);
-                startActivity(intent6);
             case R.id.rb5:
 
                 mToolbarText.setText("项目");
