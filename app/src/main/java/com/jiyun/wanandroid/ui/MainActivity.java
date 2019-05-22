@@ -73,15 +73,10 @@ public class MainActivity extends BaseActivity<EmptyView, EmptyPresenter> implem
     private String mName;
 
 
-
-
     @Override
     protected EmptyPresenter initPresenter() {
         return new EmptyPresenter();
     }
-
-
-
 
     @Override
     protected int getLayoutId() {
