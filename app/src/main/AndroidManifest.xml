@@ -44,7 +44,9 @@
         <activity
             android:name=".ui.todo.activity.ToDoActivity"
             android:theme="@style/NoAppTheme" />
-        <activity android:name=".ui.setting.activity.SettingActivity" />
+        <activity android:name=".ui.setting.activity.SettingActivity"
+            android:theme="@style/NoAppTheme"
+            />
         <activity android:name=".ui.night.activity.NightActivity" />
         <activity android:name=".ui.logout.activity.LogoutActivity" />
         <activity android:name=".ui.about.activity.AboutActivity" />
