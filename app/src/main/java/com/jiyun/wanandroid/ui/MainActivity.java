@@ -1,10 +1,6 @@
 package com.jiyun.wanandroid.ui;
 
 
-
-
-
-
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -15,7 +11,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 
 
 import android.support.v7.widget.Toolbar;
-
 
 
 import android.support.v7.widget.Toolbar;
@@ -44,10 +39,6 @@ import com.jiyun.wanandroid.view.EmptyView;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-
-
-
-
 
 
 public class MainActivity extends BaseActivity<EmptyView, EmptyPresenter> implements EmptyView {
@@ -82,14 +73,10 @@ public class MainActivity extends BaseActivity<EmptyView, EmptyPresenter> implem
     private The_publicFragment the_publicFragment;
 
 
-
-
     @Override
     protected EmptyPresenter initPresenter() {
         return new EmptyPresenter();
     }
-
-
 
 
     @Override
@@ -190,7 +177,7 @@ public class MainActivity extends BaseActivity<EmptyView, EmptyPresenter> implem
     }
 
     @Override
-    protected void initListener () {
+    protected void initListener() {
         mNav.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {

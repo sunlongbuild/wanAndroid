@@ -16,7 +16,7 @@
             android:background="@color/c_e91d65"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_22"
+            android:layout_marginTop="@dimen/dp_20"
             >
 
             <TextView
@@ -59,7 +59,7 @@
                 android:layout_marginTop="5dp"
                 android:layout_weight="1"
                 android:button="@null"
-                android:drawableTop="@mipmap/home_unselected"
+                android:drawableTop="@mipmap/icon_home"
                 android:gravity="center"
                 android:padding="4dp"
                 android:text="@string/home" />
@@ -85,7 +85,7 @@
                 android:layout_marginTop="5dp"
                 android:layout_weight="1"
                 android:button="@null"
-                android:drawableTop="@mipmap/wechat"
+                android:drawableTop="@mipmap/icon_wechat"
                 android:gravity="center"
                 android:padding="4dp"
                 android:text="@string/the_public" />
@@ -97,7 +97,7 @@
                 android:layout_marginTop="5dp"
                 android:layout_weight="1"
                 android:button="@null"
-                android:drawableTop="@mipmap/icon_navigation_not_selected"
+                android:drawableTop="@mipmap/icon_navigation"
                 android:gravity="center"
                 android:padding="4dp"
 

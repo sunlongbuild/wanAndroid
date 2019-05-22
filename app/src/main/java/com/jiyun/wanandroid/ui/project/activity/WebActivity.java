@@ -42,8 +42,7 @@ public class WebActivity extends AppCompatActivity {
 
     private void initData() {
         url = getIntent().getStringExtra("url");
-      /*  title = getIntent().getStringExtra("title");
-        mTitle.setText(title);*/
+
         mToolbar.setTitle("");
         setSupportActionBar(mToolbar);
         mWeb.getSettings().setJavaScriptEnabled(true);
