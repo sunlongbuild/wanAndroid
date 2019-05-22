@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        android:id="@+id/collect_tv_project_author"
+        android:textSize="@dimen/sp_12"
+        android:layout_margin="@dimen/dp_5"/>
+    <TextView
+        android:layout_margin="@dimen/dp_7"
+        android:id="@+id/collect_tv_project_time"
+        android:textSize="@dimen/sp_12"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"/>
+    <ImageView
+        android:id="@+id/collect_image_project_such"
+        android:layout_width="@dimen/dp_100"
+        android:layout_height="@dimen/dp_80"
+        android:layout_below="@id/collect_tv_project_author"
+        android:layout_marginLeft="@dimen/dp_6"
+        android:scaleType="center"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        android:textSize="@dimen/sp_18"
+        android:id="@+id/collect_tv_project_title"
+        android:layout_toRightOf="@id/collect_image_project_such"
+        android:layout_alignTop="@id/collect_image_project_such"
+        android:layout_marginLeft="@dimen/dp_10"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        android:textSize="@dimen/sp_12"
+        android:id="@+id/collect_tv_project_tab"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_toRightOf="@id/collect_image_project_such"
+        android:layout_alignBottom="@id/collect_image_project_such"/>
+    <ImageView
+        android:layout_width="@dimen/dp_30"
+        android:layout_height="@dimen/dp_30"
+        android:src="@mipmap/icon_xin"
+        android:layout_alignParentRight="true"
+        android:layout_alignBottom="@id/collect_image_project_such"
+        android:layout_marginRight="@dimen/dp_10"
+        android:layout_marginBottom="@dimen/dp_2"
+        android:id="@+id/collect_image_project_xin"
+        />
+</RelativeLayout>

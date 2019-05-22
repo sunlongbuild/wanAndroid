@@ -34,7 +34,6 @@ public class RvKaiFaHuanJingAdapter extends RecyclerView.Adapter<RvKaiFaHuanJing
 
     @Override
     public void onBindViewHolder(@NonNull MyHolder myHolder, final int i) {
-
         myHolder.author.setText(list.get(i).getAuthor());
         myHolder.chapterName.setText(list.get(i).getChapterName());
         myHolder.niceDate.setText(list.get(i).getNiceDate());
