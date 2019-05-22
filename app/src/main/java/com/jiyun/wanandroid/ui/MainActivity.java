@@ -1,23 +1,19 @@
 package com.jiyun.wanandroid.ui;
 
 
-import android.os.Bundle;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-
-
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -32,6 +28,7 @@ import com.jiyun.wanandroid.ui.knowledge.fragment.KnowledgeFragment;
 import com.jiyun.wanandroid.ui.logout.activity.LogoutActivity;
 import com.jiyun.wanandroid.ui.navigation.fragment.NavigationFragment;
 import com.jiyun.wanandroid.ui.project.fragment.ProjectFragment;
+import com.jiyun.wanandroid.ui.searchActivity.activity.SeacherActivity;
 import com.jiyun.wanandroid.ui.setting.activity.SettingActivity;
 import com.jiyun.wanandroid.ui.todo.activity.ToDoActivity;
 import com.jiyun.wanandroid.ui.wechat.fragment.The_publicFragment;
@@ -62,10 +59,12 @@ public class MainActivity extends BaseActivity<EmptyView, EmptyPresenter> implem
     RadioButton mRb5;
     @BindView(R.id.rg)
     RadioGroup mRg;
-    @BindView(R.id.nav)
-    NavigationView mNav;
     @BindView(R.id.dl)
     DrawerLayout mDl;
+    @BindView(R.id.nav)
+    NavigationView nav;
+    @BindView(R.id.img_sosu)
+    ImageView imgSosu;
     private HomeFragment homeFragment;
     private KnowledgeFragment knowledgeFragment;
     private NavigationFragment navigationFragment;
@@ -121,7 +120,7 @@ public class MainActivity extends BaseActivity<EmptyView, EmptyPresenter> implem
     }
 
 
-    @OnClick({R.id.rb, R.id.rb2, R.id.rb3, R.id.rb4, R.id.rb5})
+    @OnClick({R.id.rb, R.id.rb2, R.id.rb3, R.id.rb4, R.id.rb5,R.id.img_sosu})
     public void onClick(View v) {
         switch (v.getId()) {
             default:
@@ -169,14 +168,17 @@ public class MainActivity extends BaseActivity<EmptyView, EmptyPresenter> implem
                         .hide(navigationFragment)
                         .hide(the_publicFragment).commit();
                 break;
+            case R.id.img_sosu:
+                startActivity(new Intent(MainActivity.this, SeacherActivity.class));
+                break;
 
         }
 
     }
 
     @Override
-    protected void initListener () {
-        mNav.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+    protected void initListener() {
+        nav.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
@@ -208,4 +210,5 @@ public class MainActivity extends BaseActivity<EmptyView, EmptyPresenter> implem
             }
         });
     }
+
 }
