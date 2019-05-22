@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
-import com.jiyun.wanandroid.utils.ToastUtil;
 import com.jiyun.wanandroid.widget.LoadingDialog;
 
 import butterknife.ButterKnife;

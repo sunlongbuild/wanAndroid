@@ -51,7 +51,7 @@ public class ToDoActivity extends BaseActivity<EmptyView, EmptyPresenter> implem
 
     }
 
-    @OnClick({R.id.iv_change, R.id.iv_back})
+    @OnClick({R.id.iv_change, R.id.iv_back, R.id.btn_float})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_change:

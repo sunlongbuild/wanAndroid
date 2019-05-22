@@ -23,6 +23,9 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".ui.project.activity.WebActivity"
+            android:theme="@style/NoAppTheme"></activity>
+        <activity
             android:name=".ui.home.BannerShowActivity"
             android:theme="@style/NoAppTheme" />
         <activity
@@ -33,10 +36,11 @@
             android:theme="@style/NoAppTheme" />
         <activity
             android:name=".ui.knowledge.fragment.activity.KaiFaHuanJingShowActivity"
+
             android:theme="@style/NoAppTheme" />
-        <activity
-            android:name=".ui.project.activity.WebActivity"
-            android:theme="@style/NoAppTheme" />
+
+
+
         <activity
             android:name=".ui.todo.activity.ToDoActivity"
             android:theme="@style/NoAppTheme" />
@@ -46,9 +50,11 @@
         <activity android:name=".ui.about.activity.AboutActivity" />
         <activity android:name=".ui.collect.activity.CollectActivity" />
         <activity android:name=".ui.todo.activity.AddToDoActivity" />
+
         <activity android:name=".ui.wechat.fragment.WeChatWebActivity"
             android:theme="@style/NoAppTheme"
-            ></activity>
+           />
+			
     </application>
 
 </manifest>
