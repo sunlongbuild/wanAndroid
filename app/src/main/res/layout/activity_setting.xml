@@ -11,7 +11,7 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/tool_setting"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
+        android:layout_height="@dimen/dp_42"
         android:background="@color/white" >
         <TextView
             android:textSize="@dimen/sp_20"
@@ -154,11 +154,13 @@
                     android:layout_marginTop="@dimen/dp_2"
                     android:text="@string/custom_title_color" />
 
-                <CheckBox
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="@dimen/dp_10" />
+            <ImageView
+                android:layout_marginRight="@dimen/dp_10"
+                android:layout_alignParentRight="true"
+                android:layout_width="@dimen/dp_40"
+                android:layout_height="@dimen/dp_40"
+                android:background="@drawable/setting_titlecheck"
+                />
             </RelativeLayout>
 
             <RelativeLayout

@@ -1,6 +1,7 @@
 package com.jiyun.wanandroid.ui;
 
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -35,6 +36,7 @@ import com.jiyun.wanandroid.ui.project.fragment.ProjectFragment;
 import com.jiyun.wanandroid.ui.setting.activity.SettingActivity;
 import com.jiyun.wanandroid.ui.todo.activity.ToDoActivity;
 import com.jiyun.wanandroid.ui.wechat.fragment.The_publicFragment;
+import com.jiyun.wanandroid.utils.ToastUtil;
 import com.jiyun.wanandroid.utils.UIModeUtil;
 import com.jiyun.wanandroid.view.EmptyView;
 
@@ -86,9 +88,7 @@ public class MainActivity extends BaseActivity<EmptyView, EmptyPresenter> implem
     protected void initView() {
         mToolbar.setTitle("");
         mToolbarText.setText("首页");
-
         setSupportActionBar(mToolbar);
-
         initToolBar();
     }
 
@@ -208,4 +208,5 @@ public class MainActivity extends BaseActivity<EmptyView, EmptyPresenter> implem
             }
         });
     }
+
 }
