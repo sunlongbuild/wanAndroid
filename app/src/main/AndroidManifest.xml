@@ -27,7 +27,9 @@
         <activity android:name=".ui.night.activity.NightActivity" />
         <activity android:name=".ui.logout.activity.LogoutActivity" />
         <activity android:name=".ui.about.activity.AboutActivity" />
-        <activity android:name=".ui.collect.activity.CollectActivity"></activity>
+        <activity android:name=".ui.collect.activity.CollectActivity" />
+        <activity android:name=".ui.loginactivity.LoginActivity" />
+        <activity android:name=".ui.loginactivity.RegisterActivity"></activity>
     </application>
 
 </manifest>

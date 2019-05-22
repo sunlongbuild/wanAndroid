@@ -25,4 +25,8 @@ public interface Constants {
     String PATH_CACHE = PATH_DATA + "/NetCache";
 
 
+    String NAME = "name";
+    String PSW = "psw";
+    String USERNAME = "username";
+    String LOGIN = "login";
 }

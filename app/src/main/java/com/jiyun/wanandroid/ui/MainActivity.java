@@ -15,9 +15,10 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.support.design.widget.NavigationView;
 
+import com.jiyun.wanandroid.base.Constants;
+import com.jiyun.wanandroid.ui.loginactivity.LoginActivity;
 import com.jiyun.wanandroid.R;
 import com.jiyun.wanandroid.base.BaseActivity;
-import com.jiyun.wanandroid.base.BasePresenter;
 import com.jiyun.wanandroid.presenter.EmptyPresenter;
 import com.jiyun.wanandroid.ui.about.activity.AboutActivity;
 import com.jiyun.wanandroid.ui.collect.activity.CollectActivity;
@@ -30,6 +31,7 @@ import com.jiyun.wanandroid.ui.project.fragment.ProjectFragment;
 import com.jiyun.wanandroid.ui.setting.activity.SettingActivity;
 import com.jiyun.wanandroid.ui.todo.activity.ToDoActivity;
 import com.jiyun.wanandroid.ui.wechat.fragment.The_publicFragment;
+import com.jiyun.wanandroid.utils.SpUtil;
 import com.jiyun.wanandroid.view.EmptyView;
 
 import butterknife.BindView;
@@ -65,6 +67,8 @@ public class MainActivity extends BaseActivity<EmptyView, EmptyPresenter> implem
     private NavigationFragment navigationFragment;
     private ProjectFragment projectFragment;
     private The_publicFragment the_publicFragment;
+    private TextView mHander_login;
+    private String mName;
 
     @Override
     protected EmptyPresenter initPresenter() {
@@ -78,10 +82,26 @@ public class MainActivity extends BaseActivity<EmptyView, EmptyPresenter> implem
 
     @Override
     protected void initView() {
+
         mToolbar.setTitle("");
         mToolbarText.setText("首页");
         setSupportActionBar(mToolbar);
 
+        View headerView = mNav.getHeaderView(0);
+        mHander_login = headerView.findViewById(R.id.hander_login);
+        mHander_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this,LoginActivity.class));
+                 mName = (String) SpUtil.getParam(Constants.NAME, "");
+                 mHander_login.setText(mName);
+            }
+        });
+
+        //判断如果用户已经登陆过，直接显示用户名
+        if ((boolean)SpUtil.getParam(Constants.LOGIN,false)){
+            mHander_login.setText((String)SpUtil.getParam(Constants.USERNAME,"登录"));
+        }
         initToolBar();
     }
 
@@ -165,7 +185,6 @@ public class MainActivity extends BaseActivity<EmptyView, EmptyPresenter> implem
 
         }
     }
-
     @Override
     protected void initListener() {
         mNav.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -201,6 +220,4 @@ public class MainActivity extends BaseActivity<EmptyView, EmptyPresenter> implem
             }
         });
     }
-
-
 }
