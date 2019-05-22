@@ -1,15 +1,10 @@
 package com.jiyun.wanandroid.ui.navigation.fragment;
 
 
-import android.graphics.Color;
-import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.jiyun.wanandroid.R;
 import com.jiyun.wanandroid.base.BaseFragment;
@@ -21,11 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import q.rorbin.verticaltablayout.VerticalTabLayout;
-import q.rorbin.verticaltablayout.adapter.TabAdapter;
-import q.rorbin.verticaltablayout.widget.ITabView;
-import q.rorbin.verticaltablayout.widget.TabView;
 
 
 /**
@@ -34,8 +24,8 @@ import q.rorbin.verticaltablayout.widget.TabView;
 public class NavigationFragment extends BaseFragment<NavigationV, NavigationP> implements NavigationV {
 
 
-    @BindView(R.id.tab)
-    VerticalTabLayout mTab;
+  /*  @BindView(R.id.tab)
+    VerticalTabLayout mTab;*/
     @BindView(R.id.lv)
     RecyclerView mLv;
     private ArrayList<NavigationBean.DataBean> list;
@@ -81,7 +71,7 @@ public class NavigationFragment extends BaseFragment<NavigationV, NavigationP> i
     public void getData(NavigationBean bean) {
         list = new ArrayList<>();
         final List<NavigationBean.DataBean> data = bean.getData();
-        mTab.setTabAdapter(new TabAdapter() {
+       /* mTab.setTabAdapter(new TabAdapter() {
             @Override
             public int getCount() {
                 return data.size();
@@ -109,7 +99,7 @@ public class NavigationFragment extends BaseFragment<NavigationV, NavigationP> i
             public int getBackground(int position) {
                 return 0;
             }
-        });
+        });*/
      /*   //RecyclerView和tab栏联动
         mLv.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
