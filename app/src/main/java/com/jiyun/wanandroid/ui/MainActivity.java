@@ -1,7 +1,9 @@
 package com.jiyun.wanandroid.ui;
 
 
-import android.os.Bundle;
+
+
+
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -10,10 +12,13 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
+
+
 import android.support.v7.widget.Toolbar;
+
+
+
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -30,20 +35,18 @@ import com.jiyun.wanandroid.ui.home.fragment.HomeFragment;
 import com.jiyun.wanandroid.ui.knowledge.fragment.KnowledgeFragment;
 import com.jiyun.wanandroid.ui.logout.activity.LogoutActivity;
 import com.jiyun.wanandroid.ui.navigation.fragment.NavigationFragment;
-import com.jiyun.wanandroid.ui.night.activity.NightActivity;
 import com.jiyun.wanandroid.ui.project.fragment.ProjectFragment;
 import com.jiyun.wanandroid.ui.setting.activity.SettingActivity;
 import com.jiyun.wanandroid.ui.todo.activity.ToDoActivity;
 import com.jiyun.wanandroid.ui.wechat.fragment.The_publicFragment;
-import com.jiyun.wanandroid.utils.Logger;
-import com.jiyun.wanandroid.utils.SpUtil;
-import com.jiyun.wanandroid.utils.ToastUtil;
 import com.jiyun.wanandroid.utils.UIModeUtil;
 import com.jiyun.wanandroid.view.EmptyView;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+
+
 
 
 
@@ -77,10 +80,16 @@ public class MainActivity extends BaseActivity<EmptyView, EmptyPresenter> implem
     private NavigationFragment navigationFragment;
     private ProjectFragment projectFragment;
     private The_publicFragment the_publicFragment;
+
+
+
+
     @Override
     protected EmptyPresenter initPresenter() {
         return new EmptyPresenter();
     }
+
+
 
 
     @Override
@@ -92,14 +101,19 @@ public class MainActivity extends BaseActivity<EmptyView, EmptyPresenter> implem
     protected void initView() {
         mToolbar.setTitle("");
         mToolbarText.setText("首页");
+
         setSupportActionBar(mToolbar);
+
         initToolBar();
     }
+
     private void initToolBar() {
+
         ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, mDl, mToolbar, R.string.open, R.string.close);
         mDl.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
     }
+
     @Override
     protected void initData() {
         homeFragment = new HomeFragment();
@@ -119,7 +133,6 @@ public class MainActivity extends BaseActivity<EmptyView, EmptyPresenter> implem
 
         transaction.show(homeFragment).hide(knowledgeFragment).hide(navigationFragment).hide(projectFragment)
                 .hide(the_publicFragment).commit();
-
     }
 
 
@@ -145,7 +158,6 @@ public class MainActivity extends BaseActivity<EmptyView, EmptyPresenter> implem
                 break;
             case R.id.rb3:
                 mToolbarText.setText("公众号");
-
                 getSupportFragmentManager().beginTransaction()
                         .show(the_publicFragment)
                         .hide(homeFragment).hide(knowledgeFragment)
@@ -174,10 +186,11 @@ public class MainActivity extends BaseActivity<EmptyView, EmptyPresenter> implem
                 break;
 
         }
+
     }
 
     @Override
-    protected void initListener() {
+    protected void initListener () {
         mNav.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -210,5 +223,4 @@ public class MainActivity extends BaseActivity<EmptyView, EmptyPresenter> implem
             }
         });
     }
-
 }
