@@ -1,24 +1,21 @@
 package com.jiyun.wanandroid.ui;
 
-<<<<<<< HEAD
 import android.os.Bundle;
-=======
 import android.content.Intent;
 import android.support.annotation.NonNull;
->>>>>>> fa80885235e2ac3d1e90bad3d514de646e65eb4a
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-<<<<<<< HEAD
+
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-=======
+
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
->>>>>>> fa80885235e2ac3d1e90bad3d514de646e65eb4a
+
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.RadioButton;
@@ -46,17 +43,10 @@ import com.jiyun.wanandroid.utils.UIModeUtil;
 import com.jiyun.wanandroid.view.EmptyView;
 
 import butterknife.BindView;
-<<<<<<< HEAD
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends AppCompatActivity {
-=======
-import butterknife.OnClick;
-
 public class MainActivity extends BaseActivity<EmptyView, EmptyPresenter> implements EmptyView {
->>>>>>> fa80885235e2ac3d1e90bad3d514de646e65eb4a
-
 
     @BindView(R.id.toolbar_text)
     TextView mToolbarText;
@@ -85,153 +75,142 @@ public class MainActivity extends BaseActivity<EmptyView, EmptyPresenter> implem
     private NavigationFragment navigationFragment;
     private ProjectFragment projectFragment;
     private The_publicFragment the_publicFragment;
-<<<<<<< HEAD
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
-=======
-    @Override
-    protected EmptyPresenter initPresenter() {
-        return new EmptyPresenter();
-    }
->>>>>>> fa80885235e2ac3d1e90bad3d514de646e65eb4a
-
-    @Override
-    protected int getLayoutId() {
-        return R.layout.activity_main;
-    }
-
-    @Override
-    protected void initView() {
-        mToolbar.setTitle("");
-        mToolbarText.setText("首页");
-        setSupportActionBar(mToolbar);
-<<<<<<< HEAD
-=======
-        initToolBar();
-    }
-    private void initToolBar() {
->>>>>>> fa80885235e2ac3d1e90bad3d514de646e65eb4a
-        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, mDl, mToolbar, R.string.open, R.string.close);
-        mDl.addDrawerListener(actionBarDrawerToggle);
-        actionBarDrawerToggle.syncState();
-    }
-    @Override
-    protected void initData() {
-        homeFragment = new HomeFragment();
-        knowledgeFragment = new KnowledgeFragment();
-        navigationFragment = new NavigationFragment();
-        projectFragment = new ProjectFragment();
-        the_publicFragment = new The_publicFragment();
 
 
-        FragmentManager manager = getSupportFragmentManager();
-        FragmentTransaction transaction = manager.beginTransaction();
-        transaction.add(R.id.frame, homeFragment);
-        transaction.add(R.id.frame, knowledgeFragment);
-        transaction.add(R.id.frame, navigationFragment);
-        transaction.add(R.id.frame, projectFragment);
-        transaction.add(R.id.frame, the_publicFragment);
 
-        transaction.show(homeFragment).hide(knowledgeFragment).hide(navigationFragment).hide(projectFragment)
-                .hide(the_publicFragment).commit();
+        @Override
+        protected EmptyPresenter initPresenter () {
+            return new EmptyPresenter();
+        }
 
-    }
 
-<<<<<<< HEAD
+        @Override
+        protected int getLayoutId () {
+            return R.layout.activity_main;
+        }
 
-=======
->>>>>>> fa80885235e2ac3d1e90bad3d514de646e65eb4a
-    @OnClick({R.id.rb, R.id.rb2, R.id.rb3, R.id.rb4, R.id.rb5})
-    public void onClick(View v) {
-        switch (v.getId()) {
-            default:
-                break;
-            case R.id.rb:
-                mToolbarText.setText("首页");
+        @Override
+        protected void initView () {
+            mToolbar.setTitle("");
+            mToolbarText.setText("首页");
+            setSupportActionBar(mToolbar);
 
-                getSupportFragmentManager().beginTransaction().show(homeFragment).hide(knowledgeFragment).hide(navigationFragment).hide(projectFragment)
-                        .hide(the_publicFragment).commit();
+            initToolBar();
+        }
+        private void initToolBar () {
+            ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, mDl, mToolbar, R.string.open, R.string.close);
+            mDl.addDrawerListener(actionBarDrawerToggle);
+            actionBarDrawerToggle.syncState();
+        }
+        @Override
+        protected void initData () {
+            homeFragment = new HomeFragment();
+            knowledgeFragment = new KnowledgeFragment();
+            navigationFragment = new NavigationFragment();
+            projectFragment = new ProjectFragment();
+            the_publicFragment = new The_publicFragment();
 
-                break;
-            case R.id.rb2:
-                mToolbarText.setText("知识体系");
 
-                getSupportFragmentManager().beginTransaction().show(knowledgeFragment)
-                        .hide(homeFragment).hide(navigationFragment).hide(projectFragment)
-                        .hide(the_publicFragment).commit();
+            FragmentManager manager = getSupportFragmentManager();
+            FragmentTransaction transaction = manager.beginTransaction();
+            transaction.add(R.id.frame, homeFragment);
+            transaction.add(R.id.frame, knowledgeFragment);
+            transaction.add(R.id.frame, navigationFragment);
+            transaction.add(R.id.frame, projectFragment);
+            transaction.add(R.id.frame, the_publicFragment);
 
-                break;
-            case R.id.rb3:
-                mToolbarText.setText("公众号");
+            transaction.show(homeFragment).hide(knowledgeFragment).hide(navigationFragment).hide(projectFragment)
+                    .hide(the_publicFragment).commit();
 
-                getSupportFragmentManager().beginTransaction()
-                        .show(the_publicFragment)
-                        .hide(homeFragment).hide(knowledgeFragment)
-                        .hide(projectFragment).hide(navigationFragment).commit();
+        }
 
-                break;
-            case R.id.rb4:
-                mToolbarText.setText("导航");
 
-                getSupportFragmentManager().beginTransaction()
-                        .show(navigationFragment)
-                        .hide(homeFragment).hide(knowledgeFragment)
-                        .hide(projectFragment).hide(the_publicFragment).commit();
+        @OnClick({R.id.rb, R.id.rb2, R.id.rb3, R.id.rb4, R.id.rb5})
+        public void onClick (View v){
+            switch (v.getId()) {
+                default:
+                    break;
+                case R.id.rb:
+                    mToolbarText.setText("首页");
 
-                break;
-            case R.id.rb5:
+                    getSupportFragmentManager().beginTransaction().show(homeFragment).hide(knowledgeFragment).hide(navigationFragment).hide(projectFragment)
+                            .hide(the_publicFragment).commit();
 
-                mToolbarText.setText("项目");
+                    break;
+                case R.id.rb2:
+                    mToolbarText.setText("知识体系");
 
-                getSupportFragmentManager().beginTransaction()
-                        .show(projectFragment)
-                        .hide(homeFragment)
-                        .hide(knowledgeFragment)
-                        .hide(navigationFragment)
-                        .hide(the_publicFragment).commit();
-                break;
+                    getSupportFragmentManager().beginTransaction().show(knowledgeFragment)
+                            .hide(homeFragment).hide(navigationFragment).hide(projectFragment)
+                            .hide(the_publicFragment).commit();
 
+                    break;
+                case R.id.rb3:
+                    mToolbarText.setText("公众号");
+
+                    getSupportFragmentManager().beginTransaction()
+                            .show(the_publicFragment)
+                            .hide(homeFragment).hide(knowledgeFragment)
+                            .hide(projectFragment).hide(navigationFragment).commit();
+
+                    break;
+                case R.id.rb4:
+                    mToolbarText.setText("导航");
+
+                    getSupportFragmentManager().beginTransaction()
+                            .show(navigationFragment)
+                            .hide(homeFragment).hide(knowledgeFragment)
+                            .hide(projectFragment).hide(the_publicFragment).commit();
+
+                    break;
+                case R.id.rb5:
+
+                    mToolbarText.setText("项目");
+
+                    getSupportFragmentManager().beginTransaction()
+                            .show(projectFragment)
+                            .hide(homeFragment)
+                            .hide(knowledgeFragment)
+                            .hide(navigationFragment)
+                            .hide(the_publicFragment).commit();
+                    break;
+
+            }
+        }
+
+        @Override
+        protected void initListener () {
+            mNav.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                    switch (menuItem.getItemId()) {
+                        case R.id.collect:
+                            Intent intent = new Intent(MainActivity.this, CollectActivity.class);
+                            startActivity(intent);
+                            break;
+                        case R.id.todo:
+                            Intent intent2 = new Intent(MainActivity.this, ToDoActivity.class);
+                            startActivity(intent2);
+                            break;
+                        case R.id.night://切换夜间模式
+                            UIModeUtil.changeModeUI(MainActivity.this);
+                            break;
+                        case R.id.setting:
+                            Intent intent4 = new Intent(MainActivity.this, SettingActivity.class);
+                            startActivity(intent4);
+                            break;
+                        case R.id.about:
+                            Intent intent5 = new Intent(MainActivity.this, AboutActivity.class);
+                            startActivity(intent5);
+                            break;
+                        case R.id.log_out:
+                            Intent intent6 = new Intent(MainActivity.this, LogoutActivity.class);
+                            startActivity(intent6);
+                            break;
+                    }
+                    return false;
+                }
+            });
         }
     }
 
-    @Override
-    protected void initListener() {
-        mNav.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                switch (menuItem.getItemId()) {
-                    case R.id.collect:
-                        Intent intent = new Intent(MainActivity.this, CollectActivity.class);
-                        startActivity(intent);
-                        break;
-                    case R.id.todo:
-                        Intent intent2 = new Intent(MainActivity.this, ToDoActivity.class);
-                        startActivity(intent2);
-                        break;
-                    case R.id.night://切换夜间模式
-                        UIModeUtil.changeModeUI(MainActivity.this);
-                        break;
-                    case R.id.setting:
-                        Intent intent4 = new Intent(MainActivity.this, SettingActivity.class);
-                        startActivity(intent4);
-                        break;
-                    case R.id.about:
-                        Intent intent5 = new Intent(MainActivity.this, AboutActivity.class);
-                        startActivity(intent5);
-                        break;
-                    case R.id.log_out:
-                        Intent intent6 = new Intent(MainActivity.this, LogoutActivity.class);
-                        startActivity(intent6);
-                        break;
-                }
-                return false;
-            }
-        });
-    }
-
-}

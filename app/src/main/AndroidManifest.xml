@@ -22,10 +22,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-<<<<<<< HEAD
         <activity android:name=".ui.project.activity.WebActivity"
             android:theme="@style/NoAppTheme"></activity>
-=======
         <activity
             android:name=".ui.todo.activity.ToDoActivity"
             android:theme="@style/NoAppTheme" />
@@ -35,7 +33,6 @@
         <activity android:name=".ui.about.activity.AboutActivity" />
         <activity android:name=".ui.collect.activity.CollectActivity" />
         <activity android:name=".ui.todo.activity.AddToDoActivity"></activity>
->>>>>>> fa80885235e2ac3d1e90bad3d514de646e65eb4a
     </application>
 
 </manifest>

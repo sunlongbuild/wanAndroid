@@ -28,7 +28,7 @@
     <string name="life">生活</string>
     <string name="backlog">待办</string>
     <string name="finish">完成</string>
-    <string name="details">详情</string>
+    <string name="details">详情：</string>
     <string name="input_todo_name">输入待办名称，如：准备演示PPT</string>
     <string name="input_todo_des">输入待办详情，非必填，如：\n1、制作演示PPT\n2、预定会议室\n3、通知参加会议人员\n4、提前10分钟准备会议环境</string>
     <string name="save">保存</string>
@@ -52,4 +52,11 @@
     <string name="source_code">源代码</string>
     <string name="copyright_statement">版权声明</string>
     <string name="Individuals_only">仅作个人及非商业用途</string>
+    <string name="todo_title">标题：</string>
+    <string name="todo_add">新增</string>
+    <string name="priority">优先级：</string>
+    <string name="common">一般</string>
+    <string name="important">重要</string>
+    <string name="todo_data">日期：</string>
+    <string name="time">2019-5-21</string>
 </resources>
