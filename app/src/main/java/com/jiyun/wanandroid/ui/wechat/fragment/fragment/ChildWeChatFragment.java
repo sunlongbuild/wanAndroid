@@ -1,4 +1,4 @@
-package com.jiyun.wanandroid.ui.project.fragment;
+package com.jiyun.wanandroid.ui.wechat.fragment.fragment;
 
 
 import android.annotation.SuppressLint;
@@ -17,16 +17,19 @@ import android.view.ViewGroup;
 
 import com.jiyun.wanandroid.R;
 import com.jiyun.wanandroid.base.BaseFragment;
-import com.jiyun.wanandroid.entity.project.ListDataBean;
-import com.jiyun.wanandroid.presenter.project.DataPresenter;
-import com.jiyun.wanandroid.ui.project.activity.WebActivity;
-import com.jiyun.wanandroid.ui.project.adapter.MyAdapter;
-import com.jiyun.wanandroid.view.project.DataView;
+import com.jiyun.wanandroid.entity.wechat.WeChatBean;
+import com.jiyun.wanandroid.presenter.wechat.ChildWeChatPresenter;
+import com.jiyun.wanandroid.ui.wechat.fragment.WeChatWebActivity;
+import com.jiyun.wanandroid.ui.wechat.fragment.adapter.WeChatAdapter;
+import com.jiyun.wanandroid.view.wechat.ChildWeChatView;
+import com.scwang.smartrefresh.header.DropBoxHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -35,101 +38,92 @@ import butterknife.Unbinder;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class DataFragment extends BaseFragment<DataView, DataPresenter> implements DataView {
+public class ChildWeChatFragment extends BaseFragment<ChildWeChatView, ChildWeChatPresenter> implements ChildWeChatView {
 
 
-    @BindView(R.id.lv)
-    RecyclerView mLv;
-    @BindView(R.id.smart)
-    SmartRefreshLayout mSmart;
+    @BindView(R.id.rv)
+    RecyclerView rv;
+    @BindView(R.id.srl)
+    SmartRefreshLayout mSrl;
+    Unbinder unbinder;
     @BindView(R.id.btn_main)
     FloatingActionButton mBtnMain;
+    private ArrayList<WeChatBean.DataBean.DatasBean> mlist;
+    private WeChatAdapter weChatAdapter;
 
-    private ArrayList<ListDataBean.DataBean.DatasBean> datasBeans;
-    private MyAdapter adapter;
 
-    public DataFragment() {
+
+    public ChildWeChatFragment() {
         // Required empty public constructor
     }
 
-    private int cid;
-    private int page;
+    int id;
+    int page = 0;
 
     @SuppressLint("ValidFragment")
-    public DataFragment(int cid) {
-        this.cid = cid;
+    public ChildWeChatFragment(int id) {
+        this.id = id;
     }
-/*
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View inflate = inflater.inflate(R.layout.fragment_data, container, false);
-        unbinder = ButterKnife.bind(this, inflate);
-        return inflate;
-    }*/
 
     @Override
-    protected DataPresenter initPresenter() {
-        return new DataPresenter();
+    protected ChildWeChatPresenter initPresenter() {
+        return new ChildWeChatPresenter();
     }
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_data;
+        return R.layout.fragment_child_we_chat;
+    }
+
+    @Override
+    protected void initData() {
+        mPresenter.getData(id, page);
     }
 
     @Override
     protected void initView() {
-        datasBeans = new ArrayList<>();
-        adapter = new MyAdapter(getActivity(), datasBeans);
-        mLv.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mLv.setAdapter(adapter);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        rv.setLayoutManager(linearLayoutManager);
 
-        //点击悬浮按钮回到顶部并显示隐藏的toolbar与底部导航栏
-        mBtnMain.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mLv.smoothScrollToPosition(0);
-                getActivity().findViewById(R.id.toolbar).setVisibility(View.VISIBLE);
-                getActivity().findViewById(R.id.rg).setVisibility(View.VISIBLE);
-            }
-        });
-        initRecy();
+        mlist = new ArrayList<>();
+        weChatAdapter = new WeChatAdapter(getContext(), mlist);
+        rv.setAdapter(weChatAdapter);
 
 
-        mSmart.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
+        mSrl.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
             @Override
             public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
                 page++;
                 initData();
-                mSmart.finishLoadMore();
+                mSrl.finishLoadMore();
             }
 
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
                 page = 0;
-                datasBeans.clear();
-                ;
+                mlist.clear();
                 initData();
-                mSmart.finishRefresh();
+                mSrl.finishRefresh();
             }
         });
+        mSrl.setRefreshHeader(new DropBoxHeader(getContext()));
+        mSrl.setRefreshFooter(new ClassicsFooter(getContext()));
 
-        adapter.setOnClicklistener(new MyAdapter.OnClicklistener() {
+        //点击悬浮按钮回到顶部并显示隐藏的toolbar与底部导航栏
+        mBtnMain.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void OnClick(int position, ListDataBean.DataBean.DatasBean datasBean) {
-                Intent intent = new Intent(getActivity(), WebActivity.class);
-                intent.putExtra("url", datasBeans.get(position).getLink());
-                intent.putExtra("title", datasBeans.get(position).getTitle());
-                getActivity().startActivity(intent);
+            public void onClick(View v) {
+                rv.smoothScrollToPosition(0);
+                getActivity().findViewById(R.id.toolbar).setVisibility(View.VISIBLE);
+                getActivity().findViewById(R.id.rg).setVisibility(View.VISIBLE);
             }
         });
+        initRecy();
     }
     //下拉隐藏底部导航栏
     @SuppressLint("ClickableViewAccessibility")
     private void initRecy() {
-        mLv.setOnTouchListener(new View.OnTouchListener() {
+        rv.setOnTouchListener(new View.OnTouchListener() {
             public float mEndY;
             public float mStartY;
 
@@ -187,15 +181,24 @@ public class DataFragment extends BaseFragment<DataView, DataPresenter> implemen
                     return false;
                 }
             });
-    @Override
-    protected void initData() {
-        mPresenter.getData(page, cid);
-    }
+
 
     @Override
-    public void setData(ListDataBean bean) {
-        datasBeans.addAll(bean.getData().getDatas());
-        adapter.notifyDataSetChanged();
+    public void setData(WeChatBean bean) {
+        List<WeChatBean.DataBean.DatasBean> datas = bean.getData().getDatas();
+        mlist.addAll(datas);
+        weChatAdapter.notifyDataSetChanged();
+
+        weChatAdapter.setMyOnItenClcik(new WeChatAdapter.MyOnItenClcik() {
+            @Override
+            public void setMyOnItenClcik(int position) {
+                String link = mlist.get(position).getLink();
+                Intent intent = new Intent(getContext(), WeChatWebActivity.class);
+                intent.putExtra("link",link);
+                startActivity(intent);
+            }
+        });
+
     }
 
 

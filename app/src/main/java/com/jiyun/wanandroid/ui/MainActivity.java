@@ -90,7 +90,7 @@ import butterknife.OnClick;
             }
 
         @Override
-        protected int getLayoutId() {
+        protected int getLayoutId()  {
                return R.layout.activity_main;
         }
 

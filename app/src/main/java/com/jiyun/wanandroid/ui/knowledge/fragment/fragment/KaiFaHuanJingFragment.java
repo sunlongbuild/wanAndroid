@@ -3,18 +3,15 @@ package com.jiyun.wanandroid.ui.knowledge.fragment.fragment;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.jiyun.wanandroid.R;
 import com.jiyun.wanandroid.base.BaseFragment;
 import com.jiyun.wanandroid.entity.knowledge.KaiFaHuanJingBean;
-import com.jiyun.wanandroid.presenter.KaiFaHuanJingFragmentPresenter;
+import com.jiyun.wanandroid.presenter.knowledge.KaiFaHuanJingFragmentPresenter;
 import com.jiyun.wanandroid.ui.knowledge.fragment.activity.KaiFaHuanJingShowActivity;
 import com.jiyun.wanandroid.ui.knowledge.fragment.adapter.RvKaiFaHuanJingAdapter;
 import com.jiyun.wanandroid.view.knowledge.KaiFaHuanJingFragmentView;
@@ -23,8 +20,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import butterknife.Unbinder;
 
 /**

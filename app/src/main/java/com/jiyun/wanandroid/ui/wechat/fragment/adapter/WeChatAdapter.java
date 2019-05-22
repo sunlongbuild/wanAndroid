@@ -1,4 +1,4 @@
-package com.jiyun.wanandroid.ui.knowledge.fragment.adapter;
+package com.jiyun.wanandroid.ui.wechat.fragment.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -10,16 +10,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jiyun.wanandroid.R;
-import com.jiyun.wanandroid.entity.knowledge.KaiFaHuanJingBean;
+import com.jiyun.wanandroid.entity.wechat.WeChatBean;
 
 import java.util.ArrayList;
 
-public class RvKaiFaHuanJingAdapter extends RecyclerView.Adapter<RvKaiFaHuanJingAdapter.MyHolder> {
+public class WeChatAdapter extends RecyclerView.Adapter<WeChatAdapter.MyHolder> {
 
     private Context context;
-    private ArrayList<KaiFaHuanJingBean.DataBean.DatasBean>list;
+    private ArrayList<WeChatBean.DataBean.DatasBean>list;
 
-    public RvKaiFaHuanJingAdapter(Context context, ArrayList<KaiFaHuanJingBean.DataBean.DatasBean> list) {
+    public WeChatAdapter(Context context, ArrayList<WeChatBean.DataBean.DatasBean> list) {
         this.context = context;
         this.list = list;
     }
@@ -34,7 +34,6 @@ public class RvKaiFaHuanJingAdapter extends RecyclerView.Adapter<RvKaiFaHuanJing
 
     @Override
     public void onBindViewHolder(@NonNull MyHolder myHolder, final int i) {
-
         myHolder.author.setText(list.get(i).getAuthor());
         myHolder.chapterName.setText(list.get(i).getChapterName());
         myHolder.niceDate.setText(list.get(i).getNiceDate());
@@ -57,6 +56,7 @@ public class RvKaiFaHuanJingAdapter extends RecyclerView.Adapter<RvKaiFaHuanJing
     }
 
     public class MyHolder extends RecyclerView.ViewHolder{
+
         private TextView chapterName,superChapterName,title,niceDate,author;
         private ImageView follow_unselected;
         public MyHolder(@NonNull View itemView) {
@@ -67,11 +67,8 @@ public class RvKaiFaHuanJingAdapter extends RecyclerView.Adapter<RvKaiFaHuanJing
             title=itemView.findViewById(R.id.title);
             follow_unselected=itemView.findViewById(R.id.follow_unselected);
             niceDate=itemView.findViewById(R.id.niceDate);
-
         }
-
     }
-
     public  interface  MyOnItenClcik{
         void  setMyOnItenClcik(int position);
     }
