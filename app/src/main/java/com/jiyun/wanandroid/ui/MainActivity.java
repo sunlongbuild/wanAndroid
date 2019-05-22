@@ -1,7 +1,10 @@
 package com.jiyun.wanandroid.ui;
 
 
-import android.os.Bundle;
+
+
+
+
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -11,8 +14,9 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 
 
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+
+
 
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -39,10 +43,15 @@ import com.jiyun.wanandroid.utils.UIModeUtil;
 import com.jiyun.wanandroid.view.EmptyView;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+
+
+
+
+
 public class MainActivity extends BaseActivity<EmptyView, EmptyPresenter> implements EmptyView {
+
 
     @BindView(R.id.toolbar_text)
     TextView mToolbarText;
@@ -72,10 +81,16 @@ public class MainActivity extends BaseActivity<EmptyView, EmptyPresenter> implem
     private ProjectFragment projectFragment;
     private The_publicFragment the_publicFragment;
 
+
+
+
     @Override
     protected EmptyPresenter initPresenter() {
         return new EmptyPresenter();
     }
+
+
+
 
     @Override
     protected int getLayoutId() {
@@ -88,15 +103,8 @@ public class MainActivity extends BaseActivity<EmptyView, EmptyPresenter> implem
         mToolbarText.setText("首页");
 
         setSupportActionBar(mToolbar);
-
         initToolBar();
-    }
 
-    private void initToolBar() {
-
-        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, mDl, mToolbar, R.string.open, R.string.close);
-        mDl.addDrawerListener(actionBarDrawerToggle);
-        actionBarDrawerToggle.syncState();
     }
 
     @Override
@@ -118,8 +126,15 @@ public class MainActivity extends BaseActivity<EmptyView, EmptyPresenter> implem
 
         transaction.show(homeFragment).hide(knowledgeFragment).hide(navigationFragment).hide(projectFragment)
                 .hide(the_publicFragment).commit();
+
     }
 
+    private void initToolBar() {
+
+        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, mDl, mToolbar, R.string.open, R.string.close);
+        mDl.addDrawerListener(actionBarDrawerToggle);
+        actionBarDrawerToggle.syncState();
+    }
 
     @OnClick({R.id.rb, R.id.rb2, R.id.rb3, R.id.rb4, R.id.rb5})
     public void onClick(View v) {
@@ -127,12 +142,14 @@ public class MainActivity extends BaseActivity<EmptyView, EmptyPresenter> implem
             default:
                 break;
             case R.id.rb:
+
                 mToolbarText.setText("首页");
 
-                getSupportFragmentManager().beginTransaction().show(homeFragment).hide(knowledgeFragment).hide(navigationFragment).hide(projectFragment)
+                getSupportFragmentManager().beginTransaction().show(homeFragment)
+                        .hide(knowledgeFragment).hide(navigationFragment).hide(projectFragment)
                         .hide(the_publicFragment).commit();
-
                 break;
+
             case R.id.rb2:
                 mToolbarText.setText("知识体系");
 
@@ -175,7 +192,7 @@ public class MainActivity extends BaseActivity<EmptyView, EmptyPresenter> implem
     }
 
     @Override
-    protected void initListener () {
+    protected void initListener() {
         mNav.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {

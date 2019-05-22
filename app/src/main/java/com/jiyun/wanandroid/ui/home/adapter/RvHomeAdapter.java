@@ -95,7 +95,8 @@ public class RvHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             myRvItem.chapterName.setText(rvlist.get(mposition).getChapterName());
             myRvItem.niceDate.setText(rvlist.get(mposition).getNiceDate());
             myRvItem.title.setText(rvlist.get(mposition).getTitle());
-            myRvItem.superChapterName.setText(rvlist.get(mposition).getSuperChapterName() + "/");
+            myRvItem.superChapterName.setText(rvlist.get(mposition).getSuperChapterName() + "   /   ");
+
 
             myRvItem.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -148,7 +149,7 @@ public class RvHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             superChapterName = itemView.findViewById(R.id.superChapterName);
             chapterName = itemView.findViewById(R.id.chapterName);
             niceDate = itemView.findViewById(R.id.niceDate);
-            //img_shou_home=itemView.findViewById(R.id.img_shou_home);
+            img_shou_home=itemView.findViewById(R.id.follow_unselectedd);
         }
 
     }

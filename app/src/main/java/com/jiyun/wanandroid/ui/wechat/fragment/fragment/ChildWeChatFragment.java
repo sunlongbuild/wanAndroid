@@ -1,4 +1,4 @@
-package com.jiyun.wanandroid.ui.knowledge.fragment;
+package com.jiyun.wanandroid.ui.wechat.fragment.fragment;
 
 
 import android.annotation.SuppressLint;
@@ -17,10 +17,11 @@ import android.view.ViewGroup;
 
 import com.jiyun.wanandroid.R;
 import com.jiyun.wanandroid.base.BaseFragment;
-import com.jiyun.wanandroid.entity.knowledge.KnowledgeBean;
-import com.jiyun.wanandroid.presenter.knowledge.KnowledgePresenter;
-import com.jiyun.wanandroid.ui.knowledge.fragment.adapter.RvKnowledgeAdapter;
-import com.jiyun.wanandroid.view.knowledge.KnowledgeView;
+import com.jiyun.wanandroid.entity.wechat.WeChatBean;
+import com.jiyun.wanandroid.presenter.wechat.ChildWeChatPresenter;
+import com.jiyun.wanandroid.ui.wechat.fragment.WeChatWebActivity;
+import com.jiyun.wanandroid.ui.wechat.fragment.adapter.WeChatAdapter;
+import com.jiyun.wanandroid.view.wechat.ChildWeChatView;
 import com.scwang.smartrefresh.header.DropBoxHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -34,68 +35,72 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-
 /**
  * A simple {@link Fragment} subclass.
  */
-public class KnowledgeFragment extends BaseFragment<KnowledgeView, KnowledgePresenter> implements KnowledgeView {
+public class ChildWeChatFragment extends BaseFragment<ChildWeChatView, ChildWeChatPresenter> implements ChildWeChatView {
 
 
-    @BindView(R.id.knowledge_rv)
-    RecyclerView knowledgeRv;
-    @BindView(R.id.btn_hierarchy)
-    FloatingActionButton mBtnHierarchy;
+    @BindView(R.id.rv)
+    RecyclerView rv;
     @BindView(R.id.srl)
     SmartRefreshLayout mSrl;
+    Unbinder unbinder;
+    @BindView(R.id.btn_main)
+    FloatingActionButton mBtnMain;
+    private ArrayList<WeChatBean.DataBean.DatasBean> mlist;
+    private WeChatAdapter weChatAdapter;
 
-    private ArrayList<KnowledgeBean.DataBean> mlist;
-    private RvKnowledgeAdapter rvKnowledgeAdapter;
 
 
-
-    public KnowledgeFragment() {
+    public ChildWeChatFragment() {
         // Required empty public constructor
     }
 
+    int id;
+    int page = 0;
+
+    @SuppressLint("ValidFragment")
+    public ChildWeChatFragment(int id) {
+        this.id = id;
+    }
+
     @Override
-    protected KnowledgePresenter initPresenter() {
-        return new KnowledgePresenter();
+    protected ChildWeChatPresenter initPresenter() {
+        return new ChildWeChatPresenter();
     }
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_knowledge;
+        return R.layout.fragment_child_we_chat;
+    }
+
+    @Override
+    protected void initData() {
+        mPresenter.getData(id, page);
     }
 
     @Override
     protected void initView() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-        knowledgeRv.setLayoutManager(linearLayoutManager);
+        rv.setLayoutManager(linearLayoutManager);
+
         mlist = new ArrayList<>();
-        rvKnowledgeAdapter = new RvKnowledgeAdapter(getContext(), mlist);
-        knowledgeRv.setAdapter(rvKnowledgeAdapter);
-
-
-        rvKnowledgeAdapter.setMyClickListener(new RvKnowledgeAdapter.MyClickListener() {
-            @Override
-            public void setMyClickListener(int position, KnowledgeBean.DataBean dataBean) {
-                Intent intent = new Intent(getActivity(), KaiFaHuanJingActivity.class);
-                List<KnowledgeBean.DataBean.ChildrenBean> children = dataBean.getChildren();
-                intent.putExtra("position", position);
-                intent.putExtra("bean", dataBean);
-                getActivity().startActivity(intent);
-            }
-        });
+        weChatAdapter = new WeChatAdapter(getContext(), mlist);
+        rv.setAdapter(weChatAdapter);
 
 
         mSrl.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
             @Override
             public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
-
+                page++;
+                initData();
+                mSrl.finishLoadMore();
             }
 
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+                page = 0;
                 mlist.clear();
                 initData();
                 mSrl.finishRefresh();
@@ -105,34 +110,20 @@ public class KnowledgeFragment extends BaseFragment<KnowledgeView, KnowledgePres
         mSrl.setRefreshFooter(new ClassicsFooter(getContext()));
 
         //点击悬浮按钮回到顶部并显示隐藏的toolbar与底部导航栏
-        mBtnHierarchy.setOnClickListener(new View.OnClickListener() {
+        mBtnMain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                knowledgeRv.smoothScrollToPosition(0);
+                rv.smoothScrollToPosition(0);
                 getActivity().findViewById(R.id.toolbar).setVisibility(View.VISIBLE);
                 getActivity().findViewById(R.id.rg).setVisibility(View.VISIBLE);
             }
         });
         initRecy();
     }
-
-    @Override
-    protected void initData() {
-        mPresenter.getData();
-    }
-
-    @Override
-    public void setData(final KnowledgeBean bean) {
-
-        final List<KnowledgeBean.DataBean> data = bean.getData();
-        mlist.addAll(data);
-        rvKnowledgeAdapter.notifyDataSetChanged();
-
-    }
-
+    //下拉隐藏底部导航栏
     @SuppressLint("ClickableViewAccessibility")
     private void initRecy() {
-        knowledgeRv.setOnTouchListener(new View.OnTouchListener() {
+        rv.setOnTouchListener(new View.OnTouchListener() {
             public float mEndY;
             public float mStartY;
 
@@ -151,20 +142,17 @@ public class KnowledgeFragment extends BaseFragment<KnowledgeView, KnowledgePres
                             //我这个是在fragment中的操作 这个是获取activity中的布局
                             getActivity().findViewById(R.id.toolbar).setVisibility(View.VISIBLE);
                             getActivity().findViewById(R.id.rg).setVisibility(View.VISIBLE);
-                            mBtnHierarchy.setVisibility(View.VISIBLE);
-                            //这个就是当前页面的头布局id
-                            //.setVisibility(View.VISIBLE);
+                            mBtnMain.setVisibility(View.VISIBLE);
                         } else if (v1 < 0) {
                             getActivity().findViewById(R.id.rg).setVisibility(View.GONE);
                             getActivity().findViewById(R.id.toolbar).setVisibility(View.GONE);
-                            mBtnHierarchy.setVisibility(View.GONE);
+                            mBtnMain.setVisibility(View.GONE);
                         }
                         break;
                 }
                 return gestureDetector.onTouchEvent(event);
             }
         });
-
     }
 
     GestureDetector gestureDetector = new GestureDetector(getContext(),
@@ -173,29 +161,45 @@ public class KnowledgeFragment extends BaseFragment<KnowledgeView, KnowledgePres
                 public boolean onDown(MotionEvent e) {
                     return false;
                 }
-
                 @Override
                 public void onShowPress(MotionEvent e) {
                 }
-
                 @Override
                 public boolean onSingleTapUp(MotionEvent e) {
                     // do something
                     return true;
                 }
-
                 @Override
                 public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
                     return false;
                 }
-
                 @Override
                 public void onLongPress(MotionEvent e) {
                 }
-
                 @Override
                 public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
                     return false;
                 }
             });
+
+
+    @Override
+    public void setData(WeChatBean bean) {
+        List<WeChatBean.DataBean.DatasBean> datas = bean.getData().getDatas();
+        mlist.addAll(datas);
+        weChatAdapter.notifyDataSetChanged();
+
+        weChatAdapter.setMyOnItenClcik(new WeChatAdapter.MyOnItenClcik() {
+            @Override
+            public void setMyOnItenClcik(int position) {
+                String link = mlist.get(position).getLink();
+                Intent intent = new Intent(getContext(), WeChatWebActivity.class);
+                intent.putExtra("link",link);
+                startActivity(intent);
+            }
+        });
+
+    }
+
+
 }

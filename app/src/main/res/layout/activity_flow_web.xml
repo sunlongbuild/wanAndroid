@@ -3,31 +3,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.project.activity.WebActivity">
+    android:layout_height="match_parent"
+    tools:context=".ui.navigation.activity.FlowWebActivity">
     <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/c_e91d65"
-        android:id="@+id/toolbar">
+        android:id="@+id/toolbar"
+        android:background="@color/c_e91d65">
         <ImageView
-            android:id="@+id/img"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@mipmap/icon_white_left"/>
         <TextView
-            android:layout_marginLeft="@dimen/dp_10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/sp_16"
-            android:text="@string/app_name"
-            android:maxLines="1"
             android:layout_gravity="center"
-            android:id="@+id/title"/>
+            android:maxLines="1"
+            android:textSize="@dimen/sp_18"
+            android:id="@+id/tv_title"
+            />
     </android.support.v7.widget.Toolbar>
     <WebView
+        android:id="@+id/web"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/web"></WebView>
+        android:layout_height="match_parent"></WebView>
 </LinearLayout>
