@@ -1,6 +1,7 @@
 package com.jiyun.wanandroid.ui.loginactivity;
 
 import android.content.Intent;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,6 +15,7 @@ import com.jiyun.wanandroid.entity.login.LoginBean;
 import com.jiyun.wanandroid.presenter.login.LoginP;
 import com.jiyun.wanandroid.ui.MainActivity;
 import com.jiyun.wanandroid.utils.SpUtil;
+import com.jiyun.wanandroid.utils.ToastUtil;
 import com.jiyun.wanandroid.view.login.LoginV;
 
 import java.util.ArrayList;
@@ -35,12 +37,9 @@ public class LoginActivity extends BaseActivity<LoginV, LoginP> implements Login
 
     private String mYhm;
     private String mMm;
-    private String mName1;
-    private String mPwd1;
     private LoginP mLoginP;
     private String mName;
     private String mPwd;
-    private ArrayList<String> mDataBeans;
 
     @Override
     protected LoginP initPresenter() {
@@ -51,20 +50,11 @@ public class LoginActivity extends BaseActivity<LoginV, LoginP> implements Login
     }
 
     protected void initView() {
-        mDataBeans = new ArrayList<String>();
-
         mName = (String) SpUtil.getParam(Constants.NAME, "");
         mLoginYhm.setText(mName);
         mPwd = (String) SpUtil.getParam(Constants.PSW, "");
         mLoginMm.setText(mPwd);
-
     }
-
-    @Override
-    protected void initData() {
-        mLoginP.getData(mName,mPwd);
-    }
-
 
     @Override
     protected int getLayoutId() {
@@ -77,15 +67,17 @@ public class LoginActivity extends BaseActivity<LoginV, LoginP> implements Login
             case R.id.login_btn:
                 mYhm = mLoginYhm.getText().toString();
                 mMm = mLoginMm.getText().toString();
-                if (!mYhm.isEmpty() && !mMm.isEmpty()) {
+                if (!TextUtils.isEmpty(mYhm) && !TextUtils.isEmpty(mMm)) {
+                    mLoginP.getData(mName,mPwd);
                     //保存用户信息，并将登录状态标记为已登录
                     SpUtil.setParam(Constants.NAME, mYhm);
                     SpUtil.setParam(Constants.LOGIN, true);
                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
                     finish();
+                    //渐入渐出的效果
                     overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 } else {
-                    Toast.makeText(this, "未知错误，可能抛锚了吧~", Toast.LENGTH_SHORT).show();
+                    ToastUtil.showShort("用户名或密码不能为空");
                 }
                 break;
             case R.id.login_zhzc:

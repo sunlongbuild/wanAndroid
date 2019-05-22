@@ -2,6 +2,7 @@ package com.jiyun.wanandroid.ui.loginactivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,6 +15,7 @@ import com.jiyun.wanandroid.base.Constants;
 import com.jiyun.wanandroid.entity.login.RegisterBean;
 import com.jiyun.wanandroid.presenter.login.RegisterP;
 import com.jiyun.wanandroid.utils.SpUtil;
+import com.jiyun.wanandroid.utils.ToastUtil;
 import com.jiyun.wanandroid.view.login.RegisterV;
 
 import java.util.ArrayList;
@@ -89,7 +91,7 @@ public class RegisterActivity extends BaseActivity<RegisterV, RegisterP> impleme
                 mYhm = mRegisterYhm.getText().toString();
                 mMm = mRegisterMm.getText().toString();
                 mQrmm = mRegisterQrmm.getText().toString();
-                if (!mMm.isEmpty() && !mQrmm.isEmpty() && !mYhm.isEmpty()) {
+                if (!TextUtils.isEmpty(mYhm) && !TextUtils.isEmpty(mMm)) {
                     if (mMm.equals(mQrmm)) {
                         SpUtil.setParam(Constants.NAME, mYhm);
                         SpUtil.setParam(Constants.PSW, mMm);
@@ -97,14 +99,14 @@ public class RegisterActivity extends BaseActivity<RegisterV, RegisterP> impleme
                         Intent intent = new Intent(RegisterActivity.this,LoginActivity.class);
                         startActivity(intent);
                         finish();
+                        //渐入渐出的效果
                         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                    }else{
+                        ToastUtil.showShort("两次密码输入不一致，请重新输入");
                     }
                 } else {
-                    Toast.makeText(this, "用户名或者密码不能为空", Toast.LENGTH_SHORT).show();
+                        ToastUtil.showShort("用户名或者密码不能为空");
                 }
-
-
-
                 break;
             case R.id.register_zhzc:
                 startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
