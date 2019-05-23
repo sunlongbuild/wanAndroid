@@ -186,6 +186,8 @@ public class HomeFragment extends BaseFragment<HomeView, HomePresenter> implemen
             });
     @Override
     protected void initData() {
+        //数据回来之前加载动画
+        showLoading();
         mPresenter.getBanner();
         mPresenter.getRv(page);
         mPresenter.gettop( );
@@ -207,7 +209,8 @@ public class HomeFragment extends BaseFragment<HomeView, HomePresenter> implemen
         List<HomeBannerBean.DataBean> data = bean.getData();
         bannerlsit.addAll(data);
         rvHomeAdapter.notifyDataSetChanged();
-
+        //数据加载完毕隐藏
+        hideLoading();
         rvHomeAdapter.setMyBannerOnClickListener(new RvHomeAdapter.MyBannerOnClickListener() {
             @Override
             public void setMyBannerOnClickListener(int position) {
@@ -218,6 +221,7 @@ public class HomeFragment extends BaseFragment<HomeView, HomePresenter> implemen
 
             }
         });
+
     }
 
     @Override

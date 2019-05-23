@@ -191,6 +191,8 @@ public class DataFragment extends BaseFragment<DataView, DataPresenter> implemen
             });
     @Override
     protected void initData() {
+        //数据回来之前加载动画
+        showLoading();
         mPresenter.getData(page, cid);
     }
 
@@ -198,6 +200,8 @@ public class DataFragment extends BaseFragment<DataView, DataPresenter> implemen
     public void setData(ListDataBean bean) {
         datasBeans.addAll(bean.getData().getDatas());
         adapter.notifyDataSetChanged();
+        //数据加载完毕隐藏加载动画
+        hideLoading();
     }
 
 
