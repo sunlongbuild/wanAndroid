@@ -1,4 +1,4 @@
-package com.jiyun.wanandroid.ui.searchActivity.adapter;
+package com.jiyun.wanandroid.ui.search.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.jiyun.wanandroid.R;
 import com.jiyun.wanandroid.entity.search.Bean;
-import com.jiyun.wanandroid.ui.searchActivity.activity.WebSeacherActivity;
+import com.jiyun.wanandroid.ui.search.activity.WebSeacherActivity;
 
 import java.util.List;
 

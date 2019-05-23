@@ -1,4 +1,4 @@
-package com.jiyun.wanandroid.ui.loginactivity;
+package com.jiyun.wanandroid.ui.login;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.jiyun.wanandroid.R;
 import com.jiyun.wanandroid.base.BaseActivity;

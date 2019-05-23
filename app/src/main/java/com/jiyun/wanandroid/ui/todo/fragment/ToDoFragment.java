@@ -3,6 +3,8 @@ package com.jiyun.wanandroid.ui.todo.fragment;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,5 +51,6 @@ public class ToDoFragment extends BaseFragment<EmptyView, EmptyPresenter> implem
         mList.add("我是小可爱(●'◡'●)");
         MyToDoAdapter adapter = new MyToDoAdapter(getContext(), mList);
         mLv.setAdapter(adapter);
+
     }
 }

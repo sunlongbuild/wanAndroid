@@ -15,12 +15,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.jiyun.wanandroid.base.Constants;
-import com.jiyun.wanandroid.ui.loginactivity.LoginActivity;
+import com.jiyun.wanandroid.ui.login.LoginActivity;
 import com.jiyun.wanandroid.R;
 import com.jiyun.wanandroid.base.BaseActivity;
 import com.jiyun.wanandroid.presenter.EmptyPresenter;
@@ -31,6 +32,7 @@ import com.jiyun.wanandroid.ui.knowledge.fragment.KnowledgeFragment;
 import com.jiyun.wanandroid.ui.logout.activity.LogoutActivity;
 import com.jiyun.wanandroid.ui.navigation.fragment.NavigationFragment;
 import com.jiyun.wanandroid.ui.project.fragment.ProjectFragment;
+import com.jiyun.wanandroid.ui.search.activity.SeacherActivity;
 import com.jiyun.wanandroid.ui.setting.activity.SettingActivity;
 import com.jiyun.wanandroid.ui.todo.activity.ToDoActivity;
 import com.jiyun.wanandroid.ui.wechat.fragment.The_publicFragment;
@@ -67,6 +69,8 @@ public class MainActivity extends BaseActivity<EmptyView, EmptyPresenter> implem
     NavigationView mNav;
     @BindView(R.id.dl)
     DrawerLayout mDl;
+    @BindView(R.id.img_search)
+    ImageView mImgSearch;
     private HomeFragment homeFragment;
     private KnowledgeFragment knowledgeFragment;
     private NavigationFragment navigationFragment;
@@ -141,7 +145,7 @@ public class MainActivity extends BaseActivity<EmptyView, EmptyPresenter> implem
         actionBarDrawerToggle.syncState();
     }
 
-    @OnClick({R.id.rb, R.id.rb2, R.id.rb3, R.id.rb4, R.id.rb5})
+    @OnClick({R.id.rb, R.id.rb2, R.id.rb3, R.id.rb4, R.id.rb5,R.id.img_search})
     public void onClick(View v) {
         switch (v.getId()) {
             default:
@@ -190,6 +194,10 @@ public class MainActivity extends BaseActivity<EmptyView, EmptyPresenter> implem
                         .hide(knowledgeFragment)
                         .hide(navigationFragment)
                         .hide(the_publicFragment).commit();
+                break;
+            case R.id.img_search:
+                Intent intent = new Intent(MainActivity.this, SeacherActivity.class);
+                startActivity(intent);
                 break;
 
         }
