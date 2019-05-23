@@ -37,7 +37,6 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.5.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
-    //配合Rxjava使用
     //rxjava
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
     implementation 'io.reactivex.rxjava2:rxjava:2.2.4'
@@ -62,6 +61,8 @@ dependencies {
     api 'com.just.agentweb:agentweb:4.0.3-alpha@aar' // (必选)
     //状态栏模式
     implementation 'com.jaeger.statusbarutil:library:1.5.1'
+    //左滑删除控件
+    implementation 'com.github.mcxtzhang:SwipeDelMenuLayout:V1.3.0'
 
 
 }

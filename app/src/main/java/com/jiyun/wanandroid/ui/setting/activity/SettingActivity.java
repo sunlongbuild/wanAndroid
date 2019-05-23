@@ -1,27 +1,25 @@
 package com.jiyun.wanandroid.ui.setting.activity;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.jiyun.wanandroid.R;
 import com.jiyun.wanandroid.base.BaseActivity;
 import com.jiyun.wanandroid.base.Constants;
 import com.jiyun.wanandroid.presenter.EmptyPresenter;
-import com.jiyun.wanandroid.utils.Logger;
+import com.jiyun.wanandroid.ui.MainActivity;
+import com.jiyun.wanandroid.utils.DataCleanManager;
 import com.jiyun.wanandroid.utils.SpUtil;
-import com.jiyun.wanandroid.utils.SystemShareUtils;
 import com.jiyun.wanandroid.view.EmptyView;
-
-import java.io.File;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class SettingActivity extends BaseActivity<EmptyView, EmptyPresenter> implements EmptyView, View.OnClickListener {
 
@@ -29,6 +27,12 @@ public class SettingActivity extends BaseActivity<EmptyView, EmptyPresenter> imp
     Toolbar toolSetting;
     @BindView(R.id.ch_no_image)
     CheckBox chNoImage;
+    @BindView(R.id.rl_no_image)
+    RelativeLayout mRlNoImage;
+    @BindView(R.id.clear_cache)
+    TextView mClearCache;
+    @BindView(R.id.tv_cache)
+    TextView mTvCache;
 
     @Override
     protected EmptyPresenter initPresenter() {
@@ -42,6 +46,14 @@ public class SettingActivity extends BaseActivity<EmptyView, EmptyPresenter> imp
 
     @Override
     protected void initView() {
+        try {
+            //查看缓存的大小
+            String cacheSize = DataCleanManager.getTotalCacheSize(SettingActivity.this);
+            mTvCache.setText(cacheSize);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         toolSetting.setTitle("");
         setSupportActionBar(toolSetting);//支持toolbar
         toolSetting.setNavigationIcon(R.mipmap.icon_left);//设置返回键
@@ -72,5 +84,25 @@ public class SettingActivity extends BaseActivity<EmptyView, EmptyPresenter> imp
 
     }
 
+    @OnClick(R.id.clear_cache)
+    public void onViewClicked(View view) {
+        switch (view.getId()){
+            case R.id.clear_cache:
+                clearcache();
+                break;
+        }
+    }
+
+    private void clearcache() {
+        //清除操作
+        DataCleanManager.clearAllCache(SettingActivity.this);
+        try {
+            //清除后的操作
+            String s = DataCleanManager.getTotalCacheSize(SettingActivity.this);
+            mTvCache.setText(s);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
 
