@@ -169,7 +169,6 @@ public class MainActivity extends BaseActivity<EmptyView, EmptyPresenter> implem
             case R.id.rb:
 
                 mToolbarText.setText("首页");
-                ToastUtil.showShort("首页");
                 getSupportFragmentManager().beginTransaction().show(homeFragment)
                         .hide(knowledgeFragment).hide(navigationFragment).hide(projectFragment)
                         .hide(the_publicFragment).commit();
@@ -177,7 +176,6 @@ public class MainActivity extends BaseActivity<EmptyView, EmptyPresenter> implem
 
             case R.id.rb2:
                 mToolbarText.setText("知识体系");
-                ToastUtil.showShort("首页");
 
                 getSupportFragmentManager().beginTransaction().show(knowledgeFragment)
                         .hide(homeFragment).hide(navigationFragment).hide(projectFragment)
@@ -186,7 +184,6 @@ public class MainActivity extends BaseActivity<EmptyView, EmptyPresenter> implem
                 break;
             case R.id.rb3:
                 mToolbarText.setText("公众号");
-                ToastUtil.showShort("首页");
 
                 getSupportFragmentManager().beginTransaction()
                         .show(the_publicFragment)
