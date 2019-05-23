@@ -27,7 +27,7 @@ public class WeChatAdapter extends RecyclerView.Adapter<WeChatAdapter.MyHolder> 
     @NonNull
     @Override
     public MyHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View inflate = LayoutInflater.from(context).inflate(R.layout.layout_home_rvitem, null);
+        View inflate = LayoutInflater.from(context).inflate(R.layout.layout_kaifahuaning_item, null);
         MyHolder myHolder = new MyHolder(inflate);
         return myHolder;
     }

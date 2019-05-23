@@ -77,6 +77,8 @@ public class ChildWeChatFragment extends BaseFragment<ChildWeChatView, ChildWeCh
 
     @Override
     protected void initData() {
+        //数据加载完成之前加载动画
+        showLoading();
         mPresenter.getData(id, page);
     }
 
@@ -188,6 +190,9 @@ public class ChildWeChatFragment extends BaseFragment<ChildWeChatView, ChildWeCh
         List<WeChatBean.DataBean.DatasBean> datas = bean.getData().getDatas();
         mlist.addAll(datas);
         weChatAdapter.notifyDataSetChanged();
+
+        //数据加载完毕隐藏加载动画
+        hideLoading();
 
         weChatAdapter.setMyOnItenClcik(new WeChatAdapter.MyOnItenClcik() {
             @Override

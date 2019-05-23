@@ -27,7 +27,7 @@ public class RvKaiFaHuanJingAdapter extends RecyclerView.Adapter<RvKaiFaHuanJing
     @NonNull
     @Override
     public MyHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View inflate = LayoutInflater.from(context).inflate(R.layout.layout_home_rvitem, null);
+        View inflate = LayoutInflater.from(context).inflate(R.layout.layout_kaifahuaning_item, null);
         MyHolder myHolder = new MyHolder(inflate);
         return myHolder;
     }
