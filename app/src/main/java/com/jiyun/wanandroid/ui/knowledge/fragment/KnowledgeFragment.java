@@ -3,23 +3,20 @@ package com.jiyun.wanandroid.ui.knowledge.fragment;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.GestureDetector;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.jiyun.wanandroid.R;
 import com.jiyun.wanandroid.base.BaseFragment;
 import com.jiyun.wanandroid.entity.knowledge.KnowledgeBean;
 import com.jiyun.wanandroid.presenter.knowledge.KnowledgePresenter;
-import com.jiyun.wanandroid.ui.knowledge.fragment.adapter.RvKnowledgeAdapter;
+import com.jiyun.wanandroid.ui.knowledge.adapter.RvKnowledgeAdapter;
 import com.jiyun.wanandroid.view.knowledge.KnowledgeView;
 import com.scwang.smartrefresh.header.DropBoxHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -31,8 +28,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 
 /**

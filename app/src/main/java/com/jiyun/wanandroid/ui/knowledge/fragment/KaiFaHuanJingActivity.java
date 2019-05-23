@@ -11,8 +11,7 @@ import com.jiyun.wanandroid.R;
 import com.jiyun.wanandroid.base.BaseActivity;
 import com.jiyun.wanandroid.entity.knowledge.KnowledgeBean;
 import com.jiyun.wanandroid.presenter.knowledge.KaiFaHuanJingPresenter;
-import com.jiyun.wanandroid.ui.knowledge.fragment.adapter.VpKaiFaXuanXiangAdapter;
-import com.jiyun.wanandroid.ui.knowledge.fragment.fragment.KaiFaHuanJingFragment;
+import com.jiyun.wanandroid.ui.knowledge.adapter.VpKaiFaXuanXiangAdapter;
 import com.jiyun.wanandroid.view.knowledge.KaiFaHuanJingView;
 
 import java.util.ArrayList;

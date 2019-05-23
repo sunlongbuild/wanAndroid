@@ -1,4 +1,4 @@
-package com.jiyun.wanandroid.ui.knowledge.fragment.adapter;
+package com.jiyun.wanandroid.ui.knowledge.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;

@@ -1,4 +1,4 @@
-package com.jiyun.wanandroid.ui.knowledge.fragment.fragment;
+package com.jiyun.wanandroid.ui.knowledge.fragment;
 
 
 import android.annotation.SuppressLint;
@@ -19,8 +19,8 @@ import com.jiyun.wanandroid.R;
 import com.jiyun.wanandroid.base.BaseFragment;
 import com.jiyun.wanandroid.entity.knowledge.KaiFaHuanJingBean;
 import com.jiyun.wanandroid.presenter.knowledge.KaiFaHuanJingFragmentPresenter;
-import com.jiyun.wanandroid.ui.knowledge.fragment.activity.KaiFaHuanJingShowActivity;
-import com.jiyun.wanandroid.ui.knowledge.fragment.adapter.RvKaiFaHuanJingAdapter;
+import com.jiyun.wanandroid.ui.knowledge.activity.KaiFaHuanJingShowActivity;
+import com.jiyun.wanandroid.ui.knowledge.adapter.RvKaiFaHuanJingAdapter;
 import com.jiyun.wanandroid.view.knowledge.KaiFaHuanJingFragmentView;
 import com.scwang.smartrefresh.header.DropBoxHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
