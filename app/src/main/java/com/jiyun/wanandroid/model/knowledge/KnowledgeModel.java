@@ -1,6 +1,6 @@
 package com.jiyun.wanandroid.model.knowledge;
 
-import com.jiyun.wanandroid.api.home.knowledge.KnowledgeApi;
+import com.jiyun.wanandroid.api.knowledge.KnowledgeApi;
 import com.jiyun.wanandroid.base.BaseModel;
 import com.jiyun.wanandroid.entity.knowledge.KnowledgeBean;
 import com.jiyun.wanandroid.net.BaseObserver;
