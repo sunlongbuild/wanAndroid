@@ -1,4 +1,4 @@
-package com.jiyun.wanandroid.ui.loginactivity;
+package com.jiyun.wanandroid.ui.login;
 
 import android.content.Intent;
 import android.text.TextUtils;
@@ -17,8 +17,6 @@ import com.jiyun.wanandroid.ui.MainActivity;
 import com.jiyun.wanandroid.utils.SpUtil;
 import com.jiyun.wanandroid.utils.ToastUtil;
 import com.jiyun.wanandroid.view.login.LoginV;
-
-import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -43,7 +41,7 @@ public class LoginActivity extends BaseActivity<LoginV, LoginP> implements Login
 
     @Override
     protected LoginP initPresenter() {
-        if(mLoginP==null){
+        if (mLoginP == null) {
             mLoginP = new LoginP();
         }
         return mLoginP;
@@ -68,9 +66,10 @@ public class LoginActivity extends BaseActivity<LoginV, LoginP> implements Login
                 mYhm = mLoginYhm.getText().toString();
                 mMm = mLoginMm.getText().toString();
                 if (!TextUtils.isEmpty(mYhm) && !TextUtils.isEmpty(mMm)) {
-                    mLoginP.getData(mName,mPwd);
+                    mLoginP.getData(mName, mPwd);
                     //保存用户信息，并将登录状态标记为已登录
                     SpUtil.setParam(Constants.NAME, mYhm);
+                    SpUtil.setParam(Constants.PSW, mMm);
                     SpUtil.setParam(Constants.LOGIN, true);
                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
                     finish();
@@ -88,12 +87,12 @@ public class LoginActivity extends BaseActivity<LoginV, LoginP> implements Login
 
     @Override
     public void getData(LoginBean bean) {
-        if (bean!=null && bean.getData()!=null){
+        if (bean != null && bean.getData() != null) {
             String username = bean.getData().getUsername();
             mLoginYhm.setText(username);
-            if(username.equals(mName)){
+            if (username.equals(mName)) {
                 Toast.makeText(this, "登录成功", Toast.LENGTH_SHORT).show();
-            }else{
+            } else {
                 Toast.makeText(this, "登录失败", Toast.LENGTH_SHORT).show();
             }
         }

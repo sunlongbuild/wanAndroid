@@ -62,6 +62,7 @@ public class HomeFragment extends BaseFragment<HomeView, HomePresenter> implemen
     private RvHomeAdapter rvHomeAdapter;
 
 
+
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -87,6 +88,7 @@ public class HomeFragment extends BaseFragment<HomeView, HomePresenter> implemen
 
         mlist = new ArrayList<>();
         bannerlsit = new ArrayList<>();
+
         rvHomeAdapter = new RvHomeAdapter(getContext(), mlist, bannerlsit);
         mRvHome.setAdapter(rvHomeAdapter);
 
@@ -251,6 +253,7 @@ public class HomeFragment extends BaseFragment<HomeView, HomePresenter> implemen
 
     @Override
     public void setTop(HomeTopBean bean) {
+
 
 
     }
