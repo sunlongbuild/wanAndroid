@@ -252,25 +252,12 @@ public class MainActivity extends BaseActivity<EmptyView, EmptyPresenter> implem
             }
         });
     }
-
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-    }
-
-    @Override
-
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-
         if (keyCode == KeyEvent.KEYCODE_BACK || keyCode == KeyEvent.KEYCODE_HOME && event.getRepeatCount() ==0 ){
-
             dialog_Exit();
-
         }
-
         return false;
-
     }
 
     private void dialog_Exit() {

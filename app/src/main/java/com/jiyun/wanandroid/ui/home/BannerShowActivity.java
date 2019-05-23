@@ -115,6 +115,11 @@ public class BannerShowActivity extends AppCompatActivity {
             case R.id.share:
                 getShareContent();//获取分享内容
                 break;
+            case R.id.browser:
+                if (url != null){
+                    SystemShareUtils.shareNet(url,this);
+                }
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
