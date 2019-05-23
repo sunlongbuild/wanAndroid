@@ -4,6 +4,7 @@ import com.jiyun.wanandroid.api.home.HomeApi;
 import com.jiyun.wanandroid.base.BaseModel;
 import com.jiyun.wanandroid.entity.home.HomeBannerBean;
 import com.jiyun.wanandroid.entity.home.HomeRevBean;
+import com.jiyun.wanandroid.entity.home.HomeTopBean;
 import com.jiyun.wanandroid.net.BaseObserver;
 import com.jiyun.wanandroid.net.HttpUtils;
 import com.jiyun.wanandroid.net.ResultCallBack;
@@ -62,5 +63,33 @@ public class HomeModel extends BaseModel {
                         addDisposable(d);
                     }
                 });
+    }
+
+    public void gettop(final ResultCallBack<HomeTopBean> resultCallBack) {
+        HomeApi apiserver = HttpUtils.getInstance().getApiserver(HomeApi.RvUrl, HomeApi.class);
+        apiserver.getHomeTop().compose(RxUtils.<HomeTopBean>rxObserableSchedulerHelper())
+                .subscribe(new BaseObserver<HomeTopBean>() {
+                    @Override
+                    public void onNext(HomeTopBean homeTopBean) {
+
+                        if (homeTopBean != null) {
+                            resultCallBack.onSuccess(homeTopBean);
+                        } else {
+                            resultCallBack.onFail("错误");
+                        }
+                    }
+
+                    @Override
+                    public void error(String msg) {
+                        resultCallBack.onFail(msg);
+                    }
+
+                    @Override
+                    protected void subscribe(Disposable d) {
+                        addDisposable(d);
+                    }
+                });
+
+
     }
 }

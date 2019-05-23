@@ -1,6 +1,6 @@
 package com.jiyun.wanandroid.model.knowledge;
 
-import com.jiyun.wanandroid.api.home.knowledge.KaiFaHuanJingApi;
+import com.jiyun.wanandroid.api.knowledge.KaiFaHuanJingApi;
 import com.jiyun.wanandroid.base.BaseModel;
 import com.jiyun.wanandroid.entity.knowledge.KaiFaHuanJingBean;
 import com.jiyun.wanandroid.net.BaseObserver;

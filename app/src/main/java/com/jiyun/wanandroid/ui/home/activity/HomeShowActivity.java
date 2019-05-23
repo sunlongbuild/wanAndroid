@@ -75,23 +75,6 @@ public class HomeShowActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    protected void onPause() {
-        magentWeb.getWebLifeCycle().onPause();
-        super.onPause();
 
-    }
-
-    @Override
-    protected void onResume() {
-        magentWeb.getWebLifeCycle().onResume();
-        super.onResume();
-    }
-
-    @Override
-    protected void onDestroy() {
-        magentWeb.getWebLifeCycle().onDestroy();
-        super.onDestroy();
-    }
 
 }
