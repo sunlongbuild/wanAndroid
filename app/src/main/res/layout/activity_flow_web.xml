@@ -8,7 +8,7 @@
     tools:context=".ui.navigation.activity.FlowWebActivity">
     <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/dp_42"
         android:id="@+id/toolbar"
         android:background="@color/c_e91d65">
         <ImageView

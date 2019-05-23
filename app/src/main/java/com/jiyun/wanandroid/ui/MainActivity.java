@@ -159,6 +159,7 @@ public class MainActivity extends BaseActivity<EmptyView, EmptyPresenter> implem
     private void initToolBar() {
 
         ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, mDl, mToolbar, R.string.open, R.string.close);
+        actionBarDrawerToggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.c_ffffff));
         mDl.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
     }
