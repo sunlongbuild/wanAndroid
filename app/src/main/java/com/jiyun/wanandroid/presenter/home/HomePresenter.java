@@ -3,6 +3,7 @@ package com.jiyun.wanandroid.presenter.home;
 import com.jiyun.wanandroid.base.BasePresenter;
 import com.jiyun.wanandroid.entity.home.HomeBannerBean;
 import com.jiyun.wanandroid.entity.home.HomeRevBean;
+import com.jiyun.wanandroid.entity.home.HomeTopBean;
 import com.jiyun.wanandroid.model.home.HomeModel;
 import com.jiyun.wanandroid.net.ResultCallBack;
 import com.jiyun.wanandroid.utils.ToastUtil;
@@ -51,6 +52,24 @@ public class HomePresenter extends BasePresenter<HomeView> {
             public void onFail(String msg) {
 
                 ToastUtil.showLong(msg);
+            }
+        });
+    }
+
+    public void gettop() {
+        homeModel.gettop(new ResultCallBack<HomeTopBean>() {
+            @Override
+            public void onSuccess(HomeTopBean bean) {
+                if (bean!=null){
+                    if (mBaseView!=null){
+                        mBaseView.setTop(bean);
+                    }
+                }
+            }
+
+            @Override
+            public void onFail(String msg) {
+
             }
         });
     }

@@ -64,17 +64,6 @@ public class NavigationFragment extends BaseFragment<NavigationV, NavigationP> i
     public NavigationFragment() {
         // Required empty public constructor
     }
-
-/*
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View inflate = inflater.inflate(R.layout.fragment_navigation, container, false);
-        unbinder = ButterKnife.bind(this, inflate);
-        return inflate;
-    }*/
-//
     @Override
     protected NavigationP initPresenter() {
         return new NavigationP();

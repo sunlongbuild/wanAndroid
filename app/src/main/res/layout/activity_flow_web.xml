@@ -12,17 +12,23 @@
         android:id="@+id/toolbar"
         android:background="@color/c_e91d65">
         <ImageView
+            android:id="@+id/img"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@mipmap/icon_white_left"/>
         <TextView
+            android:layout_gravity="center"
+            android:id="@+id/tv_title"
+            android:textSize="@dimen/abc_text_size_title_material_toolbar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:maxLines="1"
-            android:textSize="@dimen/sp_18"
-            android:id="@+id/tv_title"
-            />
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:scrollHorizontally="true"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:singleLine="true" />
+
     </android.support.v7.widget.Toolbar>
     <WebView
         android:id="@+id/web"

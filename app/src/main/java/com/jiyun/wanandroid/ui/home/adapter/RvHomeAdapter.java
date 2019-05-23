@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide;
 import com.jiyun.wanandroid.R;
 import com.jiyun.wanandroid.entity.home.HomeBannerBean;
 import com.jiyun.wanandroid.entity.home.HomeRevBean;
+import com.jiyun.wanandroid.entity.home.HomeTopBean;
 import com.jiyun.wanandroid.ui.home.BannerShowActivity;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
@@ -27,11 +28,13 @@ public class RvHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     private Context context;
     private ArrayList<HomeRevBean.DataBean.DatasBean> rvlist;
     private ArrayList<HomeBannerBean.DataBean> bannerlist;
+    private ArrayList<HomeTopBean.DataBean>toplist;
 
-    public RvHomeAdapter(Context context, ArrayList<HomeRevBean.DataBean.DatasBean> rvlist, ArrayList<HomeBannerBean.DataBean> bannerlist) {
+    public RvHomeAdapter(Context context, ArrayList<HomeRevBean.DataBean.DatasBean> rvlist, ArrayList<HomeBannerBean.DataBean> bannerlist ) {
         this.context = context;
         this.rvlist = rvlist;
         this.bannerlist = bannerlist;
+
     }
 
     @NonNull
@@ -115,7 +118,7 @@ public class RvHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     public int getItemCount() {
         if (bannerlist.size() > 0) {
             return rvlist.size() - 1;
-        }
+        }else
         return rvlist.size();
     }
 

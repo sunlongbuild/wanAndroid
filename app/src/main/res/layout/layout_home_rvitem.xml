@@ -7,6 +7,18 @@
     >
 
     <TextView
+        android:layout_width="@dimen/dp_40"
+        android:layout_height="wrap_content"
+        android:background="@drawable/top_shape"
+        android:text="置顶"
+        android:textSize="@dimen/sp_12"
+        android:gravity="center"
+        android:layout_marginLeft="@dimen/dp_12"
+        android:layout_marginTop="@dimen/dp_13"
+        android:textColor="@color/c_dd691a"
+        android:id="@+id/top"
+        />
+    <TextView
         android:id="@+id/author"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -14,7 +26,9 @@
         android:layout_marginTop="@dimen/dp_13"
         android:text="author"
         android:textColor="@color/c_999999"
-        android:textSize="@dimen/sp_12" />
+        android:textSize="@dimen/sp_12"
+        android:layout_toRightOf="@id/top"
+        />
 
     <TextView
         android:id="@+id/niceDate"
