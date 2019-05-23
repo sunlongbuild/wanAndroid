@@ -5,9 +5,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jiyun.wanandroid.R;
@@ -16,6 +18,7 @@ import com.jiyun.wanandroid.utils.ToastUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class FlowWebActivity extends AppCompatActivity {
 
@@ -25,6 +28,8 @@ public class FlowWebActivity extends AppCompatActivity {
     Toolbar mToolbar;
     @BindView(R.id.web)
     WebView mWeb;
+    @BindView(R.id.img)
+    ImageView mImg;
     private String web;
     private String shareTitle;
 
@@ -45,7 +50,7 @@ public class FlowWebActivity extends AppCompatActivity {
         mWeb.getSettings().setJavaScriptEnabled(true);
         mWeb.setWebViewClient(new WebViewClient());
         mWeb.loadUrl(web);
-        mWeb.setWebChromeClient(new WebChromeClient(){
+        mWeb.setWebChromeClient(new WebChromeClient() {
             @Override
             public void onReceivedTitle(WebView view, String title) {
                 mTvTitle.setText(title);
@@ -53,6 +58,7 @@ public class FlowWebActivity extends AppCompatActivity {
             }
         });
     }
+
 
     /*
      * *  author gme
@@ -67,7 +73,7 @@ public class FlowWebActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
-    @Override
+
     public boolean onOptionsItemSelected(MenuItem item) {//监听上下文选择
         switch (item.getItemId()) {
             case R.id.share:
@@ -82,6 +88,16 @@ public class FlowWebActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @OnClick(R.id.img)
+    public void onClick(View v) {
+        switch (v.getId()) {
+            default:
+                break;
+            case R.id.img:
+                finish();
+                break;
+        }
+    }
     private void getShareContent() {
         if (shareTitle != null && web != null){
             SystemShareUtils.shareText(this,getResources().getString(R.string.wanandroid)+"【"+shareTitle+"】"+":"+web);

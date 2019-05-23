@@ -24,8 +24,8 @@ public class KaiFaHuanJingActivity extends BaseActivity<KaiFaHuanJingView, KaiFa
 
     @BindView(R.id.txt_toolbar)
     TextView mTxtToolbar;
-    @BindView(R.id.toolbar)
-    Toolbar mToolbar;
+    @BindView(R.id.toolbarr)
+    Toolbar mToolbarr;
     @BindView(R.id.tab)
     TabLayout mTab;
     @BindView(R.id.vp)

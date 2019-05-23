@@ -21,6 +21,7 @@ import com.jiyun.wanandroid.R;
 import com.jiyun.wanandroid.base.BaseFragment;
 import com.jiyun.wanandroid.entity.home.HomeBannerBean;
 import com.jiyun.wanandroid.entity.home.HomeRevBean;
+import com.jiyun.wanandroid.entity.home.HomeTopBean;
 import com.jiyun.wanandroid.presenter.home.HomePresenter;
 import com.jiyun.wanandroid.ui.home.BannerShowActivity;
 import com.jiyun.wanandroid.ui.home.activity.HomeShowActivity;
@@ -77,12 +78,14 @@ public class HomeFragment extends BaseFragment<HomeView, HomePresenter> implemen
 
     @Override
     protected void initView() {
+
         StatusBarUtil.setLightMode(getActivity());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         mRvHome.setLayoutManager(linearLayoutManager);
 
         mlist = new ArrayList<>();
         bannerlsit = new ArrayList<>();
+
         rvHomeAdapter = new RvHomeAdapter(getContext(), mlist, bannerlsit);
         mRvHome.setAdapter(rvHomeAdapter);
 
@@ -118,6 +121,7 @@ public class HomeFragment extends BaseFragment<HomeView, HomePresenter> implemen
             }
         });
         initRecy();
+
     }
 
     //下拉隐藏底部导航栏
@@ -184,6 +188,7 @@ public class HomeFragment extends BaseFragment<HomeView, HomePresenter> implemen
     protected void initData() {
         mPresenter.getBanner();
         mPresenter.getRv(page);
+        mPresenter.gettop( );
     }
 
     @OnClick(R.id.btn_main)
@@ -231,6 +236,12 @@ public class HomeFragment extends BaseFragment<HomeView, HomePresenter> implemen
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    public void setTop(HomeTopBean bean) {
+        //toplist.addAll(bean.getData());
+      //  rvHomeAdapter.notifyDataSetChanged();
     }
 
 

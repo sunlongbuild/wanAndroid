@@ -1,4 +1,4 @@
-package com.jiyun.wanandroid.api.home.knowledge;
+package com.jiyun.wanandroid.api.knowledge;
 
 import com.jiyun.wanandroid.entity.knowledge.KaiFaHuanJingBean;
 
