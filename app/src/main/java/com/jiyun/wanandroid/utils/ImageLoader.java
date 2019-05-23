@@ -30,7 +30,6 @@ public class ImageLoader {
                 .placeholder(placeImg);
         //获取设置页面选择的无图模式
         boolean mIsLoadingImage = (boolean) SpUtil.getParam(Constants.SETTING_NO_IMAGE, false);
-        Logger.logD("tag","无图模式"+mIsLoadingImage);
         if (mIsLoadingImage== false){
             Glide.with(context).load(url).apply(options).into(iv);
         }

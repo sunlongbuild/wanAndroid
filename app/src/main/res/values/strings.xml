@@ -90,4 +90,5 @@
     <string name="wanandroid">玩Android分享</string>
     <string name="browser">用浏览器打开</string>
     <string name="networrk_slow">网络有点慢!</string>
+    <string name="ageinback">再按一次退出程序</string>
 </resources>

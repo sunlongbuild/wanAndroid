@@ -73,6 +73,11 @@ public class FlowWebActivity extends AppCompatActivity {
             case R.id.share:
                 getShareContent();//获取分享内容
                 break;
+            case R.id.browser://打开浏览器
+                if (web != null){
+                    SystemShareUtils.shareNet(web,this);
+                }
+                break;
         }
         return super.onOptionsItemSelected(item);
     }

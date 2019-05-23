@@ -1,13 +1,17 @@
 package com.jiyun.wanandroid.ui;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -28,15 +32,12 @@ import com.jiyun.wanandroid.ui.project.fragment.ProjectFragment;
 import com.jiyun.wanandroid.ui.setting.activity.SettingActivity;
 import com.jiyun.wanandroid.ui.todo.activity.ToDoActivity;
 import com.jiyun.wanandroid.ui.wechat.fragment.The_publicFragment;
+import com.jiyun.wanandroid.utils.ToastUtil;
 import com.jiyun.wanandroid.utils.UIModeUtil;
 import com.jiyun.wanandroid.view.EmptyView;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-
-
-
-
 
 
 public class MainActivity extends BaseActivity<EmptyView, EmptyPresenter> implements EmptyView {
@@ -69,16 +70,12 @@ public class MainActivity extends BaseActivity<EmptyView, EmptyPresenter> implem
     private NavigationFragment navigationFragment;
     private ProjectFragment projectFragment;
     private The_publicFragment the_publicFragment;
-
-
-
+    private int BACKTYPE = 0;
 
     @Override
     protected EmptyPresenter initPresenter() {
         return new EmptyPresenter();
     }
-
-
 
 
     @Override
@@ -214,4 +211,37 @@ public class MainActivity extends BaseActivity<EmptyView, EmptyPresenter> implem
         });
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {//当程序退出时 提示
+        if (keyCode == KeyEvent.KEYCODE_BACK || keyCode == KeyEvent.KEYCODE_HOME && event.getRepeatCount() == 0) {
+            if (BACKTYPE == 1){
+                android.os.Process.killProcess(android.os.Process
+                        .myPid());
+            }
+            if (BACKTYPE == 0){
+                backAppPoint();//退出程序时提示
+            }
+
+
+        }
+        return false;
+
+    }
+
+    private void backAppPoint() {
+        ToastUtil.showShort(getResources().getString(R.string.ageinback));
+        new CountDownTimer(4000, 1000) {//当第一次退出程序时 开始启动倒计时
+            @Override
+            public void onTick(long millisUntilFinished) {
+
+            }
+
+            @Override
+            public void onFinish() {//当倒计时完成时  将backtype = 0  再次退出时  提醒
+                BACKTYPE = 0;
+            }
+        }.start();
+        BACKTYPE = 1;
+
+    }
 }
