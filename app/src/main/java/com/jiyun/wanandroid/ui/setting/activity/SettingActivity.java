@@ -81,7 +81,7 @@ public class SettingActivity extends BaseActivity<EmptyView, EmptyPresenter> imp
     }
 
     private void getCache() {
-
+        
     }
 
     @OnClick(R.id.clear_cache)
