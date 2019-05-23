@@ -10,15 +10,18 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:id="@+id/lv"
+    android:layout_height="wrap_content">
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:background="@color/c_e91d65"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_42"
             android:layout_marginTop="@dimen/dp_22"
-            >
 
+            >
             <TextView
                 android:id="@+id/toolbar_text"
                 android:layout_width="wrap_content"
@@ -26,12 +29,22 @@
 
         </android.support.v7.widget.Toolbar>
 
+    <ImageView
+        android:id="@+id/img_sosu"
+        android:src="@drawable/sosuo"
+        android:layout_width="@dimen/dp_18"
+        android:layout_height="@dimen/dp_18"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/dp_10"
+        />
+</RelativeLayout>
         <FrameLayout
             android:id="@+id/frame"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_above="@id/rg"
-            android:layout_below="@id/toolbar" />
+            android:layout_below="@id/lv" />
 
 
         <View
@@ -49,7 +62,6 @@
             android:layout_alignParentBottom="true"
             android:background="@color/white"
             android:orientation="horizontal"
-
             >
 
             <RadioButton
@@ -59,10 +71,11 @@
                 android:layout_marginTop="5dp"
                 android:layout_weight="1"
                 android:button="@null"
-                android:drawableTop="@mipmap/home_unselected"
+                android:drawableTop="@drawable/home_shape"
                 android:gravity="center"
                 android:padding="4dp"
-                android:text="@string/home" />
+                android:text="@string/home"
+                />
 
             <RadioButton
                 android:id="@+id/rb2"
@@ -71,11 +84,10 @@
                 android:layout_marginTop="5dp"
                 android:layout_weight="1"
                 android:button="@null"
-                android:drawableTop="@mipmap/icon_knowledge_hierarchy_not_selected"
+                android:drawableTop="@drawable/knowledge_shape"
                 android:gravity="center"
                 android:padding="4dp"
                 android:text="@string/knowledge"
-
                 />
 
             <RadioButton
@@ -85,10 +97,11 @@
                 android:layout_marginTop="5dp"
                 android:layout_weight="1"
                 android:button="@null"
-                android:drawableTop="@mipmap/wechat"
+                android:drawableTop="@drawable/wechat_shape"
                 android:gravity="center"
                 android:padding="4dp"
-                android:text="@string/the_public" />
+                android:text="@string/the_public"
+                />
 
             <RadioButton
                 android:id="@+id/rb4"
@@ -97,11 +110,11 @@
                 android:layout_marginTop="5dp"
                 android:layout_weight="1"
                 android:button="@null"
-                android:drawableTop="@mipmap/icon_navigation_not_selected"
+                android:drawableTop="@drawable/navigation_shape"
                 android:gravity="center"
                 android:padding="4dp"
-
-                android:text="@string/navigation" />
+                android:text="@string/navigation"
+                />
 
             <RadioButton
                 android:id="@+id/rb5"
@@ -110,10 +123,11 @@
                 android:layout_marginTop="5dp"
                 android:layout_weight="1"
                 android:button="@null"
-                android:drawableTop="@mipmap/icon_project_not_selected"
+                android:drawableTop="@drawable/project_shape"
                 android:gravity="center"
                 android:padding="4dp"
-                android:text="@string/project" />
+                android:text="@string/project"
+                />
 
 
         </RadioGroup>

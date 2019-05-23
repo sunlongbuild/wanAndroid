@@ -5,15 +5,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jiyun.wanandroid.R;
+import com.jiyun.wanandroid.utils.SystemShareUtils;
+import com.jiyun.wanandroid.utils.ToastUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class FlowWebActivity extends AppCompatActivity {
 
@@ -23,8 +28,10 @@ public class FlowWebActivity extends AppCompatActivity {
     Toolbar mToolbar;
     @BindView(R.id.web)
     WebView mWeb;
+    @BindView(R.id.img)
+    ImageView mImg;
     private String web;
-    private String title;
+    private String shareTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,33 +50,55 @@ public class FlowWebActivity extends AppCompatActivity {
         mWeb.getSettings().setJavaScriptEnabled(true);
         mWeb.setWebViewClient(new WebViewClient());
         mWeb.loadUrl(web);
-        mWeb.setWebChromeClient(new WebChromeClient(){
+        mWeb.setWebChromeClient(new WebChromeClient() {
             @Override
             public void onReceivedTitle(WebView view, String title) {
                 mTvTitle.setText(title);
+                shareTitle = title;
             }
         });
     }
-    //选项菜单
+
+
+    /*
+     * *  author gme
+     *    time   2019年5月22日 11:31:52
+     *    分享内容
+     *
+     */
+
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        menu.add(1,1,1,"分享");
-        menu.add(1,2,1,"收藏");
-        menu.add(1,3,1,"用浏览器打开");
+    public boolean onCreateOptionsMenu(Menu menu) {//创建上下文菜单
+        getMenuInflater().inflate(R.menu.share_collection_browser,menu);
         return super.onCreateOptionsMenu(menu);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-            case 1:
-                break;
-            case 2:
-                break;
-            case 3:
+
+    public boolean onOptionsItemSelected(MenuItem item) {//监听上下文选择
+        switch (item.getItemId()) {
+            case R.id.share:
+                getShareContent();//获取分享内容
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @OnClick(R.id.img)
+    public void onClick(View v) {
+        switch (v.getId()) {
+            default:
+                break;
+            case R.id.img:
+                finish();
+                break;
+        }
+    }
+    private void getShareContent() {
+        if (shareTitle != null && web != null){
+            SystemShareUtils.shareText(this,getResources().getString(R.string.wanandroid)+"【"+shareTitle+"】"+":"+web);
+        }else {
+            ToastUtil.showShort(getResources().getString(R.string.networrk_slow));
+        }
     }
 
 }
