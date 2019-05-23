@@ -30,9 +30,7 @@
         <activity
             android:name=".ui.knowledge.fragment.KaiFaHuanJingActivity"
             android:theme="@style/NoAppTheme" />
-        <activity
-            android:name=".ui.knowledge.fragment.activity.KaiFaHuanJingShowActivity"
-            android:theme="@style/NoAppTheme" />
+
         <activity
             android:name=".ui.todo.activity.ToDoActivity"
             android:theme="@style/NoAppTheme" />

@@ -1,4 +1,4 @@
-package com.jiyun.wanandroid.ui.knowledge.fragment.fragment;
+package com.jiyun.wanandroid.ui.knowledge.fragment;
 
 
 import android.annotation.SuppressLint;
@@ -19,8 +19,8 @@ import com.jiyun.wanandroid.R;
 import com.jiyun.wanandroid.base.BaseFragment;
 import com.jiyun.wanandroid.entity.knowledge.KaiFaHuanJingBean;
 import com.jiyun.wanandroid.presenter.knowledge.KaiFaHuanJingFragmentPresenter;
-import com.jiyun.wanandroid.ui.knowledge.fragment.activity.KaiFaHuanJingShowActivity;
-import com.jiyun.wanandroid.ui.knowledge.fragment.adapter.RvKaiFaHuanJingAdapter;
+import com.jiyun.wanandroid.ui.knowledge.activity.KaiFaHuanJingShowActivity;
+import com.jiyun.wanandroid.ui.knowledge.adapter.RvKaiFaHuanJingAdapter;
 import com.jiyun.wanandroid.view.knowledge.KaiFaHuanJingFragmentView;
 import com.scwang.smartrefresh.header.DropBoxHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -79,6 +79,8 @@ public class KaiFaHuanJingFragment extends BaseFragment<KaiFaHuanJingFragmentVie
 
     @Override
     protected void initData() {
+        //数据加载完成之前加载动画
+        showLoading();
         mPresenter.getData(page, id);
     }
 
@@ -198,7 +200,8 @@ public class KaiFaHuanJingFragment extends BaseFragment<KaiFaHuanJingFragmentVie
         List<KaiFaHuanJingBean.DataBean.DatasBean> datas = bean.getData().getDatas();
         mlist.addAll(datas);
         rvKaiFaHuanJingAdapter.notifyDataSetChanged();
-
+        //数据加载完毕隐藏加载动画
+        hideLoading();
         rvKaiFaHuanJingAdapter.setMyOnItenClcik(new RvKaiFaHuanJingAdapter.MyOnItenClcik() {
             @Override
             public void setMyOnItenClcik(int position) {
@@ -207,6 +210,8 @@ public class KaiFaHuanJingFragment extends BaseFragment<KaiFaHuanJingFragmentVie
                 startActivity(intent);
             }
         });
+
+
     }
 
 

@@ -42,6 +42,7 @@ public class MaxActivity extends AppCompatActivity{
             @Override
             public void onFinish() {
                 startActivity(new Intent(MaxActivity.this, MainActivity.class));
+                finish();
             }
         }.start();
 

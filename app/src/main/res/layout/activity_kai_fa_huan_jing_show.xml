@@ -7,13 +7,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:id="@+id/ll"
-    tools:context=".ui.knowledge.fragment.activity.KaiFaHuanJingShowActivity">
+    tools:context=".ui.knowledge.activity.KaiFaHuanJingShowActivity">
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_42"
         android:layout_marginTop="@dimen/dp_22"
-        android:background="@color/white">
+        android:background="@color/c_e91d65">
 
         <TextView
             android:id="@+id/txt_toolbar"

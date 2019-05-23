@@ -1,4 +1,4 @@
-package com.jiyun.wanandroid.ui.knowledge.fragment.activity;
+package com.jiyun.wanandroid.ui.knowledge.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
