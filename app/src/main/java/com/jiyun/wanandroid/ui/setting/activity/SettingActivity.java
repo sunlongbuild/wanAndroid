@@ -84,14 +84,11 @@ public class SettingActivity extends BaseActivity<EmptyView, EmptyPresenter> imp
 
     }
 
-    @OnClick({R.id.clear_cache,R.id.rl_no_author})
+    @OnClick({R.id.clear_cache})
     public void onViewClicked(View view) {
         switch (view.getId()){
             case R.id.clear_cache:
                 clearcache();
-                break;
-            case R.id.rl_no_author:
-
                 break;
         }
     }
