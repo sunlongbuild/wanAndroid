@@ -57,12 +57,18 @@ public class AddToDoActivity extends BaseActivity<EmptyView, EmptyPresenter> imp
         return R.layout.activity_add_todo;
     }
 
-    @OnClick(R.id.ll_calendar)
+    @OnClick({R.id.ll_calendar,R.id.iv_back,R.id.save_todo})
     public void onViewClicked(View v) {
         switch (v.getId()) {
             case R.id.ll_calendar:
                 DateUtil.getDateTime(AddToDoActivity.this, mTvData);
                 break;
+            case R.id.iv_back:
+                finish();
+                break;
+            case R.id.save_todo://点击保存 把信息提交到接口
+                break;
         }
+
     }
 }

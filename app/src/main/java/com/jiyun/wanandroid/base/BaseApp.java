@@ -26,6 +26,7 @@ public class BaseApp extends Application {
     * *  author gme
     *    time
     */
+
     //默认不是夜间模式
     public static int mMode = AppCompatDelegate.MODE_NIGHT_NO;
 
