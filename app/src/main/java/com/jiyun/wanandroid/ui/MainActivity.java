@@ -1,6 +1,9 @@
 package com.jiyun.wanandroid.ui;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
@@ -8,8 +11,14 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 
+import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
+
+
 
 import android.support.v7.widget.Toolbar;
+
 
 
 import android.view.MenuItem;
@@ -18,6 +27,7 @@ import android.widget.FrameLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.jiyun.wanandroid.base.Constants;
 import com.jiyun.wanandroid.ui.loginactivity.LoginActivity;
@@ -34,9 +44,15 @@ import com.jiyun.wanandroid.ui.project.fragment.ProjectFragment;
 import com.jiyun.wanandroid.ui.setting.activity.SettingActivity;
 import com.jiyun.wanandroid.ui.todo.activity.ToDoActivity;
 import com.jiyun.wanandroid.ui.wechat.fragment.The_publicFragment;
+
+import com.jiyun.wanandroid.utils.ToastUtil;
+
 import com.jiyun.wanandroid.utils.SpUtil;
 import com.jiyun.wanandroid.utils.UIModeUtil;
 import com.jiyun.wanandroid.view.EmptyView;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -72,14 +88,20 @@ public class MainActivity extends BaseActivity<EmptyView, EmptyPresenter> implem
     private NavigationFragment navigationFragment;
     private ProjectFragment projectFragment;
     private The_publicFragment the_publicFragment;
+
+
     private TextView mHander_login;
     private String mName;
+    // 用来计算返回键的点击间隔时间
+    private long exitTime = 0;
 
 
     @Override
     protected EmptyPresenter initPresenter() {
         return new EmptyPresenter();
     }
+
+
 
     @Override
     protected int getLayoutId() {
@@ -228,5 +250,43 @@ public class MainActivity extends BaseActivity<EmptyView, EmptyPresenter> implem
                 return false;
             }
         });
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+    }
+
+    @Override
+
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+        if (keyCode == KeyEvent.KEYCODE_BACK || keyCode == KeyEvent.KEYCODE_HOME && event.getRepeatCount() ==0 ){
+
+            dialog_Exit();
+
+        }
+
+        return false;
+
+    }
+
+    private void dialog_Exit() {
+
+        new AlertDialog.Builder(this)
+                .setTitle("确定退出wanAndroid吗")
+                .setPositiveButton("确定",new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog,int which) {
+                        android.os.Process.killProcess(android.os.Process
+                                .myPid());
+                    }
+                })
+
+                .setNegativeButton("取消",null)
+                .create()
+                .show();
+
     }
 }

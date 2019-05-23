@@ -79,6 +79,8 @@ public class KaiFaHuanJingFragment extends BaseFragment<KaiFaHuanJingFragmentVie
 
     @Override
     protected void initData() {
+        //数据加载完成之前加载动画
+        showLoading();
         mPresenter.getData(page, id);
     }
 
@@ -198,7 +200,8 @@ public class KaiFaHuanJingFragment extends BaseFragment<KaiFaHuanJingFragmentVie
         List<KaiFaHuanJingBean.DataBean.DatasBean> datas = bean.getData().getDatas();
         mlist.addAll(datas);
         rvKaiFaHuanJingAdapter.notifyDataSetChanged();
-
+        //数据加载完毕隐藏加载动画
+        hideLoading();
         rvKaiFaHuanJingAdapter.setMyOnItenClcik(new RvKaiFaHuanJingAdapter.MyOnItenClcik() {
             @Override
             public void setMyOnItenClcik(int position) {
@@ -207,6 +210,8 @@ public class KaiFaHuanJingFragment extends BaseFragment<KaiFaHuanJingFragmentVie
                 startActivity(intent);
             }
         });
+
+
     }
 
 

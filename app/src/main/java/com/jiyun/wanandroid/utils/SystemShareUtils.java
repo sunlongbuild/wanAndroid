@@ -33,6 +33,14 @@ public class SystemShareUtils {
         shareIntent.setType("image/*");
         context.startActivity(Intent.createChooser(shareIntent, "分享到："));
     }
+
+    //用浏览器打开
+    public static void shareNet(String link,Context context) {
+        Uri uri = Uri.parse(link);
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        intent.setClassName("com.tencent.mtt", "com.tencent.mtt.MainActivity");//打开QQ浏览器
+        context.startActivity(intent);
+    }
             //分享网络图片
 /*    public static void shareNetImage(Context context,String imagePath) {
         Intent shareIntent = new Intent();

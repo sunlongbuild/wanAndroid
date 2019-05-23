@@ -165,6 +165,8 @@ public class NavigationFragment extends BaseFragment<NavigationV, NavigationP> i
             });
     @Override
     protected void initData() {
+        //数据回来之前加载动画
+        showLoading();
         mPresenter.getNavigation();
     }
 
@@ -230,6 +232,8 @@ public class NavigationFragment extends BaseFragment<NavigationV, NavigationP> i
         });
         dataBeans.addAll(bean.getData());
         adapter.notifyDataSetChanged();
+        //数据加载完毕隐藏加载动画
+        hideLoading();
     }
 
 

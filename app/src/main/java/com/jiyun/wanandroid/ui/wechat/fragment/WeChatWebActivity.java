@@ -26,6 +26,7 @@ public class WeChatWebActivity extends AppCompatActivity {
     private AgentWeb magentWeb;
     private String link;
     private String shareTitle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +35,7 @@ public class WeChatWebActivity extends AppCompatActivity {
     }
 
     private void initView() {
-          link = getIntent().getStringExtra("link");
+        link = getIntent().getStringExtra("link");
         StatusBarUtil.setLightMode(this);
         mTxtToolbar = (TextView) findViewById(R.id.txt_toolbar);
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -99,7 +100,7 @@ public class WeChatWebActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {//创建上下文菜单
-        getMenuInflater().inflate(R.menu.share_collection_browser,menu);
+        getMenuInflater().inflate(R.menu.share_collection_browser, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -109,14 +110,19 @@ public class WeChatWebActivity extends AppCompatActivity {
             case R.id.share:
                 getShareContent();//获取分享内容
                 break;
+            case R.id.browser:
+                if (link != null) {
+                    SystemShareUtils.shareNet(link, this);
+                }
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
 
     private void getShareContent() {
-        if (shareTitle != null & link != null){
-            SystemShareUtils.shareText(this,getResources().getString(R.string.wanandroid)+"【"+shareTitle+"】"+":"+link);
-        }else {
+        if (shareTitle != null & link != null) {
+            SystemShareUtils.shareText(this, getResources().getString(R.string.wanandroid) + "【" + shareTitle + "】" + ":" + link);
+        } else {
             ToastUtil.showShort(getResources().getString(R.string.networrk_slow));
         }
     }
