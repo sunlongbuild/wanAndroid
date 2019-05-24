@@ -1,5 +1,8 @@
 package com.jiyun.wanandroid.ui.todo.activity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.widget.Toolbar;
@@ -17,6 +20,7 @@ import com.jiyun.wanandroid.base.Constants;
 import com.jiyun.wanandroid.entity.todo.AddToDoBean;
 import com.jiyun.wanandroid.presenter.EmptyPresenter;
 import com.jiyun.wanandroid.presenter.todo.AddToDoPresenter;
+import com.jiyun.wanandroid.ui.login.LoginActivity;
 import com.jiyun.wanandroid.utils.DateUtil;
 import com.jiyun.wanandroid.utils.SpUtil;
 import com.jiyun.wanandroid.utils.ToastUtil;
@@ -72,12 +76,12 @@ public class AddToDoActivity extends BaseActivity<AddToDoView, AddToDoPresenter>
         String name = mTodoName.getText().toString();
         String des = mTodoDes.getText().toString();
         String date = mTvData.getText().toString();
+        //获取登录的用户名和密码
         mUserName = (String) SpUtil.getParam(Constants.NAME, "");
         mPsw = (String) SpUtil.getParam(Constants.PSW, "");
-        if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(des) && !TextUtils.isEmpty(date)) {
-            mPresenter.getAddToDo(name, des, date, "loginUserName=" + mUserName,
-                    "loginUserPassword=" + mPsw);
-        }
+
+        mPresenter.getAddToDo(name, des, date, "loginUserName=" + mUserName,
+                "loginUserPassword="+mPsw);
     }
 
     @OnClick({R.id.ll_calendar, R.id.iv_back, R.id.save_todo})
@@ -90,10 +94,21 @@ public class AddToDoActivity extends BaseActivity<AddToDoView, AddToDoPresenter>
                 finish();
                 break;
             case R.id.save_todo://点击保存 把信息提交到接口
-                if (!TextUtils.isEmpty(mUserName) && !TextUtils.isEmpty(mPsw)) {
+                if (TextUtils.isEmpty(mUserName) && TextUtils.isEmpty(mPsw)) {
+                    new AlertDialog.Builder(AddToDoActivity.this).setMessage(getResources()
+                            .getString(R.string.please_login)).setPositiveButton(getResources()
+                            .getString(R.string.login), new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent intent = new Intent(AddToDoActivity.this, LoginActivity.class);
+                            startActivity(intent);
+                        }
+                    }).setNegativeButton(getResources().getString(R.string.cancel), null).show();
+                } else {
                     initData();
+                    ToastUtil.showShort(getResources().getString(R.string.save_success));
+                    finish();
                 }
-                ToastUtil.showShort(getResources().getString(R.string.save_success));
                 break;
         }
     }
