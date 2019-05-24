@@ -3,7 +3,6 @@ package com.jiyun.wanandroid.ui;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
@@ -17,7 +16,7 @@ import android.view.KeyEvent;
 
 
 
-import android.support.v7.widget.Toolbar;
+
 
 
 
@@ -27,7 +26,6 @@ import android.widget.FrameLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.jiyun.wanandroid.base.Constants;
 import com.jiyun.wanandroid.ui.loginactivity.LoginActivity;
@@ -147,12 +145,12 @@ public class MainActivity extends BaseActivity<EmptyView, EmptyPresenter> implem
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.add(R.id.frame, homeFragment);
         transaction.add(R.id.frame, knowledgeFragment);
+        transaction.add(R.id.frame, the_publicFragment);
         transaction.add(R.id.frame, navigationFragment);
         transaction.add(R.id.frame, projectFragment);
-        transaction.add(R.id.frame, the_publicFragment);
 
-        transaction.show(homeFragment).hide(knowledgeFragment).hide(navigationFragment).hide(projectFragment)
-                .hide(the_publicFragment).commit();
+        transaction.show(homeFragment).hide(knowledgeFragment).hide(the_publicFragment).hide(navigationFragment)
+                .hide(projectFragment).commit();
 
     }
 
@@ -253,11 +251,7 @@ public class MainActivity extends BaseActivity<EmptyView, EmptyPresenter> implem
         });
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-    }
+
 
     @Override
 
