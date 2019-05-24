@@ -20,9 +20,6 @@
             android:layout_marginTop="@dimen/dp_20"
             android:background="@color/c_e91d65">
 
-            android:layout_marginTop="@dimen/dp_20"
-
-
             <TextView
                 android:id="@+id/toolbar_text"
                 android:textStyle="bold"
