@@ -29,11 +29,9 @@ public interface HomeApi {
     @GET("article/top/json")
     Observable<HomeTopBean> getHomeTop();
 
-    @POST("lg/collect/add/json")
-    @FormUrlEncoded
+    @POST("lg/collect/{id}/json")
     Observable<CollectBean> collect(@Header("Cookie") String username,
-                                    @Header("Cookie") String password, @Field("title") String title,
-                                    @Field("author") String author, @Field("link") String link);
+                                    @Header("Cookie") String password, @Path("id") int id);
 
     @POST("lg/uncollect/{id}/json")
     @FormUrlEncoded

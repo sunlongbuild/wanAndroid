@@ -33,7 +33,7 @@ public class RvKaiFaHuanJingAdapter extends RecyclerView.Adapter<RvKaiFaHuanJing
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyHolder myHolder, final int i) {
+    public void onBindViewHolder(@NonNull final MyHolder myHolder, final int i) {
         myHolder.author.setText(list.get(i).getAuthor());
         myHolder.chapterName.setText(list.get(i).getChapterName());
         myHolder.niceDate.setText(list.get(i).getNiceDate());
@@ -45,6 +45,14 @@ public class RvKaiFaHuanJingAdapter extends RecyclerView.Adapter<RvKaiFaHuanJing
             public void onClick(View v) {
                 if (myOnItenClcik!=null){
                     myOnItenClcik.setMyOnItenClcik(i);
+                }
+            }
+        });
+        myHolder.follow_unselected.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mMyImageOnClickListener!=null) {
+                    mMyImageOnClickListener.setImgOnClick(i,myHolder.follow_unselected);
                 }
             }
         });
@@ -79,4 +87,13 @@ public class RvKaiFaHuanJingAdapter extends RecyclerView.Adapter<RvKaiFaHuanJing
     public void setMyOnItenClcik(MyOnItenClcik myOnItenClcik) {
         this.myOnItenClcik = myOnItenClcik;
     }
+    public interface MyImageOnClickListener{
+        void setImgOnClick(int position,ImageView view);
+    }
+    public MyImageOnClickListener mMyImageOnClickListener;
+
+    public void setMyImageOnClickListener(MyImageOnClickListener myImageOnClickListener) {
+        mMyImageOnClickListener = myImageOnClickListener;
+    }
+
 }

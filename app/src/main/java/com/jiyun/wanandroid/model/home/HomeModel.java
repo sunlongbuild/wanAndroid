@@ -115,9 +115,9 @@ public class HomeModel extends BaseModel {
                     }
                 });
     }
-    public void collect(final ResultCallBack<CollectBean> resultCallBack, String title, String author, String link) {
+    public void collect(final ResultCallBack<CollectBean> resultCallBack,int id) {
         HomeApi apiserver = HttpUtils.getInstance().getApiserver(HomeApi.RvUrl, HomeApi.class);
-        final Observable<CollectBean> collect = apiserver.collect("loginUserName=" + Constants.USERNAME, "loginPassWord=" + Constants.PSW,title,author,link);
+        final Observable<CollectBean> collect = apiserver.collect("loginUserName=" + Constants.USERNAME, "loginPassWord=" + Constants.PSW,id);
         collect.compose(RxUtils.<CollectBean>rxObserableSchedulerHelper())
                 .subscribe(new BaseObserver<CollectBean>() {
                     @Override

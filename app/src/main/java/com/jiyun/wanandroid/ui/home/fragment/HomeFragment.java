@@ -13,11 +13,6 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
-import android.view.LayoutInflater;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.jaeger.library.StatusBarUtil;
 import com.jiyun.wanandroid.R;
@@ -43,9 +38,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-import butterknife.Unbinder;
 
 
 /**
@@ -194,6 +186,7 @@ public class HomeFragment extends BaseFragment<HomeView, HomePresenter> implemen
 
                 @Override
                 public void onLongPress(MotionEvent e) {
+
                 }
 
                 @Override
@@ -241,7 +234,7 @@ public class HomeFragment extends BaseFragment<HomeView, HomePresenter> implemen
         });
 
     }
-
+    private ImageView image;
     @Override
     public void setRv(final HomeRevBean bean) {
         final List<HomeRevBean.DataBean.DatasBean> datas = bean.getData().getDatas();
@@ -258,19 +251,18 @@ public class HomeFragment extends BaseFragment<HomeView, HomePresenter> implemen
             }
         });
         rvHomeAdapter.setMyImageOnClickListener(new RvHomeAdapter.MyImageOnClickListener() {
+
             @Override
             public void setImgOnClick(int position, ImageView imageView) {
-
-
                 boolean collect = bean.getData().getDatas().get(position).isCollect();
                 HomeRevBean.DataBean.DatasBean datasBean = bean.getData().getDatas().get(position);
                 Log.e("datasBean",datasBean.toString());
+                image=imageView;
                 if (collect) {
-                    imageView.setImageResource(R.mipmap.icon_uxin);
                     mPresenter.unCollect(datasBean.getId());
-                }else {
-                    imageView.setImageResource(R.mipmap.icon_xin);
-                    mPresenter.collect(datasBean.getTitle(),datasBean.getAuthor(),datasBean.getLink());
+                }
+                else {
+                    mPresenter.collect(datasBean.getId());
                 }
             }
         });
@@ -285,12 +277,14 @@ public class HomeFragment extends BaseFragment<HomeView, HomePresenter> implemen
 
     @Override
     public void collectSuccess(CollectBean collectBean) {
+        image.setImageResource(R.mipmap.icon_xin);
         ToastUtil.showShort("收藏成功");
         rvHomeAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void unCollectSuccess(CollectBean collectBean) {
+        image.setImageResource(R.mipmap.icon_uxin);
         ToastUtil.showShort("取消收藏");
         rvHomeAdapter.notifyDataSetChanged();
     }

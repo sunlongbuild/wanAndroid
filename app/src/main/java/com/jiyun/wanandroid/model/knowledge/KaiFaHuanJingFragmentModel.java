@@ -2,12 +2,16 @@ package com.jiyun.wanandroid.model.knowledge;
 
 import com.jiyun.wanandroid.api.knowledge.KaiFaHuanJingApi;
 import com.jiyun.wanandroid.base.BaseModel;
+import com.jiyun.wanandroid.base.Constants;
+import com.jiyun.wanandroid.entity.collect.CollectBean;
 import com.jiyun.wanandroid.entity.knowledge.KaiFaHuanJingBean;
 import com.jiyun.wanandroid.net.BaseObserver;
 import com.jiyun.wanandroid.net.HttpUtils;
 import com.jiyun.wanandroid.net.ResultCallBack;
 import com.jiyun.wanandroid.net.RxUtils;
+import com.jiyun.wanandroid.utils.SpUtil;
 
+import io.reactivex.Observable;
 import io.reactivex.disposables.Disposable;
 
 public class KaiFaHuanJingFragmentModel extends BaseModel {
@@ -23,6 +27,48 @@ public class KaiFaHuanJingFragmentModel extends BaseModel {
                         } else {
                             resultCallBack.onFail("错误");
                         }
+                    }
+
+                    @Override
+                    public void error(String msg) {
+                        resultCallBack.onFail(msg);
+                    }
+
+                    @Override
+                    protected void subscribe(Disposable d) {
+                        addDisposable(d);
+                    }
+                });
+    }
+    public void uncollect(final ResultCallBack<CollectBean> resultCallBack , int id) {
+        KaiFaHuanJingApi apiserver = HttpUtils.getInstance().getApiserver(KaiFaHuanJingApi.KaiFaHuanJingUrl, KaiFaHuanJingApi.class);
+        final Observable<CollectBean> uncollect = apiserver.uncollect(id, "loginUserName" + SpUtil.getParam(Constants.NAME,null), "loginPassWord" + SpUtil.getParam(Constants.PSW,null),-1);
+        uncollect.compose(RxUtils.<CollectBean>rxObserableSchedulerHelper())
+                .subscribe(new BaseObserver<CollectBean>() {
+                    @Override
+                    public void onNext(CollectBean collectBean) {
+                        resultCallBack.onSuccess(collectBean);
+                    }
+
+                    @Override
+                    public void error(String msg) {
+                        resultCallBack.onFail(msg);
+                    }
+
+                    @Override
+                    protected void subscribe(Disposable d) {
+                        addDisposable(d);
+                    }
+                });
+    }
+    public void collect(final ResultCallBack<CollectBean> resultCallBack,int id) {
+        KaiFaHuanJingApi apiserver = HttpUtils.getInstance().getApiserver(KaiFaHuanJingApi.KaiFaHuanJingUrl, KaiFaHuanJingApi.class);
+        final Observable<CollectBean> collect = apiserver.collect("loginUserName=" + Constants.USERNAME, "loginPassWord=" + Constants.PSW,id);
+        collect.compose(RxUtils.<CollectBean>rxObserableSchedulerHelper())
+                .subscribe(new BaseObserver<CollectBean>() {
+                    @Override
+                    public void onNext(CollectBean collectBean) {
+                        resultCallBack.onSuccess(collectBean);
                     }
 
                     @Override

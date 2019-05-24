@@ -3,24 +3,24 @@ package com.jiyun.wanandroid.ui.project.fragment;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.GestureDetector;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.jiyun.wanandroid.R;
 import com.jiyun.wanandroid.base.BaseFragment;
+import com.jiyun.wanandroid.entity.collect.CollectBean;
 import com.jiyun.wanandroid.entity.project.ListDataBean;
 import com.jiyun.wanandroid.presenter.project.DataPresenter;
 import com.jiyun.wanandroid.ui.project.activity.WebActivity;
 import com.jiyun.wanandroid.ui.project.adapter.MyAdapter;
+import com.jiyun.wanandroid.utils.ToastUtil;
 import com.jiyun.wanandroid.view.project.DataView;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -29,8 +29,6 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 import java.util.ArrayList;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -47,6 +45,7 @@ public class DataFragment extends BaseFragment<DataView, DataPresenter> implemen
 
     private ArrayList<ListDataBean.DataBean.DatasBean> datasBeans;
     private MyAdapter adapter;
+    private ImageView image;
 
     public DataFragment() {
         // Required empty public constructor
@@ -127,6 +126,20 @@ public class DataFragment extends BaseFragment<DataView, DataPresenter> implemen
                 getActivity().startActivity(intent);
             }
         });
+        adapter.setMyImageOnClickListener(new MyAdapter.MyImageOnClickListener() {
+            @Override
+            public void setImgOnClick(int position, ImageView view) {
+                image = view;
+                boolean collect = datasBeans.get(position).isCollect();
+                if (collect) {
+                    ToastUtil.showShort("1");
+                    mPresenter.unCollect(datasBeans.get(position).getId());
+                }else {
+                    mPresenter.collect(datasBeans.get(position).getId());
+                    ToastUtil.showShort("2");
+                }
+            }
+        });
     }
     //下拉隐藏底部导航栏
     @SuppressLint("ClickableViewAccessibility")
@@ -202,6 +215,32 @@ public class DataFragment extends BaseFragment<DataView, DataPresenter> implemen
         adapter.notifyDataSetChanged();
         //数据加载完毕隐藏加载动画
         hideLoading();
+    }
+
+    @Override
+    public void collectSeccess(CollectBean collectBean) {
+        ToastUtil.showShort("收藏成功");
+        image.setImageResource(R.mipmap.icon_xin);
+//        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void collectFail(String string) {
+        ToastUtil.showShort(string);
+
+    }
+
+    @Override
+    public void unCollectSeccess(CollectBean collectBean) {
+        ToastUtil.showShort("取消收藏");
+        image.setImageResource(R.mipmap.icon_uxin);
+        adapter.notifyDataSetChanged();
+
+    }
+
+    @Override
+    public void unCollectFail(String string) {
+        ToastUtil.showShort(string);
     }
 
 

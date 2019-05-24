@@ -1,6 +1,7 @@
 package com.jiyun.wanandroid.presenter.knowledge;
 
 import com.jiyun.wanandroid.base.BasePresenter;
+import com.jiyun.wanandroid.entity.collect.CollectBean;
 import com.jiyun.wanandroid.entity.knowledge.KaiFaHuanJingBean;
 import com.jiyun.wanandroid.model.knowledge.KaiFaHuanJingFragmentModel;
 import com.jiyun.wanandroid.net.ResultCallBack;
@@ -35,5 +36,39 @@ public class KaiFaHuanJingFragmentPresenter  extends BasePresenter<KaiFaHuanJing
                 ToastUtil.showShort(msg);
             }
         });
+    }
+    public void collect(int id){
+        kaiFaHuanJingFragmentModel.collect(new ResultCallBack<CollectBean>() {
+            @Override
+            public void onSuccess(CollectBean bean) {
+                if (bean!=null) {
+                    if (bean.getErrorCode()==0) {
+                        mBaseView.collectSuccess(bean);
+                    }
+                }else {
+                    ToastUtil.showShort("错了");
+                }
+            }
+            @Override
+            public void onFail(String msg) {
+                ToastUtil.showShort("我错了");
+            }
+        }, id);
+    }
+    public void unCollect(int id){
+        kaiFaHuanJingFragmentModel.uncollect(new ResultCallBack<CollectBean>() {
+            @Override
+            public void onSuccess(CollectBean bean) {
+                if (bean!=null) {
+                    if (bean.getErrorCode()==0) {
+                        mBaseView.unCollectSuccess(bean);
+                    }
+                }
+            }
+            @Override
+            public void onFail(String msg) {
+                ToastUtil.showShort(msg);
+            }
+        },id);
     }
 }

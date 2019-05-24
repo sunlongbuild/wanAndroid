@@ -12,16 +12,15 @@ import io.reactivex.Observable;
 import io.reactivex.disposables.Disposable;
 
 public class CollectModel extends BaseModel {
-    public void collectList(final ResultCallBack<CollectListBean> resultCallBack, int page,String username,String password){
+    public void collectList(final ResultCallBack<CollectListBean> resultCallBack){
         CollectApi apiserver = HttpUtils.getInstance().getApiserver(CollectApi.URL, CollectApi.class);
-        Observable<CollectListBean> collectList = apiserver.collectList(page,username,password);
+        Observable<CollectListBean> collectList = apiserver.collectList("loginUserName=1663527894","loginPassWord=qiaoruncheng");
         collectList.compose(RxUtils.<CollectListBean>rxObserableSchedulerHelper())
                 .subscribe(new BaseObserver<CollectListBean>() {
                     @Override
                     public void onNext(CollectListBean collectListBean) {
                         resultCallBack.onSuccess(collectListBean);
                     }
-
                     @Override
                     public void error(String msg) {
                         resultCallBack.onFail(msg);

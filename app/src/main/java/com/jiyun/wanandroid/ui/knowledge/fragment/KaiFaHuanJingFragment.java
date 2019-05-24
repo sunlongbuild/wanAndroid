@@ -3,24 +3,28 @@ package com.jiyun.wanandroid.ui.knowledge.fragment;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.GestureDetector;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.jiyun.wanandroid.R;
 import com.jiyun.wanandroid.base.BaseFragment;
+import com.jiyun.wanandroid.base.Constants;
+import com.jiyun.wanandroid.entity.collect.CollectBean;
 import com.jiyun.wanandroid.entity.knowledge.KaiFaHuanJingBean;
 import com.jiyun.wanandroid.presenter.knowledge.KaiFaHuanJingFragmentPresenter;
 import com.jiyun.wanandroid.ui.knowledge.activity.KaiFaHuanJingShowActivity;
 import com.jiyun.wanandroid.ui.knowledge.adapter.RvKaiFaHuanJingAdapter;
+import com.jiyun.wanandroid.ui.login.LoginActivity;
+import com.jiyun.wanandroid.utils.SpUtil;
+import com.jiyun.wanandroid.utils.ToastUtil;
 import com.jiyun.wanandroid.view.knowledge.KaiFaHuanJingFragmentView;
 import com.scwang.smartrefresh.header.DropBoxHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -32,7 +36,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 /**
@@ -53,6 +56,7 @@ public class KaiFaHuanJingFragment extends BaseFragment<KaiFaHuanJingFragmentVie
     private Unbinder unbinder;
     private ArrayList<KaiFaHuanJingBean.DataBean.DatasBean> mlist;
     private RvKaiFaHuanJingAdapter rvKaiFaHuanJingAdapter;
+    private ImageView Image;
 
     public KaiFaHuanJingFragment() {
         // Required empty public constructor
@@ -187,12 +191,28 @@ public class KaiFaHuanJingFragment extends BaseFragment<KaiFaHuanJingFragmentVie
                 }
             });
 
+    @Override
+    protected void initListenter() {
+        super.initListenter();
+        rvKaiFaHuanJingAdapter.setMyImageOnClickListener(new RvKaiFaHuanJingAdapter.MyImageOnClickListener() {
+            @Override
+            public void setImgOnClick(int position, ImageView view) {
+                Image = view;
+                String param = (String) SpUtil.getParam(Constants.NAME, null);
+                if (TextUtils.isEmpty(param)) {
+                    startActivity(new Intent(getActivity(), LoginActivity.class));
+                }else {
+                    boolean collect = mlist.get(position).isCollect();
+                    if (collect) {
+                        mPresenter.unCollect(mlist.get(position).getId());
 
-
-
-
-
-
+                    }else {
+                        mPresenter.collect(mlist.get(position).getId());
+                    }
+                }
+            }
+        });
+    }
 
     @Override
     public void setData(KaiFaHuanJingBean bean) {
@@ -210,22 +230,17 @@ public class KaiFaHuanJingFragment extends BaseFragment<KaiFaHuanJingFragmentVie
                 startActivity(intent);
             }
         });
-
-
-    }
-
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // TODO: inflate a fragment view
-        View rootView = super.onCreateView(inflater, container, savedInstanceState);
-        unbinder2 = ButterKnife.bind(this, rootView);
-        return rootView;
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder2.unbind();
+    public void collectSuccess(CollectBean collectBean) {
+        Image.setImageResource(R.mipmap.icon_xin);
+        ToastUtil.showShort("收藏成功");
+    }
+
+    @Override
+    public void unCollectSuccess(CollectBean collectBean) {
+        Image.setImageResource(R.mipmap.icon_uxin);
+        ToastUtil.showShort("取消收藏");
     }
 }

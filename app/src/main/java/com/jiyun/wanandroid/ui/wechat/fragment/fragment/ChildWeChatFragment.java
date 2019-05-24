@@ -3,24 +3,24 @@ package com.jiyun.wanandroid.ui.wechat.fragment.fragment;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.GestureDetector;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.jiyun.wanandroid.R;
 import com.jiyun.wanandroid.base.BaseFragment;
+import com.jiyun.wanandroid.entity.collect.CollectBean;
 import com.jiyun.wanandroid.entity.wechat.WeChatBean;
 import com.jiyun.wanandroid.presenter.wechat.ChildWeChatPresenter;
 import com.jiyun.wanandroid.ui.wechat.fragment.WeChatWebActivity;
 import com.jiyun.wanandroid.ui.wechat.fragment.adapter.WeChatAdapter;
+import com.jiyun.wanandroid.utils.ToastUtil;
 import com.jiyun.wanandroid.view.wechat.ChildWeChatView;
 import com.scwang.smartrefresh.header.DropBoxHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -32,7 +32,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 /**
@@ -50,7 +49,7 @@ public class ChildWeChatFragment extends BaseFragment<ChildWeChatView, ChildWeCh
     FloatingActionButton mBtnMain;
     private ArrayList<WeChatBean.DataBean.DatasBean> mlist;
     private WeChatAdapter weChatAdapter;
-
+    private ImageView image;
 
 
     public ChildWeChatFragment() {
@@ -203,7 +202,30 @@ public class ChildWeChatFragment extends BaseFragment<ChildWeChatView, ChildWeCh
                 startActivity(intent);
             }
         });
+        weChatAdapter.setMyImageOnClickListener(new WeChatAdapter.MyImageOnClickListener() {
+            @Override
+            public void setImgOnClick(int position, ImageView view) {
+                image = view;
+                boolean collect = mlist.get(position).isCollect();
+                if (collect) {
+                    mPresenter.unCollect(mlist.get(position).getId());
+                }else {
+                    mPresenter.collect(mlist.get(position).getId());
+                }
+            }
+        });
+    }
 
+    @Override
+    public void collectSuccess(CollectBean collectBean) {
+        image.setImageResource(R.mipmap.icon_xin);
+        ToastUtil.showShort("收藏成功");
+    }
+
+    @Override
+    public void unCollectSuccess(CollectBean collectBean) {
+        image.setImageResource(R.mipmap.icon_uxin);
+        ToastUtil.showShort("取消收藏");
     }
 
 

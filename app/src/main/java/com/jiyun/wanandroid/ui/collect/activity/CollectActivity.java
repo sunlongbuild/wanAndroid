@@ -12,10 +12,11 @@ import com.jiyun.wanandroid.base.BaseActivity;
 import com.jiyun.wanandroid.entity.collect.CollectListBean;
 import com.jiyun.wanandroid.presenter.collect.CollectPersenter;
 import com.jiyun.wanandroid.ui.collect.adapter.Collect_Adapter;
-import com.jiyun.wanandroid.ui.loginactivity.LoginActivity;
+import com.jiyun.wanandroid.ui.login.LoginActivity;
 import com.jiyun.wanandroid.utils.SpUtil;
 import com.jiyun.wanandroid.utils.ToastUtil;
 import com.jiyun.wanandroid.view.collect.CollectView;
+import com.just.agentweb.LogUtils;
 
 import java.util.ArrayList;
 
@@ -41,7 +42,6 @@ public class CollectActivity extends BaseActivity<CollectView, CollectPersenter>
            startActivity(new Intent(CollectActivity.this, LoginActivity.class));
            finish();
         } else {
-
         }
         return R.layout.activity_collect;
     }
@@ -59,7 +59,7 @@ public class CollectActivity extends BaseActivity<CollectView, CollectPersenter>
     @Override
     protected void initData() {
         super.initData();
-        mPresenter.CollectList(page,"loginUserName=1663527894","loginPassWord=qiaoruncheng");
+        mPresenter.CollectList(page);
     }
 
     @Override
@@ -76,8 +76,11 @@ public class CollectActivity extends BaseActivity<CollectView, CollectPersenter>
 
     @Override
     public void onSuccess(CollectListBean bean) {
-        mBeans.addAll(bean.getData().getDatas());
-        mCollectAdapter.notifyDataSetChanged();
+        if (mBeans.size()==0) {
+            ToastUtil.showShort("暂无收藏数据");
+        }
+        mCollectAdapter.setData(bean);
+        LogUtils.e("collectlist",bean.toString());
     }
 
     @Override

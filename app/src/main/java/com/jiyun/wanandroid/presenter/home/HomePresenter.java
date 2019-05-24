@@ -74,12 +74,14 @@ public class HomePresenter extends BasePresenter<HomeView> {
             }
         });
     }
-    public void collect(String title,String author,String link){
+    public void collect(int id){
         homeModel.collect(new ResultCallBack<CollectBean>() {
             @Override
             public void onSuccess(CollectBean bean) {
                 if (bean!=null) {
-                    mBaseView.collectSuccess(bean);
+                    if (bean.getErrorCode()==0) {
+                        mBaseView.collectSuccess(bean);
+                    }
                 }else {
                     ToastUtil.showShort("错了");
                 }
@@ -88,18 +90,18 @@ public class HomePresenter extends BasePresenter<HomeView> {
             public void onFail(String msg) {
                 ToastUtil.showShort("我错了");
             }
-        }, title, author, link);
+        }, id);
     }
     public void unCollect(int id){
         homeModel.uncollect(new ResultCallBack<CollectBean>() {
             @Override
             public void onSuccess(CollectBean bean) {
                 if (bean!=null) {
-                    mBaseView.unCollectSuccess(bean);
+                    if (bean.getErrorCode()==0) {
+                        mBaseView.unCollectSuccess(bean);
+                    }
                 }
-
             }
-
             @Override
             public void onFail(String msg) {
                 ToastUtil.showShort(msg);

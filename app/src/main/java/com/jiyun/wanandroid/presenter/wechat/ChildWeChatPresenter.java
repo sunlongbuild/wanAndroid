@@ -1,6 +1,7 @@
 package com.jiyun.wanandroid.presenter.wechat;
 
 import com.jiyun.wanandroid.base.BasePresenter;
+import com.jiyun.wanandroid.entity.collect.CollectBean;
 import com.jiyun.wanandroid.entity.wechat.WeChatBean;
 import com.jiyun.wanandroid.model.wechat.ChildWeChatModel;
 import com.jiyun.wanandroid.net.ResultCallBack;
@@ -36,5 +37,39 @@ public class ChildWeChatPresenter extends BasePresenter<ChildWeChatView> {
                 ToastUtil.showShort(msg);
             }
         });
+    }
+    public void collect(int id){
+        childWeChatModel.collect(new ResultCallBack<CollectBean>() {
+            @Override
+            public void onSuccess(CollectBean bean) {
+                if (bean!=null) {
+                    if (bean.getErrorCode()==0) {
+                        mBaseView.collectSuccess(bean);
+                    }
+                }else {
+                    ToastUtil.showShort("错了");
+                }
+            }
+            @Override
+            public void onFail(String msg) {
+                ToastUtil.showShort("我错了");
+            }
+        }, id);
+    }
+    public void unCollect(int id){
+        childWeChatModel.uncollect(new ResultCallBack<CollectBean>() {
+            @Override
+            public void onSuccess(CollectBean bean) {
+                if (bean!=null) {
+                    if (bean.getErrorCode()==0) {
+                        mBaseView.unCollectSuccess(bean);
+                    }
+                }
+            }
+            @Override
+            public void onFail(String msg) {
+                ToastUtil.showShort(msg);
+            }
+        },id);
     }
 }

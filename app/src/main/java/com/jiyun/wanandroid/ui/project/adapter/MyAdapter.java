@@ -60,6 +60,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                 }
             }
         });
+        viewHolder.mXin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mMyImageOnClickListener!=null) {
+                    mMyImageOnClickListener.setImgOnClick(i,viewHolder.mXin);
+                }
+            }
+        });
     }
 
     @Override
@@ -96,5 +104,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     public interface OnClicklistener{
         void OnClick(int i,ListDataBean.DataBean.DatasBean datasBean);
      }
+
+     public interface MyImageOnClickListener{
+        void setImgOnClick(int position,ImageView view);
+    }
+    public MyImageOnClickListener mMyImageOnClickListener;
+
+    public void setMyImageOnClickListener(MyImageOnClickListener myImageOnClickListener) {
+        mMyImageOnClickListener = myImageOnClickListener;
+    }
 
 }

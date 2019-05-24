@@ -14,8 +14,8 @@ public class CollectPersenter extends BasePresenter<CollectView> implements Resu
     protected void initModel() {
         model = new CollectModel();
     }
-    public void CollectList(int page,String username,String password){
-        model.collectList(this,page,username,password);
+    public void CollectList(int page){
+        model.collectList(this);
     }
 
     @Override

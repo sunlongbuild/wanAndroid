@@ -2,12 +2,14 @@ package com.jiyun.wanandroid.model.project;
 
 import com.jiyun.wanandroid.api.project.ProjectApi;
 import com.jiyun.wanandroid.base.BaseModel;
+import com.jiyun.wanandroid.entity.collect.CollectBean;
 import com.jiyun.wanandroid.entity.project.ListDataBean;
 import com.jiyun.wanandroid.net.BaseObserver;
 import com.jiyun.wanandroid.net.HttpUtils;
 import com.jiyun.wanandroid.net.ResultCallBack;
 import com.jiyun.wanandroid.net.RxUtils;
 
+import io.reactivex.Observable;
 import io.reactivex.disposables.Disposable;
 
 
@@ -34,5 +36,47 @@ public class DataModel extends BaseModel{
                     }
                 }
         );
+    }
+    public void uncollect(final ResultCallBack<CollectBean> resultCallBack , int id) {
+        ProjectApi apiserver = HttpUtils.getInstance().getApiserver(ProjectApi.PROJECT_URL, ProjectApi.class);
+        final Observable<CollectBean> uncollect = apiserver.uncollect(id, "loginUserName=1663527894", "loginPassWord=qiaoruncheng",-1);
+        uncollect.compose(RxUtils.<CollectBean>rxObserableSchedulerHelper())
+                .subscribe(new BaseObserver<CollectBean>() {
+                    @Override
+                    public void onNext(CollectBean collectBean) {
+                        resultCallBack.onSuccess(collectBean);
+                    }
+
+                    @Override
+                    public void error(String msg) {
+                        resultCallBack.onFail(msg);
+                    }
+
+                    @Override
+                    protected void subscribe(Disposable d) {
+                        addDisposable(d);
+                    }
+                });
+    }
+    public void collect(final ResultCallBack<CollectBean> resultCallBack,int id) {
+        ProjectApi apiserver = HttpUtils.getInstance().getApiserver(ProjectApi.PROJECT_URL, ProjectApi.class);
+        final Observable<CollectBean> collect = apiserver.collect("loginUserName=1663527894", "loginUserPassword=qiaoruncheng",id);
+        collect.compose(RxUtils.<CollectBean>rxObserableSchedulerHelper())
+                .subscribe(new BaseObserver<CollectBean>() {
+                    @Override
+                    public void onNext(CollectBean collectBean) {
+                        resultCallBack.onSuccess(collectBean);
+                    }
+
+                    @Override
+                    public void error(String msg) {
+                        resultCallBack.onFail(msg);
+                    }
+
+                    @Override
+                    protected void subscribe(Disposable d) {
+                        addDisposable(d);
+                    }
+                });
     }
 }

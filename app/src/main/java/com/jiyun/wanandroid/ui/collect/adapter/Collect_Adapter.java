@@ -30,6 +30,10 @@ public class Collect_Adapter extends RecyclerView.Adapter {
         mContext = context;
     }
 
+    public void setData(CollectListBean collectBean){
+        mDatasBeans.addAll(collectBean.getData().getDatas());
+        notifyDataSetChanged();
+    }
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
