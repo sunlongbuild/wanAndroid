@@ -48,18 +48,13 @@ public class KaiFaHuanJingFragment extends BaseFragment<KaiFaHuanJingFragmentVie
     RecyclerView mRv;
     @BindView(R.id.btn_main)
     FloatingActionButton btnMain;
-    Unbinder unbinder1;
     @BindView(R.id.srl)
     SmartRefreshLayout srl;
-    Unbinder unbinder2;
-    private View view;
-    private Unbinder unbinder;
     private ArrayList<KaiFaHuanJingBean.DataBean.DatasBean> mlist;
     private RvKaiFaHuanJingAdapter rvKaiFaHuanJingAdapter;
     private ImageView Image;
 
     public KaiFaHuanJingFragment() {
-        // Required empty public constructor
     }
 
     int page;
@@ -231,7 +226,6 @@ public class KaiFaHuanJingFragment extends BaseFragment<KaiFaHuanJingFragmentVie
             }
         });
     }
-<<<<<<< HEAD
 
     @Override
     public void collectSuccess(CollectBean collectBean) {
@@ -244,6 +238,4 @@ public class KaiFaHuanJingFragment extends BaseFragment<KaiFaHuanJingFragmentVie
         Image.setImageResource(R.mipmap.icon_uxin);
         ToastUtil.showShort("取消收藏");
     }
-=======
->>>>>>> 7bbebb6d2e045666054028fc6204294ba03f502d
 }

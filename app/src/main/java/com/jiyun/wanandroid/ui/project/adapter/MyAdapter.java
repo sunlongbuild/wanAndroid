@@ -35,6 +35,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder viewHolder, final int i) {
         final ListDataBean.DataBean.DatasBean datasBean = list.get(i);
+        boolean collect = datasBean.isCollect();
+        if (collect) {
+            viewHolder.mXin.setImageResource(R.mipmap.icon_xin);
+        }else {
+            viewHolder.mXin.setImageResource(R.mipmap.icon_uxin);
+        }
         ImageLoader.setImage(context, datasBean.getEnvelopePic(),viewHolder.mImg,R.drawable.zhanweitu_home_kapian);
         viewHolder.mTvTitle.setText(datasBean.getTitle());
         viewHolder.mTvMessage.setText(datasBean.getDesc());
@@ -52,6 +58,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                 }
             }
         });
+
+
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -28,7 +28,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/app_name"
-        android:textSize="@dimen/sp_18"
+        android:textSize="@dimen/sp_15"
+        android:maxLines="3"
+        android:ellipsize="end"
         android:id="@+id/collect_tv_project_title"
         android:layout_toRightOf="@id/collect_image_project_such"
         android:layout_alignTop="@id/collect_image_project_such"
@@ -39,18 +41,26 @@
         android:layout_height="wrap_content"
         android:text="@string/app_name"
         android:textSize="@dimen/sp_12"
+        android:layout_marginTop="@dimen/dp_5"
         android:id="@+id/collect_tv_project_tab"
         android:layout_marginLeft="@dimen/dp_10"
         android:layout_toRightOf="@id/collect_image_project_such"
         android:layout_alignBottom="@id/collect_image_project_such"/>
     <ImageView
-        android:layout_width="@dimen/dp_30"
-        android:layout_height="@dimen/dp_30"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:src="@mipmap/icon_xin"
         android:layout_alignParentRight="true"
         android:layout_alignBottom="@id/collect_image_project_such"
         android:layout_marginRight="@dimen/dp_10"
-        android:layout_marginBottom="@dimen/dp_2"
         android:id="@+id/collect_image_project_xin"
         />
+    <View
+        android:id="@+id/view_vv"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        android:layout_below="@id/collect_image_project_such"
+        android:layout_marginTop="@dimen/dp_11"
+        android:background="@color/c_dcdcdc"
+        android:layout_marginBottom="@dimen/dp_5"/>
 </RelativeLayout>

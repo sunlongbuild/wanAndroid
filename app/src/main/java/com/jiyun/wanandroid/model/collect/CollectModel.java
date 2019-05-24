@@ -14,7 +14,7 @@ import io.reactivex.disposables.Disposable;
 public class CollectModel extends BaseModel {
     public void collectList(final ResultCallBack<CollectListBean> resultCallBack){
         CollectApi apiserver = HttpUtils.getInstance().getApiserver(CollectApi.URL, CollectApi.class);
-        Observable<CollectListBean> collectList = apiserver.collectList("loginUserName=1663527894","loginPassWord=qiaoruncheng");
+        Observable<CollectListBean> collectList = apiserver.collectList("loginUserName=1663527894","loginUserPassword=qiaoruncheng");
         collectList.compose(RxUtils.<CollectListBean>rxObserableSchedulerHelper())
                 .subscribe(new BaseObserver<CollectListBean>() {
                     @Override
