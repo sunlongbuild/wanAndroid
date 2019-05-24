@@ -1,9 +1,11 @@
 package com.jiyun.wanandroid.ui.knowledge.fragment;
 
+import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jaeger.library.StatusBarUtil;
@@ -18,6 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class KaiFaHuanJingActivity extends BaseActivity<KaiFaHuanJingView, KaiFaHuanJingPresenter> implements KaiFaHuanJingView {
 
@@ -29,6 +33,8 @@ public class KaiFaHuanJingActivity extends BaseActivity<KaiFaHuanJingView, KaiFa
     TabLayout mTab;
     @BindView(R.id.vp)
     ViewPager mVp;
+    @BindView(R.id.iv_back)
+    ImageView ivBack;
     private ArrayList<Fragment> fragments;
     private int mPosition;
 
@@ -61,7 +67,7 @@ public class KaiFaHuanJingActivity extends BaseActivity<KaiFaHuanJingView, KaiFa
         String name = data.get(mPosition).getName();
         mTxtToolbar.setText(name);
         List<KnowledgeBean.DataBean.ChildrenBean> children = dataBean.getChildren();
-        for (int i = 0; i <children.size() ; i++) {
+        for (int i = 0; i < children.size(); i++) {
             mTab.addTab(mTab.newTab().setText(children.get(i).getName()));
             fragments.add(new KaiFaHuanJingFragment(children.get(i).getId()));
 
@@ -87,5 +93,12 @@ public class KaiFaHuanJingActivity extends BaseActivity<KaiFaHuanJingView, KaiFa
             });
             mVp.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTab));
         }
+    }
+
+
+
+    @OnClick(R.id.iv_back)
+    public void onViewClicked() {
+        finish();
     }
 }

@@ -1,17 +1,14 @@
 package com.jiyun.wanandroid.ui.home.activity;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -23,9 +20,14 @@ import com.jiyun.wanandroid.utils.ToastUtil;
 import com.just.agentweb.AgentWeb;
 import com.just.agentweb.WebChromeClient;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class HomeShowActivity extends AppCompatActivity {
 
 
+    @BindView(R.id.iv_back)
+    ImageView ivBack;
     private TextView mTxtToolbar;
     private Toolbar mToolbar;
     private AgentWeb magentWeb;
@@ -37,12 +39,19 @@ public class HomeShowActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_show);
+        ButterKnife.bind(this);
         initView();
     }
 
     private void initView() {
         StatusBarUtil.setLightMode(this);
 
+        ivBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         link = getIntent().getStringExtra("link");
         Logger.logD("link", "链接地址" + link);
 
@@ -52,15 +61,7 @@ public class HomeShowActivity extends AppCompatActivity {
 
         mToolbar.setTitle("");
         setSupportActionBar(mToolbar);
-        mToolbar.setNavigationIcon(R.mipmap.back_white);
-        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!magentWeb.back()) {
-                    finish();
-                }
-            }
-        });
+
         magentWeb = AgentWeb.with(this)
                 .setAgentWebParent(mLl, new LinearLayout.LayoutParams(-1, -1))
                 .closeIndicator()
@@ -84,8 +85,6 @@ public class HomeShowActivity extends AppCompatActivity {
     }
 
 
-
-
     /*
      * *  author gme
      *    time   2019年5月22日 10:20:50
@@ -105,8 +104,8 @@ public class HomeShowActivity extends AppCompatActivity {
                 getShareContent();//获取分享内容
                 break;
             case R.id.browser://用浏览器打开
-                if (link != null){
-                    SystemShareUtils.shareNet(link,this);
+                if (link != null) {
+                    SystemShareUtils.shareNet(link, this);
                 }
                 break;
         }

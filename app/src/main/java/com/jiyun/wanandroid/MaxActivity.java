@@ -1,18 +1,18 @@
 package com.jiyun.wanandroid;
 
-import android.animation.ObjectAnimator;
+
 import android.content.Intent;
-import android.content.SharedPreferences;
+
 import android.os.Bundle;
-import android.os.CountDownTimer;
+
 import android.os.Handler;
+<<<<<<< HEAD
 import android.os.Message;
+=======
+
+>>>>>>> a6452c2b9df18c5bbf9710e2b966200e1c5ec5e0
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.view.animation.AlphaAnimation;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
+
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.jiyun.wanandroid.ui.MainActivity;
@@ -50,8 +50,11 @@ public class MaxActivity extends AppCompatActivity{
     }
     int time=1;
 
+<<<<<<< HEAD
     Handler handler = new Handler();
 
+=======
+>>>>>>> a6452c2b9df18c5bbf9710e2b966200e1c5ec5e0
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +66,12 @@ public class MaxActivity extends AppCompatActivity{
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> a6452c2b9df18c5bbf9710e2b966200e1c5ec5e0
     private void inSkip() {
         handler.postDelayed(new Runnable() {
             @Override

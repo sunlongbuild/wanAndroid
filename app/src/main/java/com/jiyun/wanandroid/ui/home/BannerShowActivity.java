@@ -8,7 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -19,7 +19,7 @@ import com.jiyun.wanandroid.utils.ToastUtil;
 import com.just.agentweb.AgentWeb;
 import com.just.agentweb.WebChromeClient;
 
-public class BannerShowActivity extends AppCompatActivity {
+public class BannerShowActivity extends AppCompatActivity implements View.OnClickListener {
 
     private TextView mTxtToolbar;
     private Toolbar mToolbar;
@@ -27,6 +27,7 @@ public class BannerShowActivity extends AppCompatActivity {
     private LinearLayout mLl;
     private String shareTile;
     private String url;
+    private ImageView mIvBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,15 +48,7 @@ public class BannerShowActivity extends AppCompatActivity {
 
         mToolbar.setTitle("");
         setSupportActionBar(mToolbar);
-        mToolbar.setNavigationIcon(R.mipmap.back_white);
-        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!magentWeb.back()) {
-                    finish();
-                }
-            }
-        });
+
         magentWeb = AgentWeb.with(this)
                 .setAgentWebParent(mLl, new LinearLayout.LayoutParams(-1, -1))
                 .closeIndicator()
@@ -74,6 +67,8 @@ public class BannerShowActivity extends AppCompatActivity {
                 super.onReceivedTitle(view, title);
             }
         });
+        mIvBack = (ImageView) findViewById(R.id.iv_back);
+        mIvBack.setOnClickListener(this);
     }
 
     @Override
@@ -97,15 +92,15 @@ public class BannerShowActivity extends AppCompatActivity {
 
 
     /*
-    * *  author gme
-    *    time   2019年5月22日 10:20:50
-    *    分享内容
-    *
-    */
+     * *  author gme
+     *    time   2019年5月22日 10:20:50
+     *    分享内容
+     *
+     */
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {//创建上下文菜单
-        getMenuInflater().inflate(R.menu.share_collection_browser,menu);
+        getMenuInflater().inflate(R.menu.share_collection_browser, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -125,11 +120,21 @@ public class BannerShowActivity extends AppCompatActivity {
     }
 
     private void getShareContent() {
-        if (shareTile != null && url != null){
-            SystemShareUtils.shareText(this,getResources().getString(R.string.wanandroid)+"【"+shareTile+"】"+":"+url);
-        }else {
+        if (shareTile != null && url != null) {
+            SystemShareUtils.shareText(this, getResources().getString(R.string.wanandroid) + "【" + shareTile + "】" + ":" + url);
+        } else {
             ToastUtil.showShort(getResources().getString(R.string.networrk_slow));
         }
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            default:
+                break;
+            case R.id.iv_back:
+                finish();
+                break;
+        }
+    }
 }
