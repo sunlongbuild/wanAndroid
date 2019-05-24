@@ -4,9 +4,11 @@ package com.jiyun.wanandroid;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.jaeger.library.StatusBarUtil;
 import com.jiyun.wanandroid.ui.MainActivity;
 
 import butterknife.BindView;
@@ -53,6 +55,7 @@ public class MaxActivity extends AppCompatActivity{
         initData();
         inSkip();
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+        StatusBarUtil.setLightMode(this);
     }
 
     private void inSkip() {

@@ -1,35 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.mcxtzhang.swipemenulib.SwipeMenuLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/swipeMenuLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.mcxtzhang.swipemenulib.SwipeMenuLayout
-        android:id="@+id/swipeMenuLayout"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_6"
+
+            android:text="标题"
+            android:textColor="@color/c_49454a"
+            android:textSize="@dimen/sp_15" />
 
         <TextView
             android:id="@+id/tv_content"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="?android:attr/selectableItemBackground"
-            android:gravity="center"
-            android:text="项目中我是任意复杂的原ContentItem布局" />
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_6"
+            android:layout_marginTop="@dimen/dp_3"
+            android:text="项目中我是任意复杂的原ContentItem布局"
+            android:textColor="@color/c_c0c0c0"
+            android:textSize="@dimen/sp_15" />
+    </LinearLayout>
 
-        <Button
-            android:id="@+id/todo_read"
-            android:layout_width="100dp"
-            android:layout_height="match_parent"
-            android:background="@color/c_4cac51"
-            android:text="@string/read"
-            android:textColor="@android:color/white" />
+    <Button
+        android:id="@+id/todo_read"
+        android:layout_width="100dp"
+        android:layout_height="@dimen/dp_55"
+        android:background="@color/c_4cac51"
+        android:text="@string/read"
+        android:textColor="@android:color/white" />
 
-        <Button
-            android:id="@+id/todo_delete"
-            android:layout_width="100dp"
-            android:layout_height="match_parent"
-            android:background="#FF0000"
-            android:text="@string/delete"
-            android:textColor="@android:color/white" />
-    </com.mcxtzhang.swipemenulib.SwipeMenuLayout>
-</LinearLayout>
+    <Button
+        android:id="@+id/todo_delete"
+        android:layout_width="100dp"
+        android:layout_height="@dimen/dp_55"
+        android:background="#FF0000"
+        android:text="@string/delete"
+        android:textColor="@android:color/white" />
+
+
+</com.mcxtzhang.swipemenulib.SwipeMenuLayout>

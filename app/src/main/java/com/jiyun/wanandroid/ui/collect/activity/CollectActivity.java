@@ -3,9 +3,13 @@ package com.jiyun.wanandroid.ui.collect.activity;
 import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.jaeger.library.StatusBarUtil;
 import com.jiyun.wanandroid.R;
 import com.jiyun.wanandroid.api.collect.OnClickListener;
 import com.jiyun.wanandroid.base.BaseActivity;
@@ -26,6 +30,12 @@ import butterknife.BindView;
 public class CollectActivity extends BaseActivity<CollectView, CollectPersenter> implements CollectView {
     @BindView(R.id.collect_rv)
     RecyclerView mCollectRv;
+    @BindView(R.id.iv_back)
+    ImageView mIvBack;
+    @BindView(R.id.txt_toolbar)
+    TextView mTxtToolbar;
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
     private int page = 0;
     private ArrayList<CollectListBean.DataBean.DatasBean> mBeans;
     private Collect_Adapter mCollectAdapter;
@@ -38,10 +48,10 @@ public class CollectActivity extends BaseActivity<CollectView, CollectPersenter>
     @Override
     protected int getLayoutId() {
         String name = (String) SpUtil.getParam("name", "");
-        Log.e("name",name);
+        Log.e("name", name);
         if (TextUtils.isEmpty(name)) {
-           startActivity(new Intent(CollectActivity.this, LoginActivity.class));
-           finish();
+            startActivity(new Intent(CollectActivity.this, LoginActivity.class));
+            finish();
         } else {
         }
         return R.layout.activity_collect;
@@ -50,11 +60,12 @@ public class CollectActivity extends BaseActivity<CollectView, CollectPersenter>
 
     @Override
     protected void initView() {
-        super.initView();
+        StatusBarUtil.setLightMode(this);
         mBeans = new ArrayList<>();
         mCollectRv.setLayoutManager(new LinearLayoutManager(this));
         mCollectAdapter = new Collect_Adapter(this, mBeans);
         mCollectRv.setAdapter(mCollectAdapter);
+
     }
 
     @Override
@@ -72,9 +83,9 @@ public class CollectActivity extends BaseActivity<CollectView, CollectPersenter>
                 CollectListBean.DataBean.DatasBean datasBean = mCollectAdapter.mDatasBeans.get(postion);
                 int originId = datasBean.getOriginId();
                 int id = datasBean.getId();
-                if (originId==-1){
+                if (originId == -1) {
                     mPresenter.unCollect_Two(id);
-                }else {
+                } else {
                     mPresenter.unCollect(originId);
                 }
                 mBeans.remove(postion);
@@ -85,11 +96,11 @@ public class CollectActivity extends BaseActivity<CollectView, CollectPersenter>
 
     @Override
     public void onSuccess(CollectListBean bean) {
-        if (mBeans.size()==0) {
+        if (mBeans.size() == 0) {
             ToastUtil.showShort("暂无收藏数据");
         }
         mCollectAdapter.setData(bean);
-        LogUtils.e("collectlist",bean.toString());
+        LogUtils.e("collectlist", bean.toString());
     }
 
     @Override
