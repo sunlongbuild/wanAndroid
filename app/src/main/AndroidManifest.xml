@@ -44,7 +44,8 @@
         <activity android:name=".ui.night.activity.NightActivity" />
         <activity android:name=".ui.logout.activity.LogoutActivity" />
         <activity android:name=".ui.about.activity.AboutActivity" />
-        <activity android:name=".ui.collect.activity.CollectActivity" />
+        <activity android:name=".ui.collect.activity.CollectActivity"
+            android:theme="@style/NoAppTheme" />
         <activity android:name=".ui.login.LoginActivity" />
         <activity android:name=".ui.login.RegisterActivity" />
         <activity

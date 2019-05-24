@@ -23,6 +23,7 @@
         android:layout_height="@dimen/dp_80"
         android:layout_below="@id/collect_tv_project_author"
         android:layout_marginLeft="@dimen/dp_6"
+        android:src="@drawable/zhanweitu_xianlu_jingdian"
         android:scaleType="center"/>
     <TextView
         android:layout_width="wrap_content"
@@ -47,8 +48,8 @@
         android:layout_toRightOf="@id/collect_image_project_such"
         android:layout_alignBottom="@id/collect_image_project_such"/>
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/dp_25"
+        android:layout_height="@dimen/dp_25"
         android:src="@mipmap/icon_xin"
         android:layout_alignParentRight="true"
         android:layout_alignBottom="@id/collect_image_project_such"

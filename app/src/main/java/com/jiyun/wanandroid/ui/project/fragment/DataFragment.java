@@ -113,7 +113,6 @@ public class DataFragment extends BaseFragment<DataView, DataPresenter> implemen
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
                 page = 0;
                 datasBeans.clear();
-                ;
                 initData();
                 mSmart.finishRefresh();
             }
@@ -133,7 +132,7 @@ public class DataFragment extends BaseFragment<DataView, DataPresenter> implemen
         adapter.setMyImageOnClickListener(new MyAdapter.MyImageOnClickListener() {
             @Override
             public void setImgOnClick(int position, ImageView view) {
-                String param = (String) SpUtil.getParam(Constants.NAME, null);
+                String param = (String) SpUtil.getParam(Constants.NAME, "");
                 if (TextUtils.isEmpty(param)) {
                     startActivity(new Intent(getActivity(), LoginActivity.class));
                     getActivity().finish();

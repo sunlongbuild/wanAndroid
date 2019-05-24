@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,6 +14,7 @@ import com.jaeger.library.StatusBarUtil;
 import com.jiyun.wanandroid.R;
 import com.jiyun.wanandroid.api.collect.OnClickListener;
 import com.jiyun.wanandroid.base.BaseActivity;
+import com.jiyun.wanandroid.base.Constants;
 import com.jiyun.wanandroid.entity.collect.CollectBean;
 import com.jiyun.wanandroid.entity.collect.CollectListBean;
 import com.jiyun.wanandroid.presenter.collect.CollectPersenter;
@@ -47,7 +49,7 @@ public class CollectActivity extends BaseActivity<CollectView, CollectPersenter>
 
     @Override
     protected int getLayoutId() {
-        String name = (String) SpUtil.getParam("name", "");
+        String name = (String) SpUtil.getParam(Constants.NAME, "");
         Log.e("name", name);
         if (TextUtils.isEmpty(name)) {
             startActivity(new Intent(CollectActivity.this, LoginActivity.class));
@@ -83,20 +85,28 @@ public class CollectActivity extends BaseActivity<CollectView, CollectPersenter>
                 CollectListBean.DataBean.DatasBean datasBean = mCollectAdapter.mDatasBeans.get(postion);
                 int originId = datasBean.getOriginId();
                 int id = datasBean.getId();
+                LogUtils.e("tag1",originId+"");
+                LogUtils.e("tag2",id+"");
                 if (originId == -1) {
                     mPresenter.unCollect_Two(id);
                 } else {
                     mPresenter.unCollect(originId);
                 }
-                mBeans.remove(postion);
+                mCollectAdapter.mDatasBeans.remove(postion);
                 mCollectAdapter.notifyDataSetChanged();
+            }
+        });
+        mIvBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }
 
     @Override
     public void onSuccess(CollectListBean bean) {
-        if (mBeans.size() == 0) {
+        if (bean.getData().getDatas().size() == 0) {
             ToastUtil.showShort("暂无收藏数据");
         }
         mCollectAdapter.setData(bean);
