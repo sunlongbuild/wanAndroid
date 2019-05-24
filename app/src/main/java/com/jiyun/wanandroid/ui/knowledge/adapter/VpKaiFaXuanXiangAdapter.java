@@ -1,4 +1,4 @@
-package com.jiyun.wanandroid.ui.knowledge.fragment.adapter;
+package com.jiyun.wanandroid.ui.knowledge.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

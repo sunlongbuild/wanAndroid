@@ -1,17 +1,15 @@
 package com.jiyun.wanandroid.ui.wechat.fragment;
 
 
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.view.View;
 
 import com.jiyun.wanandroid.R;
 import com.jiyun.wanandroid.base.BaseFragment;
 import com.jiyun.wanandroid.entity.wechat.WeChatTabBean;
 import com.jiyun.wanandroid.presenter.wechat.WeChatPresenter;
-import com.jiyun.wanandroid.ui.knowledge.fragment.adapter.VpKaiFaXuanXiangAdapter;
+import com.jiyun.wanandroid.ui.knowledge.adapter.VpKaiFaXuanXiangAdapter;
 import com.jiyun.wanandroid.ui.wechat.fragment.fragment.ChildWeChatFragment;
 import com.jiyun.wanandroid.view.wechat.WeChatView;
 
@@ -19,7 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.Unbinder;
 
 
 /**

@@ -13,6 +13,11 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.jaeger.library.StatusBarUtil;
 import com.jiyun.wanandroid.R;
@@ -38,6 +43,9 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.Unbinder;
 
 
 /**
@@ -53,10 +61,12 @@ public class HomeFragment extends BaseFragment<HomeView, HomePresenter> implemen
     @BindView(R.id.srl)
     SmartRefreshLayout mSrl;
 
+
     private int page = 0;
     private ArrayList<HomeRevBean.DataBean.DatasBean> mlist;
     private ArrayList<HomeBannerBean.DataBean> bannerlsit;
     private RvHomeAdapter rvHomeAdapter;
+
 
 
     public HomeFragment() {
@@ -77,6 +87,8 @@ public class HomeFragment extends BaseFragment<HomeView, HomePresenter> implemen
     protected void initView() {
 
         StatusBarUtil.setLightMode(getActivity());
+
+
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         mRvHome.setLayoutManager(linearLayoutManager);
 
@@ -156,38 +168,47 @@ public class HomeFragment extends BaseFragment<HomeView, HomePresenter> implemen
                 return gestureDetector.onTouchEvent(event);
             }
         });
-        }
+    }
+
     GestureDetector gestureDetector = new GestureDetector(getContext(),
             new GestureDetector.OnGestureListener() {
                 @Override
                 public boolean onDown(MotionEvent e) {
                     return false;
                 }
+
                 @Override
                 public void onShowPress(MotionEvent e) {
                 }
+
                 @Override
                 public boolean onSingleTapUp(MotionEvent e) {
                     // do something
                     return true;
                 }
+
                 @Override
                 public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
                     return false;
                 }
+
                 @Override
                 public void onLongPress(MotionEvent e) {
                 }
+
                 @Override
                 public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
                     return false;
                 }
             });
+
     @Override
     protected void initData() {
+        //数据回来之前加载动画
+        showLoading();
         mPresenter.getBanner();
         mPresenter.getRv(page);
-        mPresenter.gettop( );
+        mPresenter.gettop();
     }
 
     @OnClick(R.id.btn_main)
@@ -206,7 +227,8 @@ public class HomeFragment extends BaseFragment<HomeView, HomePresenter> implemen
         List<HomeBannerBean.DataBean> data = bean.getData();
         bannerlsit.addAll(data);
         rvHomeAdapter.notifyDataSetChanged();
-
+        //数据加载完毕隐藏
+        hideLoading();
         rvHomeAdapter.setMyBannerOnClickListener(new RvHomeAdapter.MyBannerOnClickListener() {
             @Override
             public void setMyBannerOnClickListener(int position) {
@@ -217,6 +239,7 @@ public class HomeFragment extends BaseFragment<HomeView, HomePresenter> implemen
 
             }
         });
+
     }
 
     @Override
@@ -224,12 +247,11 @@ public class HomeFragment extends BaseFragment<HomeView, HomePresenter> implemen
         final List<HomeRevBean.DataBean.DatasBean> datas = bean.getData().getDatas();
         mlist.addAll(datas);
         rvHomeAdapter.notifyDataSetChanged();
-
         rvHomeAdapter.setMyItemOnClickListener(new RvHomeAdapter.MyItemOnClickListener() {
 
             @Override
             public void setMyItemOnClickListener(int position) {
-                String link = mlist.get(position-1).getLink();
+                String link = mlist.get(position - 1).getLink();
                 Intent intent = new Intent(getContext(), HomeShowActivity.class);
                 intent.putExtra("link", link);
                 startActivity(intent);
@@ -256,8 +278,9 @@ public class HomeFragment extends BaseFragment<HomeView, HomePresenter> implemen
 
     @Override
     public void setTop(HomeTopBean bean) {
-        //toplist.addAll(bean.getData());
-      //  rvHomeAdapter.notifyDataSetChanged();
+
+
+
     }
 
     @Override

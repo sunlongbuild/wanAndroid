@@ -1,6 +1,8 @@
 package com.jiyun.wanandroid.ui;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
@@ -8,19 +10,25 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 
-
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
+
+
+
+
 
 
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.jiyun.wanandroid.base.Constants;
-import com.jiyun.wanandroid.ui.loginactivity.LoginActivity;
+import com.jiyun.wanandroid.ui.login.LoginActivity;
 import com.jiyun.wanandroid.R;
 import com.jiyun.wanandroid.base.BaseActivity;
 import com.jiyun.wanandroid.presenter.EmptyPresenter;
@@ -31,10 +39,14 @@ import com.jiyun.wanandroid.ui.knowledge.fragment.KnowledgeFragment;
 import com.jiyun.wanandroid.ui.logout.activity.LogoutActivity;
 import com.jiyun.wanandroid.ui.navigation.fragment.NavigationFragment;
 import com.jiyun.wanandroid.ui.project.fragment.ProjectFragment;
+import com.jiyun.wanandroid.ui.search.activity.SeacherActivity;
 import com.jiyun.wanandroid.ui.setting.activity.SettingActivity;
 import com.jiyun.wanandroid.ui.todo.activity.ToDoActivity;
 import com.jiyun.wanandroid.ui.wechat.fragment.The_publicFragment;
+
+
 import com.jiyun.wanandroid.utils.SpUtil;
+import com.jiyun.wanandroid.utils.ToastUtil;
 import com.jiyun.wanandroid.utils.UIModeUtil;
 import com.jiyun.wanandroid.view.EmptyView;
 
@@ -67,19 +79,27 @@ public class MainActivity extends BaseActivity<EmptyView, EmptyPresenter> implem
     NavigationView mNav;
     @BindView(R.id.dl)
     DrawerLayout mDl;
+    @BindView(R.id.img_search)
+    ImageView mImgSearch;
     private HomeFragment homeFragment;
     private KnowledgeFragment knowledgeFragment;
     private NavigationFragment navigationFragment;
     private ProjectFragment projectFragment;
     private The_publicFragment the_publicFragment;
+
+
     private TextView mHander_login;
     private String mName;
+    // 用来计算返回键的点击间隔时间
+    private long exitTime = 0;
 
 
     @Override
     protected EmptyPresenter initPresenter() {
         return new EmptyPresenter();
     }
+
+
 
     @Override
     protected int getLayoutId() {
@@ -137,11 +157,16 @@ public class MainActivity extends BaseActivity<EmptyView, EmptyPresenter> implem
     private void initToolBar() {
 
         ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, mDl, mToolbar, R.string.open, R.string.close);
+        actionBarDrawerToggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.c_ffffff));
+
+        actionBarDrawerToggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.c_ffffff));
+
         mDl.addDrawerListener(actionBarDrawerToggle);
+
         actionBarDrawerToggle.syncState();
     }
 
-    @OnClick({R.id.rb, R.id.rb2, R.id.rb3, R.id.rb4, R.id.rb5})
+    @OnClick({R.id.rb, R.id.rb2, R.id.rb3, R.id.rb4, R.id.rb5,R.id.img_search})
     public void onClick(View v) {
         switch (v.getId()) {
             default:
@@ -149,7 +174,6 @@ public class MainActivity extends BaseActivity<EmptyView, EmptyPresenter> implem
             case R.id.rb:
 
                 mToolbarText.setText("首页");
-
                 getSupportFragmentManager().beginTransaction().show(homeFragment)
                         .hide(knowledgeFragment).hide(navigationFragment).hide(projectFragment)
                         .hide(the_publicFragment).commit();
@@ -165,6 +189,7 @@ public class MainActivity extends BaseActivity<EmptyView, EmptyPresenter> implem
                 break;
             case R.id.rb3:
                 mToolbarText.setText("公众号");
+
                 getSupportFragmentManager().beginTransaction()
                         .show(the_publicFragment)
                         .hide(homeFragment).hide(knowledgeFragment)
@@ -190,6 +215,10 @@ public class MainActivity extends BaseActivity<EmptyView, EmptyPresenter> implem
                         .hide(knowledgeFragment)
                         .hide(navigationFragment)
                         .hide(the_publicFragment).commit();
+                break;
+            case R.id.img_search:
+                Intent intent = new Intent(MainActivity.this, SeacherActivity.class);
+                startActivity(intent);
                 break;
 
         }
@@ -228,5 +257,30 @@ public class MainActivity extends BaseActivity<EmptyView, EmptyPresenter> implem
                 return false;
             }
         });
+    }
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK || keyCode == KeyEvent.KEYCODE_HOME && event.getRepeatCount() ==0 ){
+            dialog_Exit();
+        }
+        return false;
+    }
+
+    private void dialog_Exit() {
+
+        new AlertDialog.Builder(this)
+                .setTitle("确定退出wanAndroid吗")
+                .setPositiveButton("确定",new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog,int which) {
+                        android.os.Process.killProcess(android.os.Process
+                                .myPid());
+                    }
+                })
+
+                .setNegativeButton("取消",null)
+                .create()
+                .show();
+
     }
 }

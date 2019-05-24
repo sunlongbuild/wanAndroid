@@ -33,6 +33,15 @@ public class SystemShareUtils {
         shareIntent.setType("image/*");
         context.startActivity(Intent.createChooser(shareIntent, "分享到："));
     }
+
+    //用浏览器打开
+    public static void shareNet(String link,Context context) {
+
+        Intent intent = new Intent();
+        intent.setData(Uri.parse(link));//Url 就是你要打开的网址
+        intent.setAction(Intent.ACTION_VIEW);
+        context.startActivity(intent); //启动浏览器
+    }
             //分享网络图片
 /*    public static void shareNetImage(Context context,String imagePath) {
         Intent shareIntent = new Intent();

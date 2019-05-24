@@ -28,7 +28,7 @@ public class RvHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     private ArrayList<HomeBannerBean.DataBean> bannerlist;
     private ArrayList<HomeTopBean.DataBean>toplist;
 
-    public RvHomeAdapter(Context context, ArrayList<HomeRevBean.DataBean.DatasBean> rvlist, ArrayList<HomeBannerBean.DataBean> bannerlist ) {
+    public RvHomeAdapter(Context context, ArrayList<HomeRevBean.DataBean.DatasBean> rvlist, ArrayList<HomeBannerBean.DataBean> bannerlist) {
         this.context = context;
         this.rvlist = rvlist;
         this.bannerlist = bannerlist;
@@ -129,7 +129,7 @@ public class RvHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     public int getItemCount() {
         if (bannerlist.size() > 0) {
             return rvlist.size() - 1;
-        }else
+        }
         return rvlist.size();
     }
 
@@ -137,7 +137,7 @@ public class RvHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     public int getItemViewType(int position) {
         if (position == 0) {
             return 1;
-        } else {
+        } else{
             return 2;
         }
 

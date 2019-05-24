@@ -1,4 +1,4 @@
-package com.jiyun.wanandroid.ui.searchActivity.activity;
+package com.jiyun.wanandroid.ui.search.activity;
 
 import android.content.Intent;
 import android.os.Bundle;

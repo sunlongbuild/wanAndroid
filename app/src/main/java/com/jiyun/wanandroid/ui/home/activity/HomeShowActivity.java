@@ -1,5 +1,7 @@
 package com.jiyun.wanandroid.ui.home.activity;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -42,7 +44,7 @@ public class HomeShowActivity extends AppCompatActivity {
         StatusBarUtil.setLightMode(this);
 
         link = getIntent().getStringExtra("link");
-        Logger.logD("link","链接地址"+link);
+        Logger.logD("link", "链接地址" + link);
 
         mTxtToolbar = (TextView) findViewById(R.id.txt_toolbar);
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -79,7 +81,6 @@ public class HomeShowActivity extends AppCompatActivity {
         });
 
 
-
     }
 
 
@@ -93,7 +94,7 @@ public class HomeShowActivity extends AppCompatActivity {
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {//创建上下文菜单
-        getMenuInflater().inflate(R.menu.share_collection_browser,menu);
+        getMenuInflater().inflate(R.menu.share_collection_browser, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -103,14 +104,19 @@ public class HomeShowActivity extends AppCompatActivity {
             case R.id.share:
                 getShareContent();//获取分享内容
                 break;
+            case R.id.browser://用浏览器打开
+                if (link != null){
+                    SystemShareUtils.shareNet(link,this);
+                }
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
 
     private void getShareContent() {
-        if (shareTitle != null & link != null){
-            SystemShareUtils.shareText(this,getResources().getString(R.string.wanandroid)+"【"+shareTitle+"】"+":"+link);
-        }else {
+        if (shareTitle != null & link != null) {
+            SystemShareUtils.shareText(this, getResources().getString(R.string.wanandroid) + "【" + shareTitle + "】" + ":" + link);
+        } else {
             ToastUtil.showShort(getResources().getString(R.string.networrk_slow));
         }
     }
