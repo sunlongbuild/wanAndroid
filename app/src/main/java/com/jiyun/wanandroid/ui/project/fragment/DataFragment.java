@@ -135,7 +135,6 @@ public class DataFragment extends BaseFragment<DataView, DataPresenter> implemen
                 String param = (String) SpUtil.getParam(Constants.NAME, "");
                 if (TextUtils.isEmpty(param)) {
                     startActivity(new Intent(getActivity(), LoginActivity.class));
-                    getActivity().finish();
                 }
                 image = view;
                 boolean collect = datasBeans.get(position).isCollect();
