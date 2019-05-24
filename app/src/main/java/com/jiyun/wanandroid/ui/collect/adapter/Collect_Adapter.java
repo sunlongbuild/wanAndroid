@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.jiyun.wanandroid.R;
 import com.jiyun.wanandroid.api.collect.OnClickListener;
-import com.jiyun.wanandroid.entity.CollectListBean;
+import com.jiyun.wanandroid.entity.collect.CollectListBean;
 import com.jiyun.wanandroid.utils.ImageLoader;
 
 import java.util.List;

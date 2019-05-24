@@ -5,10 +5,13 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -39,8 +42,9 @@ public class DataFragment extends BaseFragment<DataView, DataPresenter> implemen
     RecyclerView mLv;
     @BindView(R.id.smart)
     SmartRefreshLayout mSmart;
-    private View view;
-    private Unbinder unbinder;
+    @BindView(R.id.btn_main)
+    FloatingActionButton mBtnMain;
+
     private ArrayList<ListDataBean.DataBean.DatasBean> datasBeans;
     private MyAdapter adapter;
 
@@ -81,6 +85,19 @@ public class DataFragment extends BaseFragment<DataView, DataPresenter> implemen
         adapter = new MyAdapter(getActivity(), datasBeans);
         mLv.setLayoutManager(new LinearLayoutManager(getActivity()));
         mLv.setAdapter(adapter);
+
+        //点击悬浮按钮回到顶部并显示隐藏的toolbar与底部导航栏
+        mBtnMain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mLv.smoothScrollToPosition(0);
+                getActivity().findViewById(R.id.toolbar).setVisibility(View.VISIBLE);
+                getActivity().findViewById(R.id.rg).setVisibility(View.VISIBLE);
+            }
+        });
+        initRecy();
+
+
         mSmart.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
             @Override
             public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
@@ -91,8 +108,9 @@ public class DataFragment extends BaseFragment<DataView, DataPresenter> implemen
 
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-                page=0;
-                datasBeans.clear();;
+                page = 0;
+                datasBeans.clear();
+                ;
                 initData();
                 mSmart.finishRefresh();
             }
@@ -102,13 +120,75 @@ public class DataFragment extends BaseFragment<DataView, DataPresenter> implemen
             @Override
             public void OnClick(int position, ListDataBean.DataBean.DatasBean datasBean) {
                 Intent intent = new Intent(getActivity(), WebActivity.class);
+                intent.putExtra("url", datasBeans.get(position).getLink());
+                intent.putExtra("title", datasBeans.get(position).getTitle());
                 intent.putExtra("url",datasBeans.get(position).getLink());
-                intent.putExtra("title",datasBeans.get(position).getTitle());
+                //intent.putExtra("title",datasBeans.get(position).getTitle());
                 getActivity().startActivity(intent);
             }
         });
     }
+    //下拉隐藏底部导航栏
+    @SuppressLint("ClickableViewAccessibility")
+    private void initRecy() {
+        mLv.setOnTouchListener(new View.OnTouchListener() {
+            public float mEndY;
+            public float mStartY;
 
+            @SuppressLint("RestrictedApi")
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        mStartY = event.getY();
+                        break;
+                    case MotionEvent.ACTION_MOVE:
+                        mEndY = event.getY();
+                        float v1 = mEndY - mStartY;
+                        if (v1 > 0) {
+
+                            //我这个是在fragment中的操作 这个是获取activity中的布局
+                            getActivity().findViewById(R.id.toolbar).setVisibility(View.VISIBLE);
+                            getActivity().findViewById(R.id.rg).setVisibility(View.VISIBLE);
+                            mBtnMain.setVisibility(View.VISIBLE);
+                        } else if (v1 < 0) {
+                            getActivity().findViewById(R.id.rg).setVisibility(View.GONE);
+                            getActivity().findViewById(R.id.toolbar).setVisibility(View.GONE);
+                            mBtnMain.setVisibility(View.GONE);
+                        }
+                        break;
+                }
+                return gestureDetector.onTouchEvent(event);
+            }
+        });
+    }
+
+    GestureDetector gestureDetector = new GestureDetector(getContext(),
+            new GestureDetector.OnGestureListener() {
+                @Override
+                public boolean onDown(MotionEvent e) {
+                    return false;
+                }
+                @Override
+                public void onShowPress(MotionEvent e) {
+                }
+                @Override
+                public boolean onSingleTapUp(MotionEvent e) {
+                    // do something
+                    return true;
+                }
+                @Override
+                public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+                    return false;
+                }
+                @Override
+                public void onLongPress(MotionEvent e) {
+                }
+                @Override
+                public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+                    return false;
+                }
+            });
     @Override
     protected void initData() {
         mPresenter.getData(page, cid);
@@ -119,4 +199,6 @@ public class DataFragment extends BaseFragment<DataView, DataPresenter> implemen
         datasBeans.addAll(bean.getData().getDatas());
         adapter.notifyDataSetChanged();
     }
+
+
 }

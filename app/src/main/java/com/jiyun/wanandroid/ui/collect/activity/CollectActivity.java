@@ -1,14 +1,19 @@
 package com.jiyun.wanandroid.ui.collect.activity;
 
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
+import android.util.Log;
 
 import com.jiyun.wanandroid.R;
 import com.jiyun.wanandroid.api.collect.OnClickListener;
 import com.jiyun.wanandroid.base.BaseActivity;
-import com.jiyun.wanandroid.entity.CollectListBean;
+import com.jiyun.wanandroid.entity.collect.CollectListBean;
 import com.jiyun.wanandroid.presenter.collect.CollectPersenter;
 import com.jiyun.wanandroid.ui.collect.adapter.Collect_Adapter;
+import com.jiyun.wanandroid.ui.loginactivity.LoginActivity;
+import com.jiyun.wanandroid.utils.SpUtil;
 import com.jiyun.wanandroid.utils.ToastUtil;
 import com.jiyun.wanandroid.view.collect.CollectView;
 
@@ -23,8 +28,6 @@ public class CollectActivity extends BaseActivity<CollectView, CollectPersenter>
     private ArrayList<CollectListBean.DataBean.DatasBean> mBeans;
     private Collect_Adapter mCollectAdapter;
 
-    private String username="";
-    private String password="";
     @Override
     protected CollectPersenter initPresenter() {
         return new CollectPersenter();
@@ -32,6 +35,14 @@ public class CollectActivity extends BaseActivity<CollectView, CollectPersenter>
 
     @Override
     protected int getLayoutId() {
+        String name = (String) SpUtil.getParam("name", "");
+        Log.e("name",name);
+        if (TextUtils.isEmpty(name)) {
+           startActivity(new Intent(CollectActivity.this, LoginActivity.class));
+           finish();
+        } else {
+
+        }
         return R.layout.activity_collect;
     }
 
@@ -48,7 +59,7 @@ public class CollectActivity extends BaseActivity<CollectView, CollectPersenter>
     @Override
     protected void initData() {
         super.initData();
-        mPresenter.CollectList(page,username,password);
+        mPresenter.CollectList(page,"loginUserName=1663527894","loginPassWord=qiaoruncheng");
     }
 
     @Override
@@ -57,7 +68,8 @@ public class CollectActivity extends BaseActivity<CollectView, CollectPersenter>
         mCollectAdapter.setOnClickListener(new OnClickListener() {
             @Override
             public void OnClick(int postion) {
-
+                mBeans.remove(postion);
+                mCollectAdapter.notifyDataSetChanged();
             }
         });
     }

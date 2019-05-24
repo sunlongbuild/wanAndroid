@@ -1,6 +1,6 @@
 package com.jiyun.wanandroid.api.collect;
 
-import com.jiyun.wanandroid.entity.CollectListBean;
+import com.jiyun.wanandroid.entity.collect.CollectListBean;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;

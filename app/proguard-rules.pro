@@ -122,7 +122,8 @@
    public *;
 }
 ## okhttp
--dontwarn com.squareup.okhttp.** -keep class com.squareup.okhttp.{*;}
+-dontwarn com.squareup.okhttp.**
+-keep class com.squareup.okhttp.{*;}
 #okhttp3.x
 -dontwarn com.squareup.okhttp3.**
 -keep class com.squareup.okhttp3.** { *;}

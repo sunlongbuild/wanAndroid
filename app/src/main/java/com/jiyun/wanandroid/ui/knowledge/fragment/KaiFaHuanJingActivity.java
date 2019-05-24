@@ -1,6 +1,5 @@
 package com.jiyun.wanandroid.ui.knowledge.fragment;
 
-import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -11,25 +10,22 @@ import com.jaeger.library.StatusBarUtil;
 import com.jiyun.wanandroid.R;
 import com.jiyun.wanandroid.base.BaseActivity;
 import com.jiyun.wanandroid.entity.knowledge.KnowledgeBean;
-import com.jiyun.wanandroid.presenter.KaiFaHuanJingPresenter;
-import com.jiyun.wanandroid.ui.knowledge.fragment.adapter.RvKnowledgeAdapter;
+import com.jiyun.wanandroid.presenter.knowledge.KaiFaHuanJingPresenter;
 import com.jiyun.wanandroid.ui.knowledge.fragment.adapter.VpKaiFaXuanXiangAdapter;
 import com.jiyun.wanandroid.ui.knowledge.fragment.fragment.KaiFaHuanJingFragment;
 import com.jiyun.wanandroid.view.knowledge.KaiFaHuanJingView;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class KaiFaHuanJingActivity extends BaseActivity<KaiFaHuanJingView, KaiFaHuanJingPresenter> implements KaiFaHuanJingView {
 
     @BindView(R.id.txt_toolbar)
     TextView mTxtToolbar;
-    @BindView(R.id.toolbar)
-    Toolbar mToolbar;
+    @BindView(R.id.toolbarr)
+    Toolbar mToolbarr;
     @BindView(R.id.tab)
     TabLayout mTab;
     @BindView(R.id.vp)

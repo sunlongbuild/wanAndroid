@@ -1,7 +1,7 @@
 package com.jiyun.wanandroid.presenter.collect;
 
 import com.jiyun.wanandroid.base.BasePresenter;
-import com.jiyun.wanandroid.entity.CollectListBean;
+import com.jiyun.wanandroid.entity.collect.CollectListBean;
 import com.jiyun.wanandroid.model.collect.CollectModel;
 import com.jiyun.wanandroid.net.ResultCallBack;
 import com.jiyun.wanandroid.view.collect.CollectView;

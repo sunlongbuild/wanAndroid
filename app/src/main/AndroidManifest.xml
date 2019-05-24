@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.jiyun.wanandroid">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:appComponentFactory="123"
+        tools:replace="android:appComponentFactory"
         android:name=".base.BaseApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -16,13 +19,11 @@
         <activity
             android:name=".ui.MainActivity"
             android:theme="@style/NoAppTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
-
+        <activity
+            android:name=".ui.project.activity.WebActivity"
+            android:theme="@style/NoAppTheme" />
         <activity
             android:name=".ui.home.BannerShowActivity"
             android:theme="@style/NoAppTheme" />
@@ -32,23 +33,43 @@
         <activity
             android:name=".ui.knowledge.fragment.KaiFaHuanJingActivity"
             android:theme="@style/NoAppTheme" />
-        <activity android:name=".ui.knowledge.fragment.activity.KaiFaHuanJingShowActivity"
-            android:theme="@style/NoAppTheme"
-            ></activity>
-
-        <activity android:name=".ui.project.activity.WebActivity"
-            android:theme="@style/NoAppTheme"></activity>
-
+        <activity
+            android:name=".ui.knowledge.fragment.activity.KaiFaHuanJingShowActivity"
+            android:theme="@style/NoAppTheme" />
         <activity
             android:name=".ui.todo.activity.ToDoActivity"
             android:theme="@style/NoAppTheme" />
-        <activity android:name=".ui.setting.activity.SettingActivity" />
+        <activity
+            android:name=".ui.setting.activity.SettingActivity"
+            android:theme="@style/NoAppTheme" />
         <activity android:name=".ui.night.activity.NightActivity" />
         <activity android:name=".ui.logout.activity.LogoutActivity" />
         <activity android:name=".ui.about.activity.AboutActivity" />
         <activity android:name=".ui.collect.activity.CollectActivity" />
-        <activity android:name=".ui.todo.activity.AddToDoActivity"></activity>
+        <activity android:name=".ui.loginactivity.LoginActivity" />
+        <activity android:name=".ui.loginactivity.RegisterActivity" />
+        <activity
+            android:name=".ui.searchActivity.activity.SeacherActivity"
+            android:theme="@style/NoAppTheme" />
+        <activity
+            android:name=".ui.searchActivity.activity.WebSeacherActivity"
+            android:theme="@style/NoAppTheme" />
+        <activity
+            android:name=".ui.todo.activity.AddToDoActivity"
+            android:theme="@style/NoAppTheme" />
+        <activity
+            android:name=".ui.navigation.activity.FlowWebActivity"
+            android:theme="@style/NoAppTheme" />
+        <activity
+            android:name=".ui.wechat.fragment.WeChatWebActivity"
+            android:theme="@style/NoAppTheme" />
+        <activity android:name=".MaxActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

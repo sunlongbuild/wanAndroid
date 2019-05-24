@@ -2,13 +2,18 @@ package com.jiyun.wanandroid.model.home;
 
 import com.jiyun.wanandroid.api.home.HomeApi;
 import com.jiyun.wanandroid.base.BaseModel;
+import com.jiyun.wanandroid.base.Constants;
+import com.jiyun.wanandroid.entity.collect.CollectBean;
 import com.jiyun.wanandroid.entity.home.HomeBannerBean;
 import com.jiyun.wanandroid.entity.home.HomeRevBean;
+import com.jiyun.wanandroid.entity.home.HomeTopBean;
 import com.jiyun.wanandroid.net.BaseObserver;
 import com.jiyun.wanandroid.net.HttpUtils;
 import com.jiyun.wanandroid.net.ResultCallBack;
 import com.jiyun.wanandroid.net.RxUtils;
+import com.jiyun.wanandroid.utils.SpUtil;
 
+import io.reactivex.Observable;
 import io.reactivex.disposables.Disposable;
 
 public class HomeModel extends BaseModel {
@@ -50,6 +55,74 @@ public class HomeModel extends BaseModel {
                         } else {
                             resultCallBack.onFail("错误");
                         }
+                    }
+
+                    @Override
+                    public void error(String msg) {
+                        resultCallBack.onFail(msg);
+                    }
+
+                    @Override
+                    protected void subscribe(Disposable d) {
+                        addDisposable(d);
+                    }
+                });
+    }
+
+    public void gettop(final ResultCallBack<HomeTopBean> resultCallBack) {
+        HomeApi apiserver = HttpUtils.getInstance().getApiserver(HomeApi.RvUrl, HomeApi.class);
+        apiserver.getHomeTop().compose(RxUtils.<HomeTopBean>rxObserableSchedulerHelper())
+                .subscribe(new BaseObserver<HomeTopBean>() {
+                    @Override
+                    public void onNext(HomeTopBean homeTopBean) {
+
+                        if (homeTopBean != null) {
+                            resultCallBack.onSuccess(homeTopBean);
+                        } else {
+                            resultCallBack.onFail("错误");
+                        }
+                    }
+
+                    @Override
+                    public void error(String msg) {
+                        resultCallBack.onFail(msg);
+                    }
+
+                    @Override
+                    protected void subscribe(Disposable d) {
+                        addDisposable(d);
+                    }
+                });
+    }
+    public void uncollect(final ResultCallBack<CollectBean> resultCallBack , int id) {
+        HomeApi apiserver = HttpUtils.getInstance().getApiserver(HomeApi.RvUrl, HomeApi.class);
+        final Observable<CollectBean> uncollect = apiserver.uncollect(id, "loginUserName" + SpUtil.getParam(Constants.NAME,null), "loginPassWord" + SpUtil.getParam(Constants.PSW,null),-1);
+        uncollect.compose(RxUtils.<CollectBean>rxObserableSchedulerHelper())
+                .subscribe(new BaseObserver<CollectBean>() {
+                    @Override
+                    public void onNext(CollectBean collectBean) {
+                        resultCallBack.onSuccess(collectBean);
+                    }
+
+                    @Override
+                    public void error(String msg) {
+                        resultCallBack.onFail(msg);
+                    }
+
+                    @Override
+                    protected void subscribe(Disposable d) {
+                        addDisposable(d);
+                    }
+                });
+    }
+    public void collect(final ResultCallBack<CollectBean> resultCallBack, String title, String author, String link) {
+        HomeApi apiserver = HttpUtils.getInstance().getApiserver(HomeApi.RvUrl, HomeApi.class);
+        final Observable<CollectBean> collect = apiserver.collect("loginUserName=" + Constants.USERNAME, "loginPassWord=" + Constants.PSW,title,author,link);
+        collect.compose(RxUtils.<CollectBean>rxObserableSchedulerHelper())
+                .subscribe(new BaseObserver<CollectBean>() {
+                    @Override
+                    public void onNext(CollectBean collectBean) {
+                        resultCallBack.onSuccess(collectBean);
                     }
 
                     @Override

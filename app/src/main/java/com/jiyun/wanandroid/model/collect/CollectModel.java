@@ -2,7 +2,7 @@ package com.jiyun.wanandroid.model.collect;
 
 import com.jiyun.wanandroid.api.collect.CollectApi;
 import com.jiyun.wanandroid.base.BaseModel;
-import com.jiyun.wanandroid.entity.CollectListBean;
+import com.jiyun.wanandroid.entity.collect.CollectListBean;
 import com.jiyun.wanandroid.net.BaseObserver;
 import com.jiyun.wanandroid.net.HttpUtils;
 import com.jiyun.wanandroid.net.ResultCallBack;

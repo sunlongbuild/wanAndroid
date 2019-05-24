@@ -1,6 +1,5 @@
 package com.jiyun.wanandroid.ui;
 
-
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -8,13 +7,20 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+
+
 import android.support.v7.widget.Toolbar;
+
+
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+
+import com.jiyun.wanandroid.base.Constants;
+import com.jiyun.wanandroid.ui.loginactivity.LoginActivity;
 import com.jiyun.wanandroid.R;
 import com.jiyun.wanandroid.base.BaseActivity;
 import com.jiyun.wanandroid.presenter.EmptyPresenter;
@@ -28,11 +34,13 @@ import com.jiyun.wanandroid.ui.project.fragment.ProjectFragment;
 import com.jiyun.wanandroid.ui.setting.activity.SettingActivity;
 import com.jiyun.wanandroid.ui.todo.activity.ToDoActivity;
 import com.jiyun.wanandroid.ui.wechat.fragment.The_publicFragment;
+import com.jiyun.wanandroid.utils.SpUtil;
 import com.jiyun.wanandroid.utils.UIModeUtil;
 import com.jiyun.wanandroid.view.EmptyView;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+
 
 public class MainActivity extends BaseActivity<EmptyView, EmptyPresenter> implements EmptyView {
 
@@ -64,17 +72,13 @@ public class MainActivity extends BaseActivity<EmptyView, EmptyPresenter> implem
     private NavigationFragment navigationFragment;
     private ProjectFragment projectFragment;
     private The_publicFragment the_publicFragment;
+    private TextView mHander_login;
+    private String mName;
 
 
     @Override
-    protected void initView() {
-        mToolbar.setTitle("");
-        mToolbarText.setText("首页");
-
-        setSupportActionBar(mToolbar);
-
-
-        initToolBar();
+    protected EmptyPresenter initPresenter() {
+        return new EmptyPresenter();
     }
 
     @Override
@@ -82,16 +86,30 @@ public class MainActivity extends BaseActivity<EmptyView, EmptyPresenter> implem
         return R.layout.activity_main;
     }
 
-    private void initToolBar() {
-
-        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, mDl, mToolbar, R.string.open, R.string.close);
-        mDl.addDrawerListener(actionBarDrawerToggle);
-        actionBarDrawerToggle.syncState();
-    }
-
     @Override
-    protected EmptyPresenter initPresenter() {
-        return new EmptyPresenter();
+    protected void initView() {
+
+        mToolbar.setTitle("");
+        mToolbarText.setText("首页");
+        setSupportActionBar(mToolbar);
+
+        View headerView = mNav.getHeaderView(0);
+        mHander_login = headerView.findViewById(R.id.hander_login);
+        mHander_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this,LoginActivity.class));
+                 mName = (String) SpUtil.getParam(Constants.NAME, "");
+                 mHander_login.setText(mName);
+            }
+        });
+
+        //判断如果用户已经登陆过，直接显示用户名
+        if ((boolean)SpUtil.getParam(Constants.LOGIN,false)){
+            mHander_login.setText((String)SpUtil.getParam(Constants.USERNAME,"登录"));
+        }
+        initToolBar();
+
     }
 
     @Override
@@ -116,18 +134,27 @@ public class MainActivity extends BaseActivity<EmptyView, EmptyPresenter> implem
 
     }
 
+    private void initToolBar() {
+
+        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, mDl, mToolbar, R.string.open, R.string.close);
+        mDl.addDrawerListener(actionBarDrawerToggle);
+        actionBarDrawerToggle.syncState();
+    }
+
     @OnClick({R.id.rb, R.id.rb2, R.id.rb3, R.id.rb4, R.id.rb5})
     public void onClick(View v) {
         switch (v.getId()) {
             default:
                 break;
             case R.id.rb:
+
                 mToolbarText.setText("首页");
 
-                getSupportFragmentManager().beginTransaction().show(homeFragment).hide(knowledgeFragment).hide(navigationFragment).hide(projectFragment)
+                getSupportFragmentManager().beginTransaction().show(homeFragment)
+                        .hide(knowledgeFragment).hide(navigationFragment).hide(projectFragment)
                         .hide(the_publicFragment).commit();
-
                 break;
+
             case R.id.rb2:
                 mToolbarText.setText("知识体系");
 
@@ -166,8 +193,8 @@ public class MainActivity extends BaseActivity<EmptyView, EmptyPresenter> implem
                 break;
 
         }
-    }
 
+    }
     @Override
     protected void initListener() {
         mNav.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {

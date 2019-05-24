@@ -27,7 +27,7 @@ public class RvKaiFaHuanJingAdapter extends RecyclerView.Adapter<RvKaiFaHuanJing
     @NonNull
     @Override
     public MyHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View inflate = LayoutInflater.from(context).inflate(R.layout.layout_kaifahuaning_item, null);
+        View inflate = LayoutInflater.from(context).inflate(R.layout.layout_home_rvitem, null);
         MyHolder myHolder = new MyHolder(inflate);
         return myHolder;
     }
@@ -38,7 +38,7 @@ public class RvKaiFaHuanJingAdapter extends RecyclerView.Adapter<RvKaiFaHuanJing
         myHolder.chapterName.setText(list.get(i).getChapterName());
         myHolder.niceDate.setText(list.get(i).getNiceDate());
         myHolder.title.setText(list.get(i).getTitle());
-        myHolder.superChapterName.setText(list.get(i).getSuperChapterName());
+        myHolder.superChapterName.setText(list.get(i).getSuperChapterName()+"   /   ");
 
         myHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

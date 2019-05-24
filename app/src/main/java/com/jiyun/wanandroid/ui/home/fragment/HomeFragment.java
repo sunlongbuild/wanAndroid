@@ -3,28 +3,29 @@ package com.jiyun.wanandroid.ui.home.fragment;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.GestureDetector;
-
 import android.view.MotionEvent;
 import android.view.View;
-
-
+import android.widget.ImageView;
 
 import com.jaeger.library.StatusBarUtil;
 import com.jiyun.wanandroid.R;
 import com.jiyun.wanandroid.base.BaseFragment;
+import com.jiyun.wanandroid.entity.collect.CollectBean;
 import com.jiyun.wanandroid.entity.home.HomeBannerBean;
 import com.jiyun.wanandroid.entity.home.HomeRevBean;
+import com.jiyun.wanandroid.entity.home.HomeTopBean;
 import com.jiyun.wanandroid.presenter.home.HomePresenter;
 import com.jiyun.wanandroid.ui.home.BannerShowActivity;
 import com.jiyun.wanandroid.ui.home.activity.HomeShowActivity;
 import com.jiyun.wanandroid.ui.home.adapter.RvHomeAdapter;
+import com.jiyun.wanandroid.utils.ToastUtil;
 import com.jiyun.wanandroid.view.home.HomeView;
 import com.scwang.smartrefresh.header.DropBoxHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -36,10 +37,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-
 import butterknife.OnClick;
-
-
 
 
 /**
@@ -77,12 +75,14 @@ public class HomeFragment extends BaseFragment<HomeView, HomePresenter> implemen
 
     @Override
     protected void initView() {
+
         StatusBarUtil.setLightMode(getActivity());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         mRvHome.setLayoutManager(linearLayoutManager);
 
         mlist = new ArrayList<>();
         bannerlsit = new ArrayList<>();
+
         rvHomeAdapter = new RvHomeAdapter(getContext(), mlist, bannerlsit);
         mRvHome.setAdapter(rvHomeAdapter);
 
@@ -118,7 +118,10 @@ public class HomeFragment extends BaseFragment<HomeView, HomePresenter> implemen
             }
         });
         initRecy();
+
     }
+
+
 
     //下拉隐藏底部导航栏
     @SuppressLint("ClickableViewAccessibility")
@@ -184,6 +187,7 @@ public class HomeFragment extends BaseFragment<HomeView, HomePresenter> implemen
     protected void initData() {
         mPresenter.getBanner();
         mPresenter.getRv(page);
+        mPresenter.gettop( );
     }
 
     @OnClick(R.id.btn_main)
@@ -216,8 +220,8 @@ public class HomeFragment extends BaseFragment<HomeView, HomePresenter> implemen
     }
 
     @Override
-    public void setRv(HomeRevBean bean) {
-        List<HomeRevBean.DataBean.DatasBean> datas = bean.getData().getDatas();
+    public void setRv(final HomeRevBean bean) {
+        final List<HomeRevBean.DataBean.DatasBean> datas = bean.getData().getDatas();
         mlist.addAll(datas);
         rvHomeAdapter.notifyDataSetChanged();
 
@@ -231,6 +235,41 @@ public class HomeFragment extends BaseFragment<HomeView, HomePresenter> implemen
                 startActivity(intent);
             }
         });
+        rvHomeAdapter.setMyImageOnClickListener(new RvHomeAdapter.MyImageOnClickListener() {
+            @Override
+            public void setImgOnClick(int position, ImageView imageView) {
+
+
+                boolean collect = bean.getData().getDatas().get(position).isCollect();
+                HomeRevBean.DataBean.DatasBean datasBean = bean.getData().getDatas().get(position);
+                Log.e("datasBean",datasBean.toString());
+                if (collect) {
+                    imageView.setImageResource(R.mipmap.icon_uxin);
+                    mPresenter.unCollect(datasBean.getId());
+                }else {
+                    imageView.setImageResource(R.mipmap.icon_xin);
+                    mPresenter.collect(datasBean.getTitle(),datasBean.getAuthor(),datasBean.getLink());
+                }
+            }
+        });
+    }
+
+    @Override
+    public void setTop(HomeTopBean bean) {
+        //toplist.addAll(bean.getData());
+      //  rvHomeAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void collectSuccess(CollectBean collectBean) {
+        ToastUtil.showShort("收藏成功");
+        rvHomeAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void unCollectSuccess(CollectBean collectBean) {
+        ToastUtil.showShort("取消收藏");
+        rvHomeAdapter.notifyDataSetChanged();
     }
 
 

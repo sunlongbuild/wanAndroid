@@ -1,7 +1,6 @@
 package com.jiyun.wanandroid.ui.home.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,7 +13,7 @@ import com.bumptech.glide.Glide;
 import com.jiyun.wanandroid.R;
 import com.jiyun.wanandroid.entity.home.HomeBannerBean;
 import com.jiyun.wanandroid.entity.home.HomeRevBean;
-import com.jiyun.wanandroid.ui.home.BannerShowActivity;
+import com.jiyun.wanandroid.entity.home.HomeTopBean;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
@@ -27,11 +26,13 @@ public class RvHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     private Context context;
     private ArrayList<HomeRevBean.DataBean.DatasBean> rvlist;
     private ArrayList<HomeBannerBean.DataBean> bannerlist;
+    private ArrayList<HomeTopBean.DataBean>toplist;
 
-    public RvHomeAdapter(Context context, ArrayList<HomeRevBean.DataBean.DatasBean> rvlist, ArrayList<HomeBannerBean.DataBean> bannerlist) {
+    public RvHomeAdapter(Context context, ArrayList<HomeRevBean.DataBean.DatasBean> rvlist, ArrayList<HomeBannerBean.DataBean> bannerlist ) {
         this.context = context;
         this.rvlist = rvlist;
         this.bannerlist = bannerlist;
+
     }
 
     @NonNull
@@ -86,7 +87,7 @@ public class RvHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
         } else if (itemViewType == 2) {
 
-            MyRvItem myRvItem = (MyRvItem) viewHolder;
+            final MyRvItem myRvItem = (MyRvItem) viewHolder;
             int mposition = i;
             if (bannerlist.size() > 0) {
                 mposition = i - 1;
@@ -95,7 +96,21 @@ public class RvHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             myRvItem.chapterName.setText(rvlist.get(mposition).getChapterName());
             myRvItem.niceDate.setText(rvlist.get(mposition).getNiceDate());
             myRvItem.title.setText(rvlist.get(mposition).getTitle());
-            myRvItem.superChapterName.setText(rvlist.get(mposition).getSuperChapterName() + "/");
+            myRvItem.superChapterName.setText(rvlist.get(mposition).getSuperChapterName() + "   /   ");
+            boolean collect = rvlist.get(i).isCollect();
+            if (collect) {
+                myRvItem.img_shou_home.setImageResource(R.mipmap.icon_xin);
+            }else {
+                myRvItem.img_shou_home.setImageResource(R.mipmap.icon_uxin);
+            }
+            myRvItem.img_shou_home.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (mMyImageOnClickListener!=null) {
+                        mMyImageOnClickListener.setImgOnClick(i,myRvItem.img_shou_home);
+                    }
+                }
+            });
 
             myRvItem.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -114,7 +129,7 @@ public class RvHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     public int getItemCount() {
         if (bannerlist.size() > 0) {
             return rvlist.size() - 1;
-        }
+        }else
         return rvlist.size();
     }
 
@@ -148,7 +163,7 @@ public class RvHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             superChapterName = itemView.findViewById(R.id.superChapterName);
             chapterName = itemView.findViewById(R.id.chapterName);
             niceDate = itemView.findViewById(R.id.niceDate);
-            //img_shou_home=itemView.findViewById(R.id.img_shou_home);
+            img_shou_home=itemView.findViewById(R.id.home_follow_unselectedd);
         }
 
     }
@@ -161,6 +176,15 @@ public class RvHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     public void setMyItemOnClickListener(MyItemOnClickListener myItemOnClickListener) {
         this.myItemOnClickListener = myItemOnClickListener;
+    }
+
+    public interface MyImageOnClickListener{
+        void setImgOnClick(int position,ImageView view);
+    }
+    public MyImageOnClickListener mMyImageOnClickListener;
+
+    public void setMyImageOnClickListener(MyImageOnClickListener myImageOnClickListener) {
+        mMyImageOnClickListener = myImageOnClickListener;
     }
 
     public interface MyBannerOnClickListener {
