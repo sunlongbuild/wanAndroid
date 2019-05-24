@@ -9,6 +9,7 @@ import android.util.Log;
 import com.jiyun.wanandroid.R;
 import com.jiyun.wanandroid.api.collect.OnClickListener;
 import com.jiyun.wanandroid.base.BaseActivity;
+import com.jiyun.wanandroid.entity.collect.CollectBean;
 import com.jiyun.wanandroid.entity.collect.CollectListBean;
 import com.jiyun.wanandroid.presenter.collect.CollectPersenter;
 import com.jiyun.wanandroid.ui.collect.adapter.Collect_Adapter;
@@ -68,6 +69,14 @@ public class CollectActivity extends BaseActivity<CollectView, CollectPersenter>
         mCollectAdapter.setOnClickListener(new OnClickListener() {
             @Override
             public void OnClick(int postion) {
+                CollectListBean.DataBean.DatasBean datasBean = mCollectAdapter.mDatasBeans.get(postion);
+                int originId = datasBean.getOriginId();
+                int id = datasBean.getId();
+                if (originId==-1){
+                    mPresenter.unCollect_Two(id);
+                }else {
+                    mPresenter.unCollect(originId);
+                }
                 mBeans.remove(postion);
                 mCollectAdapter.notifyDataSetChanged();
             }
@@ -86,5 +95,10 @@ public class CollectActivity extends BaseActivity<CollectView, CollectPersenter>
     @Override
     public void onFail(String msg) {
         ToastUtil.showShort(msg);
+    }
+
+    @Override
+    public void unCollectSuccess(CollectBean collectBean) {
+        ToastUtil.showShort("取消收藏");
     }
 }

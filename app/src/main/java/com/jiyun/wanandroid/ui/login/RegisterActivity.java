@@ -94,7 +94,6 @@ public class RegisterActivity extends BaseActivity<RegisterV, RegisterP> impleme
                     if (mMm.equals(mQrmm)) {
                         SpUtil.setParam(Constants.NAME, mYhm);
                         SpUtil.setParam(Constants.PSW, mMm);
-
                         Intent intent = new Intent(RegisterActivity.this,LoginActivity.class);
                         startActivity(intent);
                         //渐入渐出的效果

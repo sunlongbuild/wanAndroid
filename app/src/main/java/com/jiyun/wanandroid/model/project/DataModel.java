@@ -39,7 +39,7 @@ public class DataModel extends BaseModel{
     }
     public void uncollect(final ResultCallBack<CollectBean> resultCallBack , int id) {
         ProjectApi apiserver = HttpUtils.getInstance().getApiserver(ProjectApi.PROJECT_URL, ProjectApi.class);
-        final Observable<CollectBean> uncollect = apiserver.uncollect(id, "loginUserName=1663527894", "loginPassWord=qiaoruncheng",-1);
+        final Observable<CollectBean> uncollect = apiserver.uncollect("loginUserName=1663527894", "loginPassWord=qiaoruncheng",id);
         uncollect.compose(RxUtils.<CollectBean>rxObserableSchedulerHelper())
                 .subscribe(new BaseObserver<CollectBean>() {
                     @Override

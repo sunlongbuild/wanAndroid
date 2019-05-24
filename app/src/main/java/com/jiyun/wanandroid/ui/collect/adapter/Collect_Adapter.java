@@ -17,7 +17,7 @@ import com.jiyun.wanandroid.utils.ImageLoader;
 import java.util.List;
 
 public class Collect_Adapter extends RecyclerView.Adapter {
-    private List<CollectListBean.DataBean.DatasBean> mDatasBeans;
+    public List<CollectListBean.DataBean.DatasBean> mDatasBeans;
     private Context mContext;
     private OnClickListener mOnClickListener;
 

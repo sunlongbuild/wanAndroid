@@ -27,5 +27,5 @@ public interface ProjectApi {
 
     @POST("lg/uncollect_originId/{originId}/json")
     @FormUrlEncoded
-    Observable<CollectBean> uncollect(@Path("id") int id , @Header("Cookie") String username,@Header("Cookie") String password,@Field("originId") int originId);
+    Observable<CollectBean> uncollect(@Header("Cookie") String username,@Header("Cookie") String password,@Field("originId") int originId);
 }

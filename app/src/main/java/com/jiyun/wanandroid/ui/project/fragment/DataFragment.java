@@ -8,6 +8,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
@@ -15,11 +16,14 @@ import android.widget.ImageView;
 
 import com.jiyun.wanandroid.R;
 import com.jiyun.wanandroid.base.BaseFragment;
+import com.jiyun.wanandroid.base.Constants;
 import com.jiyun.wanandroid.entity.collect.CollectBean;
 import com.jiyun.wanandroid.entity.project.ListDataBean;
 import com.jiyun.wanandroid.presenter.project.DataPresenter;
+import com.jiyun.wanandroid.ui.login.LoginActivity;
 import com.jiyun.wanandroid.ui.project.activity.WebActivity;
 import com.jiyun.wanandroid.ui.project.adapter.MyAdapter;
+import com.jiyun.wanandroid.utils.SpUtil;
 import com.jiyun.wanandroid.utils.ToastUtil;
 import com.jiyun.wanandroid.view.project.DataView;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -129,14 +133,17 @@ public class DataFragment extends BaseFragment<DataView, DataPresenter> implemen
         adapter.setMyImageOnClickListener(new MyAdapter.MyImageOnClickListener() {
             @Override
             public void setImgOnClick(int position, ImageView view) {
+                String param = (String) SpUtil.getParam(Constants.NAME, null);
+                if (TextUtils.isEmpty(param)) {
+                    startActivity(new Intent(getActivity(), LoginActivity.class));
+                    getActivity().finish();
+                }
                 image = view;
                 boolean collect = datasBeans.get(position).isCollect();
                 if (collect) {
-                    ToastUtil.showShort("1");
                     mPresenter.unCollect(datasBeans.get(position).getId());
                 }else {
                     mPresenter.collect(datasBeans.get(position).getId());
-                    ToastUtil.showShort("2");
                 }
             }
         });
