@@ -1,4 +1,4 @@
-package com.jiyun.wanandroid.ui.loginactivity;
+package com.jiyun.wanandroid.ui.login;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.jiyun.wanandroid.R;
 import com.jiyun.wanandroid.base.BaseActivity;
@@ -98,9 +97,9 @@ public class RegisterActivity extends BaseActivity<RegisterV, RegisterP> impleme
 
                         Intent intent = new Intent(RegisterActivity.this,LoginActivity.class);
                         startActivity(intent);
-                        finish();
                         //渐入渐出的效果
                         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                        finish();
                     }else{
                         ToastUtil.showShort("两次密码输入不一致，请重新输入");
                     }
@@ -110,6 +109,7 @@ public class RegisterActivity extends BaseActivity<RegisterV, RegisterP> impleme
                 break;
             case R.id.register_zhzc:
                 startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                finish();
                 break;
         }
     }

@@ -10,50 +10,44 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:id="@+id/lv"
-    android:layout_height="wrap_content">
+
+
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
-            android:background="@color/c_e91d65"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_42"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="@dimen/dp_20"
+            android:background="@color/c_e91d65">
+
             android:layout_marginTop="@dimen/dp_20"
 
-            >
+
             <TextView
                 android:id="@+id/toolbar_text"
+                android:textStyle="bold"
+                android:textSize="@dimen/sp_16"
+                android:textColor="@color/c_ffffff"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
+            <ImageView
+                android:id="@+id/img_search"
+                android:layout_width="@dimen/dp_20"
+                android:layout_height="@dimen/dp_20"
+                android:layout_gravity="right"
+                android:layout_marginRight="@dimen/dp_10"
+                android:src="@mipmap/icon_search" />
         </android.support.v7.widget.Toolbar>
 
-    <ImageView
-        android:id="@+id/img_sosu"
-        android:src="@drawable/sosuo"
-        android:layout_width="@dimen/dp_18"
-        android:layout_height="@dimen/dp_18"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:layout_marginRight="@dimen/dp_10"
-        />
-</RelativeLayout>
+
         <FrameLayout
             android:id="@+id/frame"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_above="@id/rg"
-            android:layout_below="@id/lv" />
+            android:layout_below="@id/toolbar" />
 
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_above="@id/rg"
-            android:layout_alignParentBottom="true"
-            android:layout_below="@id/frame"
-            android:background="@drawable/gra_white_de" />
 
         <RadioGroup
             android:id="@+id/rg"
@@ -61,8 +55,7 @@
             android:layout_height="60dp"
             android:layout_alignParentBottom="true"
             android:background="@color/white"
-            android:orientation="horizontal"
-            >
+            android:orientation="horizontal">
 
             <RadioButton
                 android:id="@+id/rb"
@@ -74,8 +67,7 @@
                 android:drawableTop="@drawable/home_shape"
                 android:gravity="center"
                 android:padding="4dp"
-                android:text="@string/home"
-                />
+                android:text="@string/home" />
 
             <RadioButton
                 android:id="@+id/rb2"
@@ -87,8 +79,7 @@
                 android:drawableTop="@drawable/knowledge_shape"
                 android:gravity="center"
                 android:padding="4dp"
-                android:text="@string/knowledge"
-                />
+                android:text="@string/knowledge" />
 
             <RadioButton
                 android:id="@+id/rb3"
@@ -100,8 +91,7 @@
                 android:drawableTop="@drawable/wechat_shape"
                 android:gravity="center"
                 android:padding="4dp"
-                android:text="@string/the_public"
-                />
+                android:text="@string/the_public" />
 
             <RadioButton
                 android:id="@+id/rb4"
@@ -113,8 +103,7 @@
                 android:drawableTop="@drawable/navigation_shape"
                 android:gravity="center"
                 android:padding="4dp"
-                android:text="@string/navigation"
-                />
+                android:text="@string/navigation" />
 
             <RadioButton
                 android:id="@+id/rb5"
@@ -126,8 +115,7 @@
                 android:drawableTop="@drawable/project_shape"
                 android:gravity="center"
                 android:padding="4dp"
-                android:text="@string/project"
-                />
+                android:text="@string/project" />
 
 
         </RadioGroup>

@@ -14,9 +14,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
 
         <!-- <item name="colorPrimaryDark">@color/white</item>-->
-
         <item name="colorPrimaryDark">@color/c_e91d65</item>
-
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
