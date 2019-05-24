@@ -40,6 +40,7 @@ import com.jiyun.wanandroid.ui.logout.activity.LogoutActivity;
 import com.jiyun.wanandroid.ui.navigation.fragment.NavigationFragment;
 import com.jiyun.wanandroid.ui.project.fragment.ProjectFragment;
 import com.jiyun.wanandroid.ui.search.activity.SeacherActivity;
+import com.jiyun.wanandroid.ui.search.activity.SearchhomeActivity;
 import com.jiyun.wanandroid.ui.setting.activity.SettingActivity;
 import com.jiyun.wanandroid.ui.todo.activity.ToDoActivity;
 import com.jiyun.wanandroid.ui.wechat.fragment.The_publicFragment;
@@ -217,7 +218,7 @@ public class MainActivity extends BaseActivity<EmptyView, EmptyPresenter> implem
                         .hide(the_publicFragment).commit();
                 break;
             case R.id.img_search:
-                Intent intent = new Intent(MainActivity.this, SeacherActivity.class);
+                Intent intent = new Intent(MainActivity.this, SearchhomeActivity.class);
                 startActivity(intent);
                 break;
 
