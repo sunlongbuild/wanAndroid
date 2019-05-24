@@ -231,6 +231,7 @@ public class KaiFaHuanJingFragment extends BaseFragment<KaiFaHuanJingFragmentVie
             }
         });
     }
+<<<<<<< HEAD
 
     @Override
     public void collectSuccess(CollectBean collectBean) {
@@ -243,4 +244,6 @@ public class KaiFaHuanJingFragment extends BaseFragment<KaiFaHuanJingFragmentVie
         Image.setImageResource(R.mipmap.icon_uxin);
         ToastUtil.showShort("取消收藏");
     }
+=======
+>>>>>>> 7bbebb6d2e045666054028fc6204294ba03f502d
 }

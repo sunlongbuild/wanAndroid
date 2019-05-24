@@ -3,6 +3,7 @@ package com.jiyun.wanandroid.ui;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -10,6 +11,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,14 +30,14 @@ import com.jiyun.wanandroid.ui.collect.activity.CollectActivity;
 import com.jiyun.wanandroid.ui.home.fragment.HomeFragment;
 import com.jiyun.wanandroid.ui.knowledge.fragment.KnowledgeFragment;
 import com.jiyun.wanandroid.ui.login.LoginActivity;
-import com.jiyun.wanandroid.ui.logout.activity.LogoutActivity;
 import com.jiyun.wanandroid.ui.navigation.fragment.NavigationFragment;
 import com.jiyun.wanandroid.ui.project.fragment.ProjectFragment;
-import com.jiyun.wanandroid.ui.search.activity.SeacherActivity;
+import com.jiyun.wanandroid.ui.search.activity.SearchhomeActivity;
 import com.jiyun.wanandroid.ui.setting.activity.SettingActivity;
 import com.jiyun.wanandroid.ui.todo.activity.ToDoActivity;
 import com.jiyun.wanandroid.ui.wechat.fragment.The_publicFragment;
 import com.jiyun.wanandroid.utils.SpUtil;
+import com.jiyun.wanandroid.utils.ToastUtil;
 import com.jiyun.wanandroid.utils.UIModeUtil;
 import com.jiyun.wanandroid.view.EmptyView;
 
@@ -88,11 +90,17 @@ public class MainActivity extends BaseActivity<EmptyView, EmptyPresenter> implem
         return new EmptyPresenter();
     }
 
-
-
     @Override
     protected int getLayoutId() {
         return R.layout.activity_main;
+    }
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mName = (String) SpUtil.getParam(Constants.NAME, "");
+        mHander_login.setText(mName);
     }
 
     @Override
@@ -104,18 +112,22 @@ public class MainActivity extends BaseActivity<EmptyView, EmptyPresenter> implem
 
         View headerView = mNav.getHeaderView(0);
         mHander_login = headerView.findViewById(R.id.hander_login);
+
         mHander_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this,LoginActivity.class));
-                 mName = (String) SpUtil.getParam(Constants.NAME, "");
-                 mHander_login.setText(mName);
+                String s = mHander_login.getText().toString();
+                if (s.equals("登录")) {
+                    Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                    startActivityForResult(intent, 200);
+                }
             }
         });
 
+
         //判断如果用户已经登陆过，直接显示用户名
-        if ((boolean)SpUtil.getParam(Constants.LOGIN,false)){
-            mHander_login.setText((String)SpUtil.getParam(Constants.USERNAME,"登录"));
+        if ((boolean) SpUtil.getParam(Constants.LOGIN, false)) {
+            mHander_login.setText((String) SpUtil.getParam(Constants.NAME, "登录"));
         }
         initToolBar();
 
@@ -134,12 +146,12 @@ public class MainActivity extends BaseActivity<EmptyView, EmptyPresenter> implem
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.add(R.id.frame, homeFragment);
         transaction.add(R.id.frame, knowledgeFragment);
+        transaction.add(R.id.frame, the_publicFragment);
         transaction.add(R.id.frame, navigationFragment);
         transaction.add(R.id.frame, projectFragment);
-        transaction.add(R.id.frame, the_publicFragment);
 
-        transaction.show(homeFragment).hide(knowledgeFragment).hide(navigationFragment).hide(projectFragment)
-                .hide(the_publicFragment).commit();
+        transaction.show(homeFragment).hide(knowledgeFragment).hide(the_publicFragment).hide(navigationFragment)
+                .hide(projectFragment).commit();
 
     }
 
@@ -155,7 +167,7 @@ public class MainActivity extends BaseActivity<EmptyView, EmptyPresenter> implem
         actionBarDrawerToggle.syncState();
     }
 
-    @OnClick({R.id.rb, R.id.rb2, R.id.rb3, R.id.rb4, R.id.rb5,R.id.img_search})
+    @OnClick({R.id.rb, R.id.rb2, R.id.rb3, R.id.rb4, R.id.rb5, R.id.img_search})
     public void onClick(View v) {
         switch (v.getId()) {
             default:
@@ -206,13 +218,14 @@ public class MainActivity extends BaseActivity<EmptyView, EmptyPresenter> implem
                         .hide(the_publicFragment).commit();
                 break;
             case R.id.img_search:
-                Intent intent = new Intent(MainActivity.this, SeacherActivity.class);
+                Intent intent = new Intent(MainActivity.this, SearchhomeActivity.class);
                 startActivity(intent);
                 break;
 
         }
 
     }
+
     @Override
     protected void initListener() {
         mNav.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -220,10 +233,12 @@ public class MainActivity extends BaseActivity<EmptyView, EmptyPresenter> implem
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
                     case R.id.collect:
+                        //收藏
                         Intent intent = new Intent(MainActivity.this, CollectActivity.class);
                         startActivity(intent);
                         break;
                     case R.id.todo:
+                        //TODO
                         Intent intent2 = new Intent(MainActivity.this, ToDoActivity.class);
                         startActivity(intent2);
                         break;
@@ -231,25 +246,61 @@ public class MainActivity extends BaseActivity<EmptyView, EmptyPresenter> implem
                         UIModeUtil.changeModeUI(MainActivity.this);
                         break;
                     case R.id.setting:
+                        //设置
                         Intent intent4 = new Intent(MainActivity.this, SettingActivity.class);
                         startActivity(intent4);
                         break;
                     case R.id.about:
+                        //关于我们
                         Intent intent5 = new Intent(MainActivity.this, AboutActivity.class);
                         startActivity(intent5);
                         break;
                     case R.id.log_out:
-                        Intent intent6 = new Intent(MainActivity.this, LogoutActivity.class);
-                        startActivity(intent6);
+                        //退出登录
+                        initOut();
                         break;
                 }
                 return false;
             }
         });
     }
+
+    private void initOut() {
+        ToastUtil.showShort("退出登录");
+        View headerView = mNav.getHeaderView(0);
+        mHander_login = headerView.findViewById(R.id.hander_login);
+        mHander_login.setText("登录");
+        /*LoginMyServer apiserver = HttpUtils.getInstance().getApiserver(LoginMyServer.OutUrl, LoginMyServer.class);
+        Observable<OutBean> outBeanObservable = apiserver.getoutData();
+        Observable<OutBean> compose = outBeanObservable.compose(RxUtils.<OutBean>rxObserableSchedulerHelper());
+        compose.subscribe(new BaseObserver<OutBean>() {
+            @Override
+            public void error(String msg) {
+
+            }
+
+            @Override
+            protected void subscribe(Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(OutBean outBean) {
+                if (outBean.getErrorCode() == 0) {
+                    SpUtil.setParam(Constants.NAME, "登录");
+                    SpUtil.setParam(Constants.PSW, "");
+
+                }
+
+            }
+        });
+*/
+    }
+
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK || keyCode == KeyEvent.KEYCODE_HOME && event.getRepeatCount() ==0 ){
+        if (keyCode == KeyEvent.KEYCODE_BACK || keyCode == KeyEvent.KEYCODE_HOME && event.getRepeatCount() == 0) {
             dialog_Exit();
         }
         return false;
@@ -259,16 +310,28 @@ public class MainActivity extends BaseActivity<EmptyView, EmptyPresenter> implem
 
         new AlertDialog.Builder(this)
                 .setTitle("确定退出wanAndroid吗")
-                .setPositiveButton("确定",new DialogInterface.OnClickListener() {
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog,int which) {
+                    public void onClick(DialogInterface dialog, int which) {
                         android.os.Process.killProcess(android.os.Process
                                 .myPid());
                     }
                 })
                 .setNegativeButton("取消",null)
+
+                .setNegativeButton("取消", null)
                 .create()
                 .show();
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 200 && resultCode == 100) {
+            if (mName != null) {
+                mDl.openDrawer(Gravity.LEFT);
+            }
+        }
     }
 }

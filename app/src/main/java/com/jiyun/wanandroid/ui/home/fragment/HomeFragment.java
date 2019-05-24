@@ -156,6 +156,9 @@ public class HomeFragment extends BaseFragment<HomeView, HomePresenter> implemen
                             mBtnMain.setVisibility(View.GONE);
                         }
                         break;
+                    case MotionEvent.ACTION_UP:
+
+                        break;
                 }
                 return gestureDetector.onTouchEvent(event);
             }

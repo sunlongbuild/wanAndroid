@@ -1,8 +1,5 @@
 package com.jiyun.wanandroid.ui.logout.activity;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-
 import com.jiyun.wanandroid.R;
 import com.jiyun.wanandroid.base.BaseActivity;
 import com.jiyun.wanandroid.presenter.EmptyPresenter;
@@ -19,4 +16,5 @@ public class LogoutActivity extends BaseActivity<EmptyView,EmptyPresenter> imple
     protected int getLayoutId() {
         return R.layout.activity_logout;
     }
+
 }
