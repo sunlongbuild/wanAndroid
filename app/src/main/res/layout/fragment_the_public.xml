@@ -7,6 +7,7 @@
 
     <!-- TODO: Update blank fragment layout -->
  <android.support.design.widget.TabLayout
+     app:tabBackground="@color/c_e91d65"
      android:layout_width="match_parent"
      android:layout_height="wrap_content"
      android:id="@+id/tab"

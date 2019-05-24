@@ -46,7 +46,9 @@ public class ChildWeChatModel extends BaseModel {
     }
     public void uncollect(final ResultCallBack<CollectBean> resultCallBack , int id) {
         WeChatApi apiserver = HttpUtils.getInstance().getApiserver(WeChatApi.WeChatUrl, WeChatApi.class);
-        final Observable<CollectBean> uncollect = apiserver.uncollect(id, "loginUserName" + SpUtil.getParam(Constants.NAME,null), "loginPassWord" + SpUtil.getParam(Constants.PSW,null),-1);
+        String name = (String) SpUtil.getParam(Constants.NAME, "");
+        String psw = (String) SpUtil.getParam(Constants.PSW, "");
+        final Observable<CollectBean> uncollect = apiserver.uncollect(id, "loginUserName" + name, "loginUserPassWord" + psw,-1);
         uncollect.compose(RxUtils.<CollectBean>rxObserableSchedulerHelper())
                 .subscribe(new BaseObserver<CollectBean>() {
                     @Override
@@ -66,8 +68,10 @@ public class ChildWeChatModel extends BaseModel {
                 });
     }
     public void collect(final ResultCallBack<CollectBean> resultCallBack, int id) {
+        String name = (String) SpUtil.getParam(Constants.NAME, "");
+        String psw = (String) SpUtil.getParam(Constants.PSW, "");
         WeChatApi apiserver = HttpUtils.getInstance().getApiserver(WeChatApi.WeChatUrl, WeChatApi.class);
-        final Observable<CollectBean> collect = apiserver.collect("loginUserName=" + Constants.USERNAME, "loginPassWord=" + Constants.PSW,id);
+        final Observable<CollectBean> collect = apiserver.collect("loginUserName=" + name, "loginUserPassWord=" + psw,id);
         collect.compose(RxUtils.<CollectBean>rxObserableSchedulerHelper())
                 .subscribe(new BaseObserver<CollectBean>() {
                     @Override

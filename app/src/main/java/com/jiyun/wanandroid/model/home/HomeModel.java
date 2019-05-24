@@ -96,7 +96,9 @@ public class HomeModel extends BaseModel {
     }
     public void uncollect(final ResultCallBack<CollectBean> resultCallBack , int id) {
         HomeApi apiserver = HttpUtils.getInstance().getApiserver(HomeApi.RvUrl, HomeApi.class);
-        final Observable<CollectBean> uncollect = apiserver.uncollect(id, "loginUserName" + SpUtil.getParam(Constants.NAME,null), "loginPassWord" + SpUtil.getParam(Constants.PSW,null),-1);
+        String name = (String) SpUtil.getParam(Constants.NAME, "");
+        String psw = (String) SpUtil.getParam(Constants.PSW, "");
+        final Observable<CollectBean> uncollect = apiserver.uncollect(id, "loginUserName" +name, "loginUserPassWord" + psw,-1);
         uncollect.compose(RxUtils.<CollectBean>rxObserableSchedulerHelper())
                 .subscribe(new BaseObserver<CollectBean>() {
                     @Override
@@ -117,7 +119,9 @@ public class HomeModel extends BaseModel {
     }
     public void collect(final ResultCallBack<CollectBean> resultCallBack,int id) {
         HomeApi apiserver = HttpUtils.getInstance().getApiserver(HomeApi.RvUrl, HomeApi.class);
-        final Observable<CollectBean> collect = apiserver.collect("loginUserName=" + Constants.USERNAME, "loginPassWord=" + Constants.PSW,id);
+        String name = (String) SpUtil.getParam(Constants.NAME, "");
+        String psw = (String) SpUtil.getParam(Constants.PSW, "");
+        final Observable<CollectBean> collect = apiserver.collect("loginUserName=" + name, "loginUserPassWord=" + psw,id);
         collect.compose(RxUtils.<CollectBean>rxObserableSchedulerHelper())
                 .subscribe(new BaseObserver<CollectBean>() {
                     @Override
