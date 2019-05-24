@@ -48,7 +48,6 @@ import com.jiyun.wanandroid.ui.wechat.fragment.The_publicFragment;
 
 
 import com.jiyun.wanandroid.utils.SpUtil;
-import com.jiyun.wanandroid.utils.ToastUtil;
 import com.jiyun.wanandroid.utils.UIModeUtil;
 import com.jiyun.wanandroid.view.EmptyView;
 
@@ -156,12 +155,12 @@ public class MainActivity extends BaseActivity<EmptyView, EmptyPresenter> implem
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.add(R.id.frame, homeFragment);
         transaction.add(R.id.frame, knowledgeFragment);
+        transaction.add(R.id.frame, the_publicFragment);
         transaction.add(R.id.frame, navigationFragment);
         transaction.add(R.id.frame, projectFragment);
-        transaction.add(R.id.frame, the_publicFragment);
 
-        transaction.show(homeFragment).hide(knowledgeFragment).hide(navigationFragment).hide(projectFragment)
-                .hide(the_publicFragment).commit();
+        transaction.show(homeFragment).hide(knowledgeFragment).hide(the_publicFragment).hide(navigationFragment)
+                .hide(projectFragment).commit();
 
     }
 
@@ -269,6 +268,10 @@ public class MainActivity extends BaseActivity<EmptyView, EmptyPresenter> implem
             }
         });
     }
+
+
+
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK || keyCode == KeyEvent.KEYCODE_HOME && event.getRepeatCount() ==0 ){

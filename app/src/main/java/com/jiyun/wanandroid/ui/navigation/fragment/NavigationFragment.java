@@ -80,6 +80,7 @@ public class NavigationFragment extends BaseFragment<NavigationV, NavigationP> i
         manager = new LinearLayoutManager(getActivity());
         mLv.setLayoutManager(manager);
 
+        initRecy();
         //点击悬浮按钮回到顶部并显示隐藏的toolbar与底部导航栏
         btnMain.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,7 +90,6 @@ public class NavigationFragment extends BaseFragment<NavigationV, NavigationP> i
                 getActivity().findViewById(R.id.rg).setVisibility(View.VISIBLE);
             }
         });
-        initRecy();
         adapter = new MyNavigationAdapter(getActivity(), dataBeans);
         mLv.setAdapter(adapter);
 
