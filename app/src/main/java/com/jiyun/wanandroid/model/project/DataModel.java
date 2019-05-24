@@ -2,12 +2,14 @@ package com.jiyun.wanandroid.model.project;
 
 import com.jiyun.wanandroid.api.project.ProjectApi;
 import com.jiyun.wanandroid.base.BaseModel;
+import com.jiyun.wanandroid.base.Constants;
 import com.jiyun.wanandroid.entity.collect.CollectBean;
 import com.jiyun.wanandroid.entity.project.ListDataBean;
 import com.jiyun.wanandroid.net.BaseObserver;
 import com.jiyun.wanandroid.net.HttpUtils;
 import com.jiyun.wanandroid.net.ResultCallBack;
 import com.jiyun.wanandroid.net.RxUtils;
+import com.jiyun.wanandroid.utils.SpUtil;
 
 import io.reactivex.Observable;
 import io.reactivex.disposables.Disposable;
@@ -39,7 +41,9 @@ public class DataModel extends BaseModel{
     }
     public void uncollect(final ResultCallBack<CollectBean> resultCallBack , int id) {
         ProjectApi apiserver = HttpUtils.getInstance().getApiserver(ProjectApi.PROJECT_URL, ProjectApi.class);
-        final Observable<CollectBean> uncollect = apiserver.uncollect("loginUserName=1663527894", "loginPassWord=qiaoruncheng",id);
+        String name = (String) SpUtil.getParam(Constants.NAME, "");
+        String psw = (String) SpUtil.getParam(Constants.PSW, "");
+        final Observable<CollectBean> uncollect = apiserver.uncollect("loginUserName="+name, "loginPassWord="+psw,id);
         uncollect.compose(RxUtils.<CollectBean>rxObserableSchedulerHelper())
                 .subscribe(new BaseObserver<CollectBean>() {
                     @Override
@@ -60,7 +64,9 @@ public class DataModel extends BaseModel{
     }
     public void collect(final ResultCallBack<CollectBean> resultCallBack,int id) {
         ProjectApi apiserver = HttpUtils.getInstance().getApiserver(ProjectApi.PROJECT_URL, ProjectApi.class);
-        final Observable<CollectBean> collect = apiserver.collect("loginUserName=1663527894", "loginUserPassword=qiaoruncheng",id);
+        String name = (String) SpUtil.getParam(Constants.NAME, "");
+        String psw = (String) SpUtil.getParam(Constants.PSW, "");
+        final Observable<CollectBean> collect = apiserver.collect("loginUserName="+name, "loginUserPassword="+psw,id);
         collect.compose(RxUtils.<CollectBean>rxObserableSchedulerHelper())
                 .subscribe(new BaseObserver<CollectBean>() {
                     @Override
