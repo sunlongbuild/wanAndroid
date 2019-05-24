@@ -28,8 +28,9 @@
         <activity
             android:name=".ui.knowledge.fragment.KaiFaHuanJingActivity"
             android:theme="@style/NoAppTheme" />
-        <activity android:name=".ui.knowledge.activity.KaiFaHuanJingShowActivity"
-            android:theme="@style/NoAppTheme"/>
+        <activity
+            android:name=".ui.knowledge.activity.KaiFaHuanJingShowActivity"
+            android:theme="@style/NoAppTheme" />
 
         <activity
             android:name=".ui.todo.activity.ToDoActivity"
@@ -58,7 +59,9 @@
         <activity
             android:name=".ui.wechat.fragment.WeChatWebActivity"
             android:theme="@style/NoAppTheme" />
-        <activity android:name=".MaxActivity">
+        <activity
+            android:name=".MaxActivity"
+            android:theme="@style/FullScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

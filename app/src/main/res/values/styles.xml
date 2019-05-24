@@ -38,4 +38,8 @@
         <!--选中的颜色-->
         <item name="colorAccent">@color/c_06bbd6</item>
     </style>
+    <!--孙龙：全屏的界面-->
+    <style name="FullScreen" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="windowActionBar">true</item>
+    </style>
 </resources>
