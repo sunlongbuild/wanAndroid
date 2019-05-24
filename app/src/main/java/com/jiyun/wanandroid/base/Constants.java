@@ -39,4 +39,5 @@ public interface Constants {
     //设置界面的图片是否保存key值
     String SETTING_NO_IMAGE = "setting_no_image";
     int ERROR_CODE = -1001;
+    String EXIT_APP = "exit_app";
 }
