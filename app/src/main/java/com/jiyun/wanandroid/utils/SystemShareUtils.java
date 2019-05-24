@@ -36,10 +36,11 @@ public class SystemShareUtils {
 
     //用浏览器打开
     public static void shareNet(String link,Context context) {
-        Uri uri = Uri.parse(link);
-        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-        intent.setClassName("com.tencent.mtt", "com.tencent.mtt.MainActivity");//打开QQ浏览器
-        context.startActivity(intent);
+
+        Intent intent = new Intent();
+        intent.setData(Uri.parse(link));//Url 就是你要打开的网址
+        intent.setAction(Intent.ACTION_VIEW);
+        context.startActivity(intent); //启动浏览器
     }
             //分享网络图片
 /*    public static void shareNetImage(Context context,String imagePath) {

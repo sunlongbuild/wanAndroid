@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:id="@+id/ll"
-    tools:context=".ui.knowledge.fragment.activity.KaiFaHuanJingShowActivity">
+    tools:context=".ui.knowledge.activity.KaiFaHuanJingShowActivity">
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"

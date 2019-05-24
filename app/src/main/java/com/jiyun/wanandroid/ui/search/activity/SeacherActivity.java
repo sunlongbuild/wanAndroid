@@ -1,4 +1,4 @@
-package com.jiyun.wanandroid.ui.searchActivity.activity;
+package com.jiyun.wanandroid.ui.search.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import com.jiyun.wanandroid.R;
 import com.jiyun.wanandroid.api.search.Service_Api;
 import com.jiyun.wanandroid.entity.search.Bean;
-import com.jiyun.wanandroid.ui.searchActivity.adapter.Search_Adapter;
+import com.jiyun.wanandroid.ui.search.adapter.Search_Adapter;
 
 import java.util.HashMap;
 import java.util.List;

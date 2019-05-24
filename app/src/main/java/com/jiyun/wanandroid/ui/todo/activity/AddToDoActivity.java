@@ -3,6 +3,7 @@ package com.jiyun.wanandroid.ui.todo.activity;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -12,15 +13,22 @@ import android.widget.TextView;
 
 import com.jiyun.wanandroid.R;
 import com.jiyun.wanandroid.base.BaseActivity;
+import com.jiyun.wanandroid.base.Constants;
+import com.jiyun.wanandroid.entity.todo.AddToDoBean;
 import com.jiyun.wanandroid.presenter.EmptyPresenter;
+import com.jiyun.wanandroid.presenter.todo.AddToDoPresenter;
 import com.jiyun.wanandroid.utils.DateUtil;
+import com.jiyun.wanandroid.utils.SpUtil;
+import com.jiyun.wanandroid.utils.ToastUtil;
 import com.jiyun.wanandroid.view.EmptyView;
+import com.jiyun.wanandroid.view.todo.AddToDoView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class AddToDoActivity extends BaseActivity<EmptyView, EmptyPresenter> implements EmptyView {
+public class AddToDoActivity extends BaseActivity<AddToDoView, AddToDoPresenter> implements
+        AddToDoView {
 
     @BindView(R.id.iv_back)
     ImageView mIvBack;
@@ -46,10 +54,12 @@ public class AddToDoActivity extends BaseActivity<EmptyView, EmptyPresenter> imp
     TextView mTvData;
     @BindView(R.id.iv_right)
     ImageView mIvRight;
+    private String mUserName;
+    private String mPsw;
 
     @Override
-    protected EmptyPresenter initPresenter() {
-        return new EmptyPresenter();
+    protected AddToDoPresenter initPresenter() {
+        return new AddToDoPresenter();
     }
 
     @Override
@@ -57,18 +67,39 @@ public class AddToDoActivity extends BaseActivity<EmptyView, EmptyPresenter> imp
         return R.layout.activity_add_todo;
     }
 
-    @OnClick({R.id.ll_calendar,R.id.iv_back,R.id.save_todo})
+    @Override
+    protected void initData() {
+        String name = mTodoName.getText().toString();
+        String des = mTodoDes.getText().toString();
+        String date = mTvData.getText().toString();
+        mUserName = (String) SpUtil.getParam(Constants.NAME, "");
+        mPsw = (String) SpUtil.getParam(Constants.PSW, "");
+        if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(des) && !TextUtils.isEmpty(date)) {
+            mPresenter.getAddToDo(name, des, date, "loginUserName=" + mUserName,
+                    "loginUserPassword=" + mPsw);
+        }
+    }
+
+    @OnClick({R.id.ll_calendar, R.id.iv_back, R.id.save_todo})
     public void onViewClicked(View v) {
         switch (v.getId()) {
-            case R.id.ll_calendar:
+            case R.id.ll_calendar://日历
                 DateUtil.getDateTime(AddToDoActivity.this, mTvData);
                 break;
             case R.id.iv_back:
                 finish();
                 break;
             case R.id.save_todo://点击保存 把信息提交到接口
+                if (!TextUtils.isEmpty(mUserName) && !TextUtils.isEmpty(mPsw)) {
+                    initData();
+                }
+                ToastUtil.showShort(getResources().getString(R.string.save_success));
                 break;
         }
+    }
+
+    @Override
+    public void setData(AddToDoBean addToDoBean) {
 
     }
 }
