@@ -15,6 +15,14 @@
         android:layout_marginTop="@dimen/dp_22"
         android:background="@color/c_e91d65">
 
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="@dimen/dp_20"
+            android:layout_height="@dimen/dp_20"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_2"
+            android:src="@mipmap/icon_left" />
+
         <TextView
 
             android:id="@+id/txt_toolbar"

@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -18,7 +19,7 @@ import com.jiyun.wanandroid.utils.ToastUtil;
 import com.just.agentweb.AgentWeb;
 import com.just.agentweb.WebChromeClient;
 
-public class WeChatWebActivity extends AppCompatActivity {
+public class WeChatWebActivity extends AppCompatActivity implements View.OnClickListener {
 
     private TextView mTxtToolbar;
     private Toolbar mToolbar;
@@ -26,6 +27,7 @@ public class WeChatWebActivity extends AppCompatActivity {
     private AgentWeb magentWeb;
     private String link;
     private String shareTitle;
+    private ImageView mIvBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,15 +45,7 @@ public class WeChatWebActivity extends AppCompatActivity {
 
         mToolbar.setTitle("");
         setSupportActionBar(mToolbar);
-        mToolbar.setNavigationIcon(R.mipmap.back_white);
-        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!magentWeb.back()) {
-                    finish();
-                }
-            }
-        });
+
         magentWeb = AgentWeb.with(this)
                 .setAgentWebParent(mLl, new LinearLayout.LayoutParams(-1, -1))
                 .closeIndicator()
@@ -70,6 +64,8 @@ public class WeChatWebActivity extends AppCompatActivity {
                 super.onReceivedTitle(view, title);
             }
         });
+        mIvBack = (ImageView) findViewById(R.id.iv_back);
+        mIvBack.setOnClickListener(this);
     }
 
 
@@ -124,6 +120,17 @@ public class WeChatWebActivity extends AppCompatActivity {
             SystemShareUtils.shareText(this, getResources().getString(R.string.wanandroid) + "【" + shareTitle + "】" + ":" + link);
         } else {
             ToastUtil.showShort(getResources().getString(R.string.networrk_slow));
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            default:
+                break;
+            case R.id.iv_back:
+                finish();
+                break;
         }
     }
 }

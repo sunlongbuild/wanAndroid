@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -12,6 +13,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.KeyEvent;
 
 
@@ -47,7 +49,6 @@ import com.jiyun.wanandroid.ui.wechat.fragment.The_publicFragment;
 
 
 import com.jiyun.wanandroid.utils.SpUtil;
-import com.jiyun.wanandroid.utils.ToastUtil;
 import com.jiyun.wanandroid.utils.UIModeUtil;
 import com.jiyun.wanandroid.view.EmptyView;
 
@@ -108,6 +109,13 @@ public class MainActivity extends BaseActivity<EmptyView, EmptyPresenter> implem
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        mName = (String) SpUtil.getParam(Constants.NAME, "");
+        mHander_login.setText(mName);
+    }
+
+    @Override
     protected void initView() {
 
         mToolbar.setTitle("");
@@ -116,18 +124,20 @@ public class MainActivity extends BaseActivity<EmptyView, EmptyPresenter> implem
 
         View headerView = mNav.getHeaderView(0);
         mHander_login = headerView.findViewById(R.id.hander_login);
+
+
         mHander_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this,LoginActivity.class));
-                 mName = (String) SpUtil.getParam(Constants.NAME, "");
-                 mHander_login.setText(mName);
+
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivityForResult(intent,200);
             }
         });
 
         //判断如果用户已经登陆过，直接显示用户名
         if ((boolean)SpUtil.getParam(Constants.LOGIN,false)){
-            mHander_login.setText((String)SpUtil.getParam(Constants.USERNAME,"登录"));
+            mHander_login.setText((String)SpUtil.getParam(Constants.NAME,"登录"));
         }
         initToolBar();
 
@@ -146,12 +156,12 @@ public class MainActivity extends BaseActivity<EmptyView, EmptyPresenter> implem
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.add(R.id.frame, homeFragment);
         transaction.add(R.id.frame, knowledgeFragment);
+        transaction.add(R.id.frame, the_publicFragment);
         transaction.add(R.id.frame, navigationFragment);
         transaction.add(R.id.frame, projectFragment);
-        transaction.add(R.id.frame, the_publicFragment);
 
-        transaction.show(homeFragment).hide(knowledgeFragment).hide(navigationFragment).hide(projectFragment)
-                .hide(the_publicFragment).commit();
+        transaction.show(homeFragment).hide(knowledgeFragment).hide(the_publicFragment).hide(navigationFragment)
+                .hide(projectFragment).commit();
 
     }
 
@@ -259,6 +269,10 @@ public class MainActivity extends BaseActivity<EmptyView, EmptyPresenter> implem
             }
         });
     }
+
+
+
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK || keyCode == KeyEvent.KEYCODE_HOME && event.getRepeatCount() ==0 ){
@@ -283,5 +297,15 @@ public class MainActivity extends BaseActivity<EmptyView, EmptyPresenter> implem
                 .create()
                 .show();
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==200&&resultCode==100){
+            if(mName!=null){
+                mDl.openDrawer(Gravity.LEFT);
+            }
+        }
     }
 }

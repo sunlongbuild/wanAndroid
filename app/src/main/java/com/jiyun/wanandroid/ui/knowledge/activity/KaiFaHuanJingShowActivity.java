@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -18,7 +19,7 @@ import com.jiyun.wanandroid.utils.ToastUtil;
 import com.just.agentweb.AgentWeb;
 import com.just.agentweb.WebChromeClient;
 
-public class KaiFaHuanJingShowActivity extends AppCompatActivity {
+public class KaiFaHuanJingShowActivity extends AppCompatActivity implements View.OnClickListener {
 
     private TextView mTxtToolbar;
     private Toolbar mToolbar;
@@ -26,6 +27,8 @@ public class KaiFaHuanJingShowActivity extends AppCompatActivity {
     private AgentWeb magentWeb;
     private LinearLayout mLl;
     private String shareTitle;
+    private ImageView mIvBack;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,15 +51,7 @@ public class KaiFaHuanJingShowActivity extends AppCompatActivity {
 
         mToolbar.setTitle("");
         setSupportActionBar(mToolbar);
-        mToolbar.setNavigationIcon(R.mipmap.back_white);
-        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!magentWeb.back()) {
-                    finish();
-                }
-            }
-        });
+
         magentWeb = AgentWeb.with(this)
                 .setAgentWebParent(mLl, new LinearLayout.LayoutParams(-1, -1))
                 .closeIndicator()
@@ -77,6 +72,8 @@ public class KaiFaHuanJingShowActivity extends AppCompatActivity {
         });
 
 
+        mIvBack = (ImageView) findViewById(R.id.iv_back);
+        mIvBack.setOnClickListener(this);
     }
 
     @Override
@@ -100,7 +97,7 @@ public class KaiFaHuanJingShowActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {//创建上下文菜单
-        getMenuInflater().inflate(R.menu.share_menu,menu);
+        getMenuInflater().inflate(R.menu.share_menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -115,10 +112,22 @@ public class KaiFaHuanJingShowActivity extends AppCompatActivity {
     }
 
     private void getShareContent() {
-        if (shareTitle != null & link != null){
-            SystemShareUtils.shareText(this,getResources().getString(R.string.wanandroid)+"【"+shareTitle+"】"+":"+link);
-        }else {
+        if (shareTitle != null & link != null) {
+            SystemShareUtils.shareText(this, getResources().getString(R.string.wanandroid) + "【" + shareTitle + "】" + ":" + link);
+        } else {
             ToastUtil.showShort(getResources().getString(R.string.networrk_slow));
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            default:
+                break;
+            case R.id.iv_back:
+
+                finish();
+                break;
         }
     }
 }

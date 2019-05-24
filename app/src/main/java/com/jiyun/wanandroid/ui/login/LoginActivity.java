@@ -67,20 +67,21 @@ public class LoginActivity extends BaseActivity<LoginV, LoginP> implements Login
                 mMm = mLoginMm.getText().toString();
                 if (!TextUtils.isEmpty(mYhm) && !TextUtils.isEmpty(mMm)) {
                     mLoginP.getData(mName, mPwd);
-                    //保存用户信息，并将登录状态标记为已登录
                     SpUtil.setParam(Constants.NAME, mYhm);
                     SpUtil.setParam(Constants.PSW, mMm);
-                    SpUtil.setParam(Constants.LOGIN, true);
-                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                    finish();
+
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    setResult(100,intent);
                     //渐入渐出的效果
                     overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                    finish();
                 } else {
                     ToastUtil.showShort("用户名或密码不能为空");
                 }
                 break;
             case R.id.login_zhzc:
                 startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
+                finish();
                 break;
         }
     }
