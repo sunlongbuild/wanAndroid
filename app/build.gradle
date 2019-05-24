@@ -63,6 +63,7 @@ dependencies {
     implementation 'com.jaeger.statusbarutil:library:1.5.1'
     //左滑删除控件
     implementation 'com.github.mcxtzhang:SwipeDelMenuLayout:V1.3.0'
-
+    //这个是开屏动画动图依赖
+    implementation 'com.airbnb.android:lottie:1.0.1'
 
 }

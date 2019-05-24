@@ -1,5 +1,6 @@
 package com.jiyun.wanandroid.ui.search.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -30,11 +31,12 @@ public class SeacherActivity extends AppCompatActivity implements View.OnClickLi
     private int num;
     private EditText mInput;
     private ImageView mSeach;
-    private String input;
+
     private RecyclerView mRecycler;
     private List<Bean.DataBean.DatasBean> list;
     private ImageView mImgFanhui;
     private Toolbar mTob;
+    private String input;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,16 +46,17 @@ public class SeacherActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     private void initView() {
-        mInput = (EditText) findViewById(R.id.input);
-        mSeach = (ImageView) findViewById(R.id.seach);
-        mSeach.setOnClickListener(this);
+//        mInput = (EditText) findViewById(R.id.input);
+//        mSeach = (ImageView) findViewById(R.id.seach);
+//        mSeach.setOnClickListener(this);
         mRecycler = (RecyclerView) findViewById(R.id.recycler);
         mRecycler.setLayoutManager(new LinearLayoutManager(this));
-        mImgFanhui = (ImageView) findViewById(R.id.img_fanhui);
-        mImgFanhui.setOnClickListener(this);
-        mTob = (Toolbar) findViewById(R.id.tob);
-        mTob.setTitle("");
-        setSupportActionBar(mTob);
+//        mImgFanhui = (ImageView) findViewById(R.id.img_fanhui);
+//        mImgFanhui.setOnClickListener(this);
+//        mTob = (Toolbar) findViewById(R.id.tob);
+//        mTob.setTitle("");
+//        setSupportActionBar(mTob);
+        getInitData();
     }
 
     @Override
@@ -71,7 +74,9 @@ public class SeacherActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     private void getInitData() {
-        input = mInput.getText().toString();
+       // input = mInput.getText().toString();
+        Intent intent = getIntent();
+        input = intent.getStringExtra("name");
         int num = 0;
         Retrofit retrofit = new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
