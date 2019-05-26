@@ -20,8 +20,8 @@ public class ToDoListPresenter extends BasePresenter<ToDoListView> {
         mModels.add(mToDoListModel);
     }
 
-    public void getToDoList(String userName, String psw) {
-        mToDoListModel.getTodoList(userName, psw, new ResultCallBack<ToDoListBean>() {
+    public void getToDoList(int status,String userName, String psw) {
+        mToDoListModel.getTodoList(status,userName, psw, new ResultCallBack<ToDoListBean>() {
             @Override
             public void onSuccess(ToDoListBean bean) {
                 if (mBaseView != null) {

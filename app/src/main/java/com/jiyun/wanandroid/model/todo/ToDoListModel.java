@@ -15,11 +15,11 @@ import io.reactivex.disposables.Disposable;
  * Created by $sl on 2019/5/24 10:29.
  */
 public class ToDoListModel extends BaseModel {
-    public void getTodoList( String userName, String psw, final
+    public void getTodoList(int status,String userName, String psw, final
     ResultCallBack<ToDoListBean> callBack) {
         ToDoApiService apiserver = HttpUtils.getInstance().getApiserver(ToDoApiService.baseUrl,
                 ToDoApiService.class);
-        Observable<ToDoListBean> observable = apiserver.getToDoList(userName, psw);
+        Observable<ToDoListBean> observable = apiserver.getToDoList(status,userName, psw);
         observable.compose(RxUtils.<ToDoListBean>rxObserableSchedulerHelper()).subscribe(new BaseObserver<ToDoListBean>() {
             @Override
             public void onNext(ToDoListBean toDoListBean) {

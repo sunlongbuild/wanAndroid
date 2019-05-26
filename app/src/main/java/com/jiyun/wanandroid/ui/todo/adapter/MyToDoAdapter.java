@@ -1,6 +1,7 @@
 package com.jiyun.wanandroid.ui.todo.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import com.jiyun.wanandroid.api.todo.ToDoApiService;
 import com.jiyun.wanandroid.base.Constants;
 import com.jiyun.wanandroid.entity.todo.ToDoDeleteBean;
 import com.jiyun.wanandroid.entity.todo.ToDoListBean;
+import com.jiyun.wanandroid.entity.todo.ToDoUpdataBean;
 import com.jiyun.wanandroid.net.BaseObserver;
 import com.jiyun.wanandroid.net.HttpUtils;
 import com.jiyun.wanandroid.net.RxUtils;
@@ -32,6 +34,9 @@ import io.reactivex.disposables.Disposable;
 public class MyToDoAdapter extends BaseAdapter {
     private Context mContext;
     private ArrayList<ToDoListBean.DataBean.DatasBean> mList;
+    private int mId;
+    private String mName;
+    private String mPsw;
 
     public MyToDoAdapter(Context context, ArrayList<ToDoListBean.DataBean.DatasBean> list) {
         mContext = context;
@@ -72,11 +77,22 @@ public class MyToDoAdapter extends BaseAdapter {
         viewHolder.tv_title.setText(mList.get(position).getTitle());
         viewHolder.tv_content.setText(mList.get(position).getContent());
         final ViewHolder finalViewHolder = viewHolder;
+        mId = mList.get(position).getId();
+
         viewHolder.mTodoDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mList.remove(position);
-                deleteToDo(position);
+                deleteToDo();
+                notifyDataSetChanged();
+                finalViewHolder.mSwipeMenuLayout.quickClose();//关闭左滑删除
+            }
+        });
+
+        viewHolder.mTodoRead.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finishToDo(1);
                 notifyDataSetChanged();
                 finalViewHolder.mSwipeMenuLayout.quickClose();//关闭左滑删除
             }
@@ -96,19 +112,46 @@ public class MyToDoAdapter extends BaseAdapter {
         SwipeMenuLayout mSwipeMenuLayout;
     }
 
-    public void deleteToDo(int position) {
-        Integer id = (Integer) SpUtil.getParam(Constants.todoid, 0);
-        String name = (String) SpUtil.getParam(Constants.NAME, "");
-        String psw = (String) SpUtil.getParam(Constants.PSW, "");
+    public void deleteToDo() {
+
+        mName = (String) SpUtil.getParam(Constants.NAME, "");
+        mPsw = (String) SpUtil.getParam(Constants.PSW, "");
         ToDoApiService apiserver = HttpUtils.getInstance().getApiserver(ToDoApiService.baseUrl,
                 ToDoApiService.class);
-        Observable<ToDoDeleteBean> observable = apiserver.deleteList(id, "loginUserName=" + name,
-                "loginUserPassword=" + psw);
+        Observable<ToDoDeleteBean> observable = apiserver.deleteList(mId, "loginUserName=" +
+                mName, "loginUserPassword=" + mPsw);
         observable.compose(RxUtils.<ToDoDeleteBean>rxObserableSchedulerHelper()).subscribe(new BaseObserver<ToDoDeleteBean>() {
             @Override
             public void onNext(ToDoDeleteBean toDoDeleteBean) {
                 if (toDoDeleteBean.getErrorCode() == 0) {
                     ToastUtil.showShort("删除成功！");
+                }
+            }
+
+            @Override
+            public void error(String msg) {
+
+            }
+
+            @Override
+            protected void subscribe(Disposable d) {
+
+            }
+        });
+    }
+
+    public void finishToDo(int status) {
+        mName = (String) SpUtil.getParam(Constants.NAME, "");
+        mPsw = (String) SpUtil.getParam(Constants.PSW, "");
+        ToDoApiService apiserver = HttpUtils.getInstance().getApiserver(ToDoApiService.baseUrl,
+                ToDoApiService.class);
+        Observable<ToDoUpdataBean> observable = apiserver.finishList(mId, status,
+                "loginUserName=" + mName, "loginUserPassword=" + mPsw);
+        observable.compose(RxUtils.<ToDoUpdataBean>rxObserableSchedulerHelper()).subscribe(new BaseObserver<ToDoUpdataBean>() {
+            @Override
+            public void onNext(ToDoUpdataBean toDoUpdataBean) {
+                if (toDoUpdataBean.getErrorCode() == 0) {
+                    ToastUtil.showShort(toDoUpdataBean.getErrorMsg());
                 }
             }
 

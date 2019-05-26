@@ -2,6 +2,7 @@ package com.jiyun.wanandroid.ui.todo.fragment;
 
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,8 +17,10 @@ import com.jiyun.wanandroid.base.BaseFragment;
 import com.jiyun.wanandroid.base.Constants;
 import com.jiyun.wanandroid.entity.todo.ToDoListBean;
 import com.jiyun.wanandroid.presenter.todo.ToDoListPresenter;
+import com.jiyun.wanandroid.ui.todo.activity.AddToDoActivity;
 import com.jiyun.wanandroid.ui.todo.adapter.MyToDoAdapter;
 import com.jiyun.wanandroid.utils.SpUtil;
+import com.jiyun.wanandroid.utils.ToastUtil;
 import com.jiyun.wanandroid.view.todo.ToDoListView;
 import com.mcxtzhang.swipemenulib.SwipeMenuLayout;
 
@@ -31,7 +34,7 @@ import butterknife.Unbinder;
  * A simple {@link Fragment} subclass.
  */
 public class ToDoFragment extends BaseFragment<ToDoListView, ToDoListPresenter> implements
-        ToDoListView, AdapterView.OnItemClickListener {
+        ToDoListView, AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener {
 
     @BindView(R.id.tv)
     TextView mTv;
@@ -39,7 +42,6 @@ public class ToDoFragment extends BaseFragment<ToDoListView, ToDoListPresenter> 
     ListView mLv;
     private ArrayList<ToDoListBean.DataBean.DatasBean> mList;
     private MyToDoAdapter mAdapter;
-    private int position;
 
     @Override
     protected ToDoListPresenter initPresenter() {
@@ -57,7 +59,13 @@ public class ToDoFragment extends BaseFragment<ToDoListView, ToDoListPresenter> 
         mAdapter = new MyToDoAdapter(getContext(), mList);
         mLv.setAdapter(mAdapter);
 
-        mLv.setOnItemClickListener(this);
+        mLv.setOnItemLongClickListener(this);
+        mLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ToastUtil.showShort(position + "");
+            }
+        });
     }
 
     @Override
@@ -65,27 +73,13 @@ public class ToDoFragment extends BaseFragment<ToDoListView, ToDoListPresenter> 
         super.onResume();
         String name = (String) SpUtil.getParam(Constants.NAME, "");
         String psw = (String) SpUtil.getParam(Constants.PSW, "");
-        mPresenter.getToDoList("loginUserName=" + name, "loginUserPassword=" + psw);
-    }
-
-    @Override
-    protected void initListenter() {
-        //        mTodoDelete.setOnClickListener(new View.OnClickListener() {
-        //            @Override
-        //            public void onClick(View v) {
-        //                mList.remove(position);
-        //                mAdapter.notifyDataSetChanged();
-        //                mSwipeMenuLayout.quickClose();//关闭左滑
-        //            }
-        //        });
+        mPresenter.getToDoList(0, "loginUserName=" + name, "loginUserPassword=" + psw);
     }
 
     @Override
     public void setToDoList(ToDoListBean toDoList) {
         mList.addAll(toDoList.getData().getDatas());
         for (int i = 0; i < toDoList.getData().getDatas().size(); i++) {
-            int id = toDoList.getData().getDatas().get(i).getId();
-            SpUtil.setParam(Constants.todoid, id);
             if (toDoList.getData().getDatas().get(i).getDateStr() != null) {
                 mTv.setText(toDoList.getData().getDatas().get(i).getDateStr());
             }
@@ -103,6 +97,16 @@ public class ToDoFragment extends BaseFragment<ToDoListView, ToDoListPresenter> 
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        this.position = position;
+
+    }
+
+    //长按编辑
+    @Override
+    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+        Intent intent = new Intent(getContext(), AddToDoActivity.class);
+        intent.putExtra("type", 1);
+        startActivity(intent);
+
+        return false;
     }
 }
